@@ -225,9 +225,47 @@
   const img1 = document.getElementById('img1');
   const img2 = document.getElementById('img2');
 
-  // PON AQUÍ LAS RUTAS/URL FINALES
-  img1.src = "./imgs/va_sas.png"; // o una URL pública: "https://…/va_sas.png"
-  img2.src = "./imgs/va_cf.png";  // o una URL pública: "https://…/va_cf.png"
+// === Drive helpers con Fallback ===
+// Extrae el FILE_ID del link de compartir (termina en /view)
+function extractDriveId(link){
+  const m = link.match(/\/d\/([a-zA-Z0-9_-]+)/) || link.match(/[?&]id=([^&]+)/);
+  return m ? m[1] : null;
+}
+
+// Intenta varios endpoints de Drive hasta que uno funcione
+function setDriveImage(imgEl, shareLink){
+  const id = extractDriveId(shareLink);
+  if(!id){ console.warn('No se pudo extraer FILE_ID de:', shareLink); return; }
+
+  // Orden de prueba (el 3 y 4 suelen ser los más robustos)
+  const candidates = [
+    `https://drive.google.com/uc?export=view&id=${id}`,
+    `https://drive.google.com/uc?export=download&id=${id}`,
+    `https://lh3.googleusercontent.com/d/${id}=s2000`,            // proxy de googleusercontent
+    `https://drive.google.com/thumbnail?id=${id}&sz=w10000`      // thumbnail tamaño grande
+  ];
+
+  let idx = 0;
+  function tryNext(){
+    if(idx >= candidates.length){
+      console.error('Ninguna URL de Drive funcionó para', shareLink);
+      return;
+    }
+    const url = candidates[idx++];
+    // asigna y, si hay error, intenta la siguiente
+    imgEl.onerror = () => tryNext();
+    imgEl.src = url;
+    console.log('Probando URL Drive =>', url);
+  }
+  tryNext();
+}
+// Pega tus links de "Obtener vínculo" (los que terminan en /view)
+setDriveImage(img1, "https://drive.google.com/file/d/1ZbS5WyojhMcdcZz5TINSL2yGTxwQbskb/view"); // SAS
+setDriveImage(img2, "https://drive.google.com/file/d/1fUxaxuNvT5EdzAai_NvUL773Qq_mjk2O/view"); // CF
+
+// (temporal) para depurar, ver la URL final en consola
+console.log('img1 URL =>', img1.src);
+console.log('img2 URL =>', img2.src);
 
   // Lightbox (zoom)
   const lightbox = document.getElementById('lightbox');
@@ -249,6 +287,7 @@
   img2?.addEventListener('click', ()=> openLightbox(img2.src));
   lightbox?.addEventListener('click', closeLightbox);
   document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeLightbox(); });
+
 </script>
 </body>
 </html>
