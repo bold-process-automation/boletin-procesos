@@ -110,55 +110,34 @@
       </div>
     </section>
     <!-- ========== VALOR AGREGADO POR UNIDAD DE NEGOCIO (IMÁGENES) ========== -->
-    <section id="viewVAUN" class="mt-6 hidden">
-      <!-- Controles de carga -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        <div class="rounded-2xl border border-slate-200 bg-white p-4">
-          <h3 class="font-semibold mb-2">Imagen 1</h3>
-          <div class="flex flex-col gap-2 text-sm">
-            <input id="file1" type="file" accept="image/*" class="w-full text-sm">
-            <div class="flex items-center gap-2">
-              <input id="url1" type="text" placeholder="o pega una URL https://..."
-                     class="flex-1 rounded-xl border border-slate-300 h-10 px-3 outline-none focus:ring-2 focus:ring-indigo-300">
-              <button id="btnUrl1" class="rounded-xl border px-3 h-10 bg-white border-slate-300 hover:bg-slate-50">Cargar URL</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="rounded-2xl border border-slate-200 bg-white p-4">
-          <h3 class="font-semibold mb-2">Imagen 2</h3>
-          <div class="flex flex-col gap-2 text-sm">
-            <input id="file2" type="file" accept="image/*" class="w-full text-sm">
-            <div class="flex items-center gap-2">
-              <input id="url2" type="text" placeholder="o pega una URL https://..."
-                     class="flex-1 rounded-xl border border-slate-300 h-10 px-3 outline-none focus:ring-2 focus:ring-indigo-300">
-              <button id="btnUrl2" class="rounded-xl border px-3 h-10 bg-white border-slate-300 hover:bg-slate-50">Cargar URL</button>
-            </div>
-          </div>
-        </div>
+<section id="viewVAUN" class="mt-6 hidden">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+    <figure class="rounded-2xl overflow-hidden border border-slate-200 bg-white">
+      <div class="p-3 text-sm text-slate-600 border-b">
+        Unidad de negocio – Valor agregado (SAS)
       </div>
-
-      <!-- Vista de imágenes -->
-      <div class="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div class="rounded-2xl overflow-hidden border border-slate-200 bg-white">
-          <div class="p-3 text-sm text-slate-600 border-b">Vista Imagen 1</div>
-          <div class="p-3">
-            <img id="img1" alt="Imagen 1" class="w-full h-auto rounded-lg cursor-zoom-in">
-          </div>
-        </div>
-        <div class="rounded-2xl overflow-hidden border border-slate-200 bg-white">
-          <div class="p-3 text-sm text-slate-600 border-b">Vista Imagen 2</div>
-          <div class="p-3">
-            <img id="img2" alt="Imagen 2" class="w-full h-auto rounded-lg cursor-zoom-in">
-          </div>
-        </div>
+      <div class="p-3">
+        <!-- Pega aquí la URL o ruta local de la imagen SAS -->
+        <img id="img1" alt="Valor agregado SAS" class="w-full h-auto rounded-lg cursor-zoom-in">
       </div>
+    </figure>
 
-      <!-- Modal/lightbox para ampliar -->
-      <div id="lightbox" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
-        <img id="lightboxImg" class="max-h-[90vh] max-w-[95vw] rounded-xl shadow-2xl">
+    <figure class="rounded-2xl overflow-hidden border border-slate-200 bg-white">
+      <div class="p-3 text-sm text-slate-600 border-b">
+        Unidad de negocio – Valor agregado (CF)
       </div>
-    </section>
+      <div class="p-3">
+        <!-- Pega aquí la URL o ruta local de la imagen CF -->
+        <img id="img2" alt="Valor agregado CF" class="w-full h-auto rounded-lg cursor-zoom-in">
+      </div>
+    </figure>
+  </div>
+
+  <!-- Modal/lightbox para ampliar -->
+  <div id="lightbox" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
+    <img id="lightboxImg" class="max-h-[90vh] max-w-[95vw] rounded-xl shadow-2xl">
+  </div>
+</section>
 
     <div class="mt-8 text-xs text-slate-500">
 
@@ -208,13 +187,67 @@
   const tabCambios=document.getElementById('tabCambios');
   const viewAuto=document.getElementById('viewAuto');
   const viewCambios=document.getElementById('viewCambios');
-  function activate(tab){ if(tab==='auto'){ tabAuto.classList.add('tab-active'); tabCambios.classList.remove('tab-active'); viewAuto.classList.remove('hidden'); viewCambios.classList.add('hidden'); } else { tabCambios.classList.add('tab-active'); tabAuto.classList.remove('tab-active'); viewCambios.classList.remove('hidden'); viewAuto.classList.add('hidden'); } }
+  const tabVAUN = document.getElementById('tabVAUN');
+  const viewVAUN = document.getElementById('viewVAUN');
+  function activate(tab){
+  // Quitar activo / ocultar todo
+  tabAuto.classList.remove('tab-active');
+  tabCambios.classList.remove('tab-active');
+  tabVAUN.classList.remove('tab-active');
+
+  viewAuto.classList.add('hidden');
+  viewCambios.classList.add('hidden');
+  viewVAUN.classList.add('hidden');
+
+  if (tab === 'auto') {
+    tabAuto.classList.add('tab-active');
+    viewAuto.classList.remove('hidden');
+  } else if (tab === 'cambios') {
+    tabCambios.classList.add('tab-active');
+    viewCambios.classList.remove('hidden');
+  } else { // 'vaun'
+    tabVAUN.classList.add('tab-active');
+    viewVAUN.classList.remove('hidden');
+  }
+}
   tabAuto.addEventListener('click',()=>activate('auto'));
   tabCambios.addEventListener('click',()=>activate('cambios'));
+  tabVAUN.addEventListener('click', ()=>activate('vaun'));
 
-  // Init
-  activate('auto'); 
-  renderCompanies(); renderAuto(); renderCambios();
+  // // Init
+  activate('auto');
+  renderCompanies();
+  renderAuto();
+  renderCambios();
+
+  // ======== VA por Unidad de Negocio: imágenes fijas + lightbox ========
+  const img1 = document.getElementById('img1');
+  const img2 = document.getElementById('img2');
+
+  // PON AQUÍ LAS RUTAS/URL FINALES
+  img1.src = "./imgs/va_sas.png"; // o una URL pública: "https://…/va_sas.png"
+  img2.src = "./imgs/va_cf.png";  // o una URL pública: "https://…/va_cf.png"
+
+  // Lightbox (zoom)
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+
+  function openLightbox(src){
+    if(!src) return;
+    lightboxImg.src = src;
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+  }
+  function closeLightbox(){
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+    lightboxImg.src = '';
+  }
+
+  img1?.addEventListener('click', ()=> openLightbox(img1.src));
+  img2?.addEventListener('click', ()=> openLightbox(img2.src));
+  lightbox?.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeLightbox(); });
 </script>
 </body>
 </html>
