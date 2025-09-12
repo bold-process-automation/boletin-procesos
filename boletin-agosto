@@ -92,9 +92,9 @@
         <table class="w-full text-sm">
           <thead>
             <tr>
-              <th class="sticky px-3 py-2 text-left">Código</th>
+              <th class="sticky px-3 py-2 text-left whitespace-nowrap">Código</th>
               <th class="sticky px-3 py-2 text-left">Documento</th>
-              <th class="sticky px-3 py-2 text-left">Dueño</th>
+              <th class="sticky px-3 py-2 text-left whitespace-nowrap">Dueño</th>
               <th class="sticky px-3 py-2 text-left">Detalle</th>
               <th class="sticky px-3 py-2 text-left">Compañía</th>
               <th class="sticky px-3 py-2 text-left">Tipo</th>
@@ -176,8 +176,40 @@
   const prevBtn=document.getElementById('prevPage');
   const nextBtn=document.getElementById('nextPage');
   let q2='', tipoSel='', sort2='fecha', page=1, pageSize=10;
+ function rowCambios(r){
+  const tipoClass = r.tipo === 'Creación'
+    ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+    : 'bg-amber-50 text-amber-700 border border-amber-200';
+    const va = (!r.valor_agregado || String(r.valor_agregado).trim() === '' || String(r.valor_agregado).toUpperCase() === 'N/A')
+  ? 'No aplica'
+  : r.valor_agregado;
 
-  function rowCambios(r){ const tipoClass = r.tipo==='Creación' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-amber-50 text-amber-700 border border-amber-200'; const va = (r.valor_agregado && r.valor_agregado!=='N/A') ? r.valor_agregado : ''; return '<tr class="border-b border-slate-100 hover:bg-slate-50"><td class="px-3 py-2 font-medium text-slate-800">'+r.codigo+'</td><td class="px-3 py-2">'+r.documento+'</td><td class="px-3 py-2">'+(r.dueno||'')+'</td><td class="px-3 py-2 text-slate-700">'+(r.detalle||'')+'</td><td class="px-3 py-2">'+(r.compania||'')+'</td><td class="px-3 py-2"><span class="text-xs px-2 py-1 rounded-full '+tipoClass+'">'+r.tipo+'</span></td><td class="px-3 py-2">'+formatDate(r.fecha)+'</td><td class="px-3 py-2">'+va+'</td></tr>'; }
+  return `
+    <tr class="border-b border-slate-100 hover:bg-slate-50">
+      <!-- Código: no-wrap, ocupa lo justo -->
+      <td class="px-3 py-2 font-medium text-slate-800 whitespace-nowrap">${r.codigo}</td>
+
+      <!-- Documento: lo dejas como lo tenías -->
+      <td class="px-3 py-2">${r.documento || ''}</td>
+
+      <!-- Dueño: no-wrap, pero con elipsis para no empujar columnas; tooltip con el nombre completo -->
+      <td class="px-3 py-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[18ch]" title="${r.dueno || ''}">
+        ${r.dueno || ''}
+      </td>
+
+      <td class="px-3 py-2 text-slate-700">${r.detalle || ''}</td>
+      <td class="px-3 py-2">${r.compania || ''}</td>
+      <td class="px-3 py-2">
+        <span class="text-xs px-2 py-1 rounded-full ${tipoClass}">${r.tipo}</span>
+      </td>
+      <td class="px-3 py-2">${formatDate(r.fecha)}</td>
+      <td class="px-3 py-2">${va}</td>
+    </tr>
+  `;
+}
+  function rowCambios(r){ const tipoClass = r.tipo==='Creación' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-amber-50 text-amber-700 border border-amber-200'; const va = (!r.valor_agregado || String(r.valor_agregado).trim() === '' || String(r.valor_agregado).toUpperCase() === 'N/A')
+  ? 'No aplica'
+  : r.valor_agregado;return '<tr class="border-b border-slate-100 hover:bg-slate-50"><td class="px-3 py-2 font-medium text-slate-800">'+r.codigo+'</td><td class="px-3 py-2">'+r.documento+'</td><td class="px-3 py-2">'+(r.dueno||'')+'</td><td class="px-3 py-2 text-slate-700">'+(r.detalle||'')+'</td><td class="px-3 py-2">'+(r.compania||'')+'</td><td class="px-3 py-2"><span class="text-xs px-2 py-1 rounded-full '+tipoClass+'">'+r.tipo+'</span></td><td class="px-3 py-2">'+formatDate(r.fecha)+'</td><td class="px-3 py-2">'+va+'</td></tr>'; }
   function getFilteredCambios(){ return cambios.filter(r=>!tipoSel||r.tipo===tipoSel).filter(r=>(r.codigo+' '+r.documento+' '+(r.dueno||'')+' '+(r.detalle||'')+' '+(r.compania||'')+' '+(r.valor_agregado||'')).toLowerCase().includes(q2.toLowerCase())).sort((a,b)=> sort2==='fecha' ? (parseLocalDate(b.fecha)-parseLocalDate(a.fecha)) : (a.codigo.localeCompare(b.codigo))); }
   function renderCambios(){ const all=getFilteredCambios(); const totalPages=Math.max(1, Math.ceil(all.length/pageSize)); if(page>totalPages) page=totalPages; const start=(page-1)*pageSize; const list=all.slice(start,start+pageSize); tbodyCambios.innerHTML=list.map(rowCambios).join(''); countCambios.textContent=all.length+' resultado'+(all.length!==1?'s':''); pageInfo.textContent=page+' / '+totalPages; prevBtn.disabled=page<=1; nextBtn.disabled=page>=totalPages; }
   document.getElementById('q2').addEventListener('input',(e)=>{q2=e.target.value;page=1;renderCambios();});
