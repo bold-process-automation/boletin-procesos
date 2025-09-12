@@ -182,7 +182,7 @@
     : 'bg-amber-50 text-amber-700 border border-amber-200';
     const va = (!r.valor_agregado || String(r.valor_agregado).trim() === '' || String(r.valor_agregado).toUpperCase() === 'N/A')
   ? 'No aplica'
-  : r.valor_agregado : '';
+  : r.valor_agregado;
 
   return `
     <tr class="border-b border-slate-100 hover:bg-slate-50">
