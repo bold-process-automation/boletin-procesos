@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Boletín de procesos - Arq. de Negocio</title>
- <link rel="icon" href="data:image/svg+xml,
+  <link rel="icon" href="data:image/svg+xml,
   <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
     <text y='.9em' font-size='90'>🚀</text>
   </svg>">
@@ -92,16 +92,29 @@
         <table class="w-full text-sm">
           <thead>
             <tr>
-              <th class="sticky px-3 py-2 text-left">Código</th>
+              <th class="sticky px-3 py-2 text-left whitespace-nowrap sortable" data-key="codigo">
+                Código <span class="sort-indicator" data-for="codigo"></span>
+              </th>
               <th class="sticky px-3 py-2 text-left">Documento</th>
-              <th class="sticky px-3 py-2 text-left">Dueño</th>
+              <th class="sticky px-3 py-2 text-left whitespace-nowrap sortable" data-key="dueno">
+                Dueño <span class="sort-indicator" data-for="dueno"></span>
+              </th>
               <th class="sticky px-3 py-2 text-left">Detalle</th>
-              <th class="sticky px-3 py-2 text-left">Compañía</th>
-              <th class="sticky px-3 py-2 text-left">Tipo</th>
-              <th class="sticky px-3 py-2 text-left">Aprobación</th>
-              <th class="sticky px-3 py-2 text-left">VA</th>
+              <th class="sticky px-3 py-2 text-left sortable" data-key="compania">
+                Compañía <span class="sort-indicator" data-for="compania"></span>
+              </th>
+              <th class="sticky px-3 py-2 text-left sortable" data-key="tipo">
+                Tipo <span class="sort-indicator" data-for="tipo"></span>
+              </th>
+              <th class="sticky px-3 py-2 text-left sortable" data-key="fecha">
+                Aprobación <span class="sort-indicator" data-for="fecha"></span>
+              </th>
+              <th class="sticky px-3 py-2 text-left sortable" data-key="va">
+                VA <span class="sort-indicator" data-for="va"></span>
+              </th>
             </tr>
           </thead>
+          
           <tbody id="tbodyCambios" class="bg-white"></tbody>
         </table>
       </div>
@@ -155,6 +168,7 @@
 
   let rows = [{"aplicativo": "APPIAN", "aplicacion": "RPA Ciclo operativo ACH", "proceso": "OP-PR-022 Gestión de transferencias ACH", "detalle": "Cargue y descarga de transacciones en integra ACH y neurona para su posterior conciliación ", "compania": "CF", "vaFinal": 70.0, "incrementoVA": 38.0, "fecha": "2025-08-06"}, {"aplicativo": "APPIAN", "aplicacion": "Gestión de planes de acción de RO", "proceso": "GR-PR-005 Elaboración y Seguimiento a Planes de Acción de RO\nGR-PR-105 Elaboración y Seguimiento a Planes de Acción de RO SAS", "detalle": "Creación (Risk Manager) y seguimiento (responsables) a los planes de acción de RO", "compania": "SAS Y CF", "vaFinal": 100.0, "incrementoVA": 33.0, "fecha": "2025-08-05"}, {"aplicativo": "APPIAN", "aplicacion": "Gestión de eventos RO", "proceso": "GR-PR-006 Gestión de eventos de riesgo operacional\nGR-PR-106 Gestión de eventos de riesgo operacional SAS", "detalle": NaN, "compania": "SAS Y CF", "vaFinal": 80.0, "incrementoVA": 5.0, "fecha": "2025-08-05"}];
   const cambios = [{"codigo": "OP-PR-022", "documento": "Gestión de transferencias ACH", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Inclusión de RPA Appian en las actividades que realizaba el Analista de Operaciones Financieras (Back) Bold.co SAS\nInclusión como output del proceso, el proceso OP-PR-036 Contabilización y conciliación de Cash In y Cash Out", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "70.45%"}, {"codigo": "OP-IN-030-05", "documento": "Instructivo Actualización Fuente de Adquirencia", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es asegurar la adecuada actualización de la base de datos del área de adquirencia mediante la inclusión de información consolidada, completa y precisa, en relación con el origen de los datos y las fechas establecidas en cada uno de los archivos consolidados. Esto con el fin de reflejar los resultados obtenidos a nivel operativo y mostrarlos al área de FinOps, generando valor a través de la visualización de datos.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-27", "valor_agregado": "N/A"}, {"codigo": "OP-IN-030-06", "documento": "Instructivo Pago y liquidación de Bold CF a Bold CO SAS", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es validar correctamente el pago a BOLD CO SAS de los montos resultantes del cuadre operativo y la conciliación de las franquicias para todos los tipos de procesamiento (doméstico e internacional), asegurando que las transacciones procesadas sean liquidadas por Bold CF a Bold CO SAS, a través de la liquidación de Payouts, el traslado entre cuentas y la generación de un informe al área de tesorería respecto a la operación.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-27", "valor_agregado": "N/A"}, {"codigo": "OP-PR-033", "documento": "Ajustes de adquirencia", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Inclusión de Appian\nAjuste general del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "66.67%"}, {"codigo": "GM-PR-001", "documento": "Comunicaciones a clientes", "dueno": "María Paula Machado Pantoja", "detalle": "Se añade actividad 21. \"Notificar los resultados de la campaña\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-20", "valor_agregado": "77.27%"}, {"codigo": "TH-PR-001", "documento": "Reclutamiento de personal", "dueno": "Lina Meza", "detalle": "Eliminación de actividades correspondientes a convocatoria interna ya que están dentro del proceso TH-PR-024 Cambio interno de rol\nAclaración de actividades de prueba de polígrafo para las distintas áreas\nInclusión de actividades relacionadas al cálculo de acciones con Appian", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "43.33%"}, {"codigo": "TH-PR-008", "documento": "Offboarding de personal", "dueno": "Lina Meza", "detalle": "Se eliminan las actividades correspondientes al rol Inventory Analyst\nAjuste general del flujo", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "42.11%"}, {"codigo": "TH-PR-011", "documento": "Gestión programa ESOP", "dueno": "Lina Meza", "detalle": "Eliminación de Carta como gestor de plan de acciones, ahora todo se visualiza en BambooHR y se gestionan con un módulo de Appian.\nCambio del nombre del proceso.", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "93.10%"}, {"codigo": "TH-PR-012", "documento": "Liquidación y pago de aportes", "dueno": "Lina Meza", "detalle": "Adición de la actividad 6. \"Conciliar planilla vs. Contabilidad\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-024", "documento": "Cambio interno de rol", "dueno": "Lina Meza", "detalle": "Ajuste del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-12", "valor_agregado": "45.16%"}, {"codigo": "GF-IN-005-02", "documento": "Instructivo Generación Informe IRL", "dueno": "Nicoll Albornoz Blanco", "detalle": "Inclusión de actividades de el Analista de Operaciones Financieras Senior Bold.co SAS relacionadas a la validación de la reportería de microcrédito tarjeta\nInclusión de actividades de el Analista de Operaciones Financieras Bold.co SAS relacionadas a la validación de la reportería de emisión\nAjuste de las actividades del responsable del reporte", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-005-03", "documento": "Instructivo Generación Informe CFEN", "dueno": "Nicoll Albornoz Blanco", "detalle": "Ajuste de las actividades del responsable del reporte", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-030-01", "documento": "Instructivo conciliación cobro y recaudo tarjeta de crédito", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es conciliar los pagos realizados por los clientes de microcrédito tarjeta a través de los medios habilitados contra los registros internos y contables.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-030-02", "documento": "Instructivo control y seguimiento de cupos", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es conciliar y validar la consistencia de los cupos de microcrédito tarjeta (aprobado, utilizado y disponible) entre los reportes, identificando y gestionando las diferencias hasta registrar en el ERP.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "SI-PR-004", "documento": "Gestión de Compras", "dueno": "Erick Verbel Facouseh", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-29", "valor_agregado": "12.50%"}, {"codigo": "SI-PR-006", "documento": "Selección y creación de terceros", "dueno": "Erick Verbel Facouseh", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-29", "valor_agregado": "38.46%"}, {"codigo": "SI-PR-008", "documento": "Recolección de activos fijos e implementos de trabajo en offboarding", "dueno": "Lina Meza", "detalle": "Ajuste general en las actividades del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "33.33%"}, {"codigo": "LC-MA-006", "documento": "Manual Ejecución Debida Diligencia Intensificada (DDI) CF", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-007", "documento": "Manual Metodológico Matriz de Riesgos SARLAFT", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-009", "documento": "Manual Metodología Segmentación de Riesgo Clientes", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "SI-PO-002", "documento": "Política activos fijos y elementos de trabajo", "dueno": "Lina Meza", "detalle": "Se añade política de cobertura para equipos en caso de accidentes de tránsito ocurridos en horario laboral.\nSe especifica el procedimiento a seguir y los soportes a presentar en caso de robo de equipos.", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "N/A"}, {"codigo": "OP-PR-169", "documento": "Cierre diario de turno para clientes master merchant SAS", "dueno": "Juan Camilo Salgado Marín", "detalle": "Su objetivo es garantizar el envío oportuno y seguro del archivo diario de transacciones a comercios master merchant, consolidando la información correspondiente al cierre del turno, y asegurando que nuevos clientes reciban correctamente las instrucciones para el acceso al archivo.", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-04", "valor_agregado": "16.67%"}, {"codigo": "GM-PR-101", "documento": "Comunicaciones a clientes SAS", "dueno": "Jacob Abadia Garcia", "detalle": "Se añade actividad 21. \"Notificar los resultados de la campaña\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-20", "valor_agregado": "77.27%"}, {"codigo": "TH-PR-108", "documento": "Offboarding de personal", "dueno": "Maria Fernanda Navia Rey", "detalle": "Se eliminan las actividades correspondientes al rol Inventory Analyst\nSe incluye la participación del Sales Ops Analyst\nAjuste general del flujo", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-111", "documento": "Gestión programa ESOP", "dueno": "Maria Fernanda Navia Rey", "detalle": "Eliminación de Carta como gestor de plan de acciones, ahora todo se visualiza en BambooHR y se gestionan con un módulo de Appian.\nCambio del nombre del proceso.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "93.10%"}, {"codigo": "TH-PR-112", "documento": "Liquidación y pago de aportes", "dueno": "Maria Fernanda Navia Rey", "detalle": "Adición de la actividad 6. \"Conciliar planilla vs. Contabilidad\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-124", "documento": "Cambio interno de rol SAS", "dueno": "Maria Fernanda Navia Rey", "detalle": "Ajuste del proceso", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-11", "valor_agregado": "45.16%"}, {"codigo": "SI-PR-108", "documento": "Recolección de activos fijos e implementos de trabajo en offboarding SAS", "dueno": "Maria Fernanda Navia Rey", "detalle": "Inclusión actividades de recolección de activos fijos de manera presencial, y actividades de recolección de activos fijos a domicilio.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "52.17%"}, {"codigo": "LC-MA-106", "documento": "Manual Ejecución Debida Diligencia Intensificada (DDI) SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-107", "documento": "Documento Metodológico Matriz de Riesgos SAGRILAFT SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-108", "documento": "Documento Metodológico Matriz de Riesgos PTEE (C/ST) - Programa de Transparencia y Ética Empresarial SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-109", "documento": "Manual Metodología Segmentación de Riesgo Clientes SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}];
+  
 
   const cardsEl = document.getElementById('cards');
   let query = '', company = '', minVA = 0, sortMode='fecha';
@@ -175,17 +189,120 @@
   const pageInfo=document.getElementById('pageInfo');
   const prevBtn=document.getElementById('prevPage');
   const nextBtn=document.getElementById('nextPage');
-  let q2='', tipoSel='', sort2='fecha', page=1, pageSize=10;
+  let q2='', tipoSel='', page=1, pageSize=10;
 
-  function rowCambios(r){ const tipoClass = r.tipo==='Creación' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-amber-50 text-amber-700 border border-amber-200'; const va = (r.valor_agregado && r.valor_agregado!=='N/A') ? r.valor_agregado : ''; return '<tr class="border-b border-slate-100 hover:bg-slate-50"><td class="px-3 py-2 font-medium text-slate-800">'+r.codigo+'</td><td class="px-3 py-2">'+r.documento+'</td><td class="px-3 py-2">'+(r.dueno||'')+'</td><td class="px-3 py-2 text-slate-700">'+(r.detalle||'')+'</td><td class="px-3 py-2">'+(r.compania||'')+'</td><td class="px-3 py-2"><span class="text-xs px-2 py-1 rounded-full '+tipoClass+'">'+r.tipo+'</span></td><td class="px-3 py-2">'+formatDate(r.fecha)+'</td><td class="px-3 py-2">'+va+'</td></tr>'; }
-  function getFilteredCambios(){ return cambios.filter(r=>!tipoSel||r.tipo===tipoSel).filter(r=>(r.codigo+' '+r.documento+' '+(r.dueno||'')+' '+(r.detalle||'')+' '+(r.compania||'')+' '+(r.valor_agregado||'')).toLowerCase().includes(q2.toLowerCase())).sort((a,b)=> sort2==='fecha' ? (parseLocalDate(b.fecha)-parseLocalDate(a.fecha)) : (a.codigo.localeCompare(b.codigo))); }
+// --- Orden de tabla Cambios ---
+let sortKey = 'fecha';   // columna activa por defecto
+let sortDir = 'desc';    // 'asc' o 'desc'
+
+// Valor normalizado por columna para comparar
+function valueForSort(r, key){
+  switch (key) {
+    case 'va': {
+      const v = r.valor_agregado;
+      if (!v || String(v).trim() === '' || String(v).toUpperCase() === 'N/A') return -Infinity; // "No aplica" al fondo
+      return parseFloat(String(v).replace('%','').replace(',','.'));
+    }
+    case 'fecha':
+      return parseLocalDate(r.fecha).getTime();
+    case 'codigo':
+      return r.codigo || '';
+    case 'dueno':
+      return r.dueno || '';
+    case 'compania':
+      return r.compania || '';
+    case 'tipo':
+      return r.tipo || '';
+    default:
+      return r[key] || '';
+  }
+}
+
+// Aplica el orden a una lista ya filtrada
+function sortList(list){
+  return list.sort((a, b) => {
+    const va = valueForSort(a, sortKey);
+    const vb = valueForSort(b, sortKey);
+    if (typeof va === 'number' && typeof vb === 'number') {
+      return sortDir === 'asc' ? va - vb : vb - va;
+    }
+    const res = String(va).localeCompare(String(vb), 'es', { numeric: true, sensitivity: 'base' });
+    return sortDir === 'asc' ? res : -res;
+  });
+}
+
+// Flechita ▲▼ en header activo
+function updateSortIndicators(){
+  document.querySelectorAll('.sort-indicator').forEach(s => s.textContent = '');
+  const active = document.querySelector(`.sort-indicator[data-for="${sortKey}"]`);
+  if (active) active.textContent = sortDir === 'asc' ? ' ▲' : ' ▼';
+}
+
+  function rowCambios(r){
+  const tipoClass = r.tipo === 'Creación'
+    ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+    : 'bg-amber-50 text-amber-700 border border-amber-200';
+    const va = (!r.valor_agregado || String(r.valor_agregado).trim() === '' || String(r.valor_agregado).toUpperCase() === 'N/A')
+  ? 'No aplica'
+  : r.valor_agregado;
+
+  return `
+    <tr class="border-b border-slate-100 hover:bg-slate-50">
+      <!-- Código: no-wrap, ocupa lo justo -->
+      <td class="px-3 py-2 font-medium text-slate-800 whitespace-nowrap">${r.codigo}</td>
+
+      <!-- Documento: lo dejas como lo tenías -->
+      <td class="px-3 py-2">${r.documento || ''}</td>
+
+      <!-- Dueño: no-wrap, pero con elipsis para no empujar columnas; tooltip con el nombre completo -->
+      <td class="px-3 py-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[18ch]" title="${r.dueno || ''}">
+        ${r.dueno || ''}
+      </td>
+
+      <td class="px-3 py-2 text-slate-700">${r.detalle || ''}</td>
+      <td class="px-3 py-2">${r.compania || ''}</td>
+      <td class="px-3 py-2">
+        <span class="text-xs px-2 py-1 rounded-full ${tipoClass}">${r.tipo}</span>
+      </td>
+      <td class="px-3 py-2">${formatDate(r.fecha)}</td>
+      <td class="px-3 py-2">${va}</td>
+    </tr>
+  `;
+}
+function getFilteredCambios(){
+  const base = cambios
+    .filter(r => !tipoSel || r.tipo === tipoSel)
+    .filter(r =>
+      (r.codigo + ' ' + r.documento + ' ' + (r.dueno||'') + ' ' + (r.detalle||'') + ' ' + (r.compania||'') + ' ' + (r.valor_agregado||''))
+        .toLowerCase()
+        .includes(q2.toLowerCase())
+    );
+  return sortList(base);
+}
+
   function renderCambios(){ const all=getFilteredCambios(); const totalPages=Math.max(1, Math.ceil(all.length/pageSize)); if(page>totalPages) page=totalPages; const start=(page-1)*pageSize; const list=all.slice(start,start+pageSize); tbodyCambios.innerHTML=list.map(rowCambios).join(''); countCambios.textContent=all.length+' resultado'+(all.length!==1?'s':''); pageInfo.textContent=page+' / '+totalPages; prevBtn.disabled=page<=1; nextBtn.disabled=page>=totalPages; }
   document.getElementById('q2').addEventListener('input',(e)=>{q2=e.target.value;page=1;renderCambios();});
   document.getElementById('tipoSel').addEventListener('change',(e)=>{tipoSel=e.target.value;page=1;renderCambios();});
   document.getElementById('sortBtn2').addEventListener('click',()=>{sort2=sort2==='fecha'?'codigo':'fecha';document.getElementById('sortBtn2').textContent=sort2==='fecha'?'Ordenar por Fecha':'Ordenar por Código';page=1;renderCambios();});
-  document.getElementById('resetBtn2').addEventListener('click',()=>{q2='';tipoSel='';sort2='fecha';page=1;document.getElementById('q2').value='';document.getElementById('tipoSel').value='';document.getElementById('sortBtn2').textContent='Ordenar por Fecha';renderCambios();});
-  prevBtn.addEventListener('click',()=>{if(page>1){page--;renderCambios();}});
-  nextBtn.addEventListener('click',()=>{page++;renderCambios();});
+  document.querySelectorAll('th.sortable').forEach(th => {
+  th.style.cursor = 'pointer';
+  th.addEventListener('click', () => {
+    const key = th.dataset.key;
+    if (!key) return;
+
+    if (sortKey === key) {
+      sortDir = (sortDir === 'asc') ? 'desc' : 'asc';
+    } else {
+      sortKey = key;
+      // Por defecto: VA y Fecha en descendente; texto en ascendente
+      sortDir = (key === 'va' || key === 'fecha') ? 'desc' : 'asc';
+    }
+    page = 1;
+    updateSortIndicators();
+    renderCambios();
+  });
+});
+
 
   // ======== TABS ========
   const tabAuto=document.getElementById('tabAuto');
@@ -224,6 +341,8 @@
   renderCompanies();
   renderAuto();
   renderCambios();
+  updateSortIndicators();
+
 
   // ======== VA por Unidad de Negocio: imágenes fijas + lightbox ========
   const img1 = document.getElementById('img1');
