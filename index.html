@@ -4,108 +4,222 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Boletín de procesos - Arq. de Negocio</title>
- <link rel="icon" href="data:image/svg+xml,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-    <text y='.9em' font-size='90'>🚀</text>
-  </svg>">
+  <title>Boletín de Procesos | Bold</title>
+  <link rel="icon" type="image/x-icon" href="favicon-bold.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23121f6c'/><text x='16' y='22' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-weight='bold' font-size='14'>B</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    .fade-in{animation:fade .25s ease-out both}
-    @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
-    .bar{transition:width .35s ease}
-    .tab{background:#fff;color:#111827;border:1px solid #e5e7eb}
-    .tab:hover{background:#f8fafc}
-    .tab-active{background:#111827 !important;color:#fff !important;border-color:#111827 !important}
-    th.sticky{position:sticky;top:0;background:#0f172a;color:#fff}
+    :root {
+      --bold-primary: #121f6c;     /* Azul principal Bold */
+      --bold-secondary: #4d2864;   /* Morado corporativo */
+      --bold-accent: #692e60;      /* Morado medio */
+      --bold-coral: #9c3559;       /* Coral corporativo */
+      --bold-red: #bf3b51;         /* Rojo Bold */
+      --bold-bright: #ee424e;      /* Rojo vibrante */
+      --bold-success: #22c55e;     /* Verde éxito */
+      --bold-warning: #f59e0b;     /* Amarillo advertencia */
+      --bold-error: #891618;       /* Granate error */
+      --bold-gradient-primary: linear-gradient(135deg, #121f6c 0%, #4d2864 100%);
+      --bold-gradient-accent: linear-gradient(135deg, #692e60 0%, #9c3559 100%);
+      --bold-text-dark: #1f2937;
+      --bold-text-light: #6b7280;
+      --bold-bg-light: #f8fafc;
+    }
+    
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { 
+      background: var(--bold-bg-light);
+      color: var(--bold-text-dark);
+      line-height: 1.6;
+    }
+    
+    .fade-in{animation:fade .4s ease-out both}
+    @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .bar{transition:width .4s ease}
+    
+    /* Navegación profesional */
+    .nav-btn{
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      font-weight: 500;
+      font-size: 0.95rem;
+      letter-spacing: -0.025em;
+    }
+    .nav-btn:hover{
+      background: var(--bold-gradient-primary) !important; 
+      color: white !important; 
+      transform: translateY(-1px); 
+      box-shadow: 0 6px 20px rgba(18, 31, 108, 0.25);
+      border-color: transparent !important;
+    }
+    .nav-btn:active{transform:translateY(0px);}
+    
+    /* Clases de colores */
+    .bold-gradient-primary { background: var(--bold-gradient-primary); }
+    .bold-gradient-accent { background: var(--bold-gradient-accent); }
+    .bold-primary { color: var(--bold-primary); }
+    .bold-secondary { color: var(--bold-secondary); }
+    .bold-accent { color: var(--bold-accent); }
+    .bold-coral { color: var(--bold-coral); }
+    .bold-red { color: var(--bold-red); }
+    .bold-bright { color: var(--bold-bright); }
+    .bold-success { color: var(--bold-success); }
+    .bold-warning { color: var(--bold-warning); }
+    .bold-error { color: var(--bold-error); }
+    
+    /* Header de tabla profesional */
+    th.sticky{
+      position:sticky;
+      top:0;
+      background: var(--bold-primary);
+      color:#fff; 
+      font-weight: 600;
+      font-size: 0.875rem;
+      letter-spacing: 0.025em;
+      text-transform: uppercase;
+    }
+    
+    /* Tarjetas corporativas */
+    .card-shadow { 
+      box-shadow: 0 2px 8px rgba(18, 31, 108, 0.08), 0 0 1px rgba(18, 31, 108, 0.12); 
+      border: 1px solid rgba(18, 31, 108, 0.06);
+    }
+    .card-shadow:hover { 
+      box-shadow: 0 8px 32px rgba(18, 31, 108, 0.16), 0 2px 8px rgba(18, 31, 108, 0.08); 
+      transform: translateY(-2px); 
+      border-color: rgba(18, 31, 108, 0.12);
+    }
+    
+    /* Botón principal corporativo */
+    .bold-button {
+      background: var(--bold-gradient-accent);
+      color: white;
+      font-weight: 600;
+      border-radius: 10px;
+      padding: 12px 24px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 0.9rem;
+      letter-spacing: -0.025em;
+    }
+    .bold-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(156, 53, 89, 0.3);
+      filter: brightness(1.05);
+    }
+    
+    /* Tipografía profesional */
+    .heading-primary {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .heading-secondary {
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+    }
+    .text-corporate {
+      font-weight: 500;
+      color: var(--bold-text-light);
+      line-height: 1.6;
+    }
   </style>
 </head>
-<body class="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-  <div class="mx-auto max-w-6xl p-6 md:p-10">
-    <div class="flex items-center gap-3">
-      <div class="text-white bg-indigo-600 rounded-xl p-2 text-xl">📄</div>
-      <h1 class="text-2xl md:text-4xl font-semibold tracking-tight">Boletín de procesos</h1>
-    </div>
-    <p class="text-slate-600 mt-2">Automatizaciones (VA) y Cambios de procesos (creación/actualización).</p>
-
-    <div class="mt-6 flex gap-2">
-      <button id="tabAuto" class="tab rounded-xl px-4 py-2">Automatizaciones</button>
-      <button id="tabCambios" class="tab rounded-xl px-4 py-2">Cambios de procesos</button>
-      <button id="tabVAUN" class="tab rounded-xl px-4 py-2">Valor agregado por unidad de negocio</button>
-    </div>
-
-
-    <!-- ========== AUTOMATIZACIONES (TARJETAS) ========== -->
-    <section id="viewAuto" class="mt-6">
-      <div class="grid grid-cols-1 md:grid-cols-5 gap-3 items-end">
-        <div class="md:col-span-2">
-          <label class="block text-xs text-slate-500 mb-1">Buscar</label>
-          <div class="relative">
-            <input id="q" type="text" placeholder="App, proceso, detalle, compañía" class="pl-9 w-full rounded-xl border border-slate-300 h-10 px-3 outline-none focus:ring-2 focus:ring-indigo-300" />
-            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">🔎</span>
-          </div>
+<body class="min-h-screen">
+  <div class="mx-auto max-w-7xl p-6 md:p-12">
+    <!-- Header principal corporativo -->
+    <header class="text-center mb-20">
+      <div class="inline-flex items-center gap-6 mb-8 px-8 py-4 bg-white rounded-3xl shadow-lg border border-gray-100">
+        <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-4 shadow-inner">
+          <img src="logo-bold.png" alt="Bold Logo" class="w-14 h-14 object-contain">
         </div>
-        <div class="md:col-span-2">
-          <div class="flex flex-wrap gap-2 items-center">
-            <span class="text-xs text-slate-500">Compañía:</span>
-            <button data-company="" class="company-btn bg-slate-200 text-slate-800 rounded-full px-3 py-1 text-sm">Todas</button>
-            <span id="companyBadges" class="flex flex-wrap gap-2"></span>
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs text-slate-500 mb-1">Mín. % VA</label>
-          <input id="minVA" type="range" min="0" max="100" step="5" value="0" class="w-full">
-          <div class="text-xs text-slate-600 text-right"><span id="minVAVal">0</span>%</div>
-        </div>
-        <div class="flex gap-2 justify-end">
-          <button id="sortBtn" class="h-10 rounded-xl border px-3 text-sm bg-white border-slate-300 hover:bg-slate-50">Ordenar por % VA</button>
-          <button id="resetBtn" class="h-10 rounded-xl px-3 text-sm border border-transparent hover:bg-slate-100">↻ Limpiar</button>
+        <div class="text-left">
+          <h1 class="text-3xl md:text-5xl heading-primary bold-primary">
+            Boletín de Procesos
+          </h1>
+          <p class="text-sm md:text-base bold-secondary font-medium mt-1">
+            Arquitectura de Negocio | Bold
+          </p>
         </div>
       </div>
-      <div id="cards" class="mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
-    </section>
+      
+      <div class="max-w-4xl mx-auto mb-8">
+        <p class="text-lg md:text-xl text-corporate leading-relaxed">
+          Información actualizada sobre los <span class="bold-coral font-semibold">cambios realizados en la documentación</span> 
+          asociada a la ejecución de procesos de <span class="bold-primary font-semibold">Bold CF y Bold.co SAS</span>, 
+          <span class="bold-accent font-semibold">automatizaciones</span> y mejoras continuas
+        </p>
+      </div>
+    </header>
+
+    <!-- Navegación corporativa -->
+    <nav class="flex justify-center gap-2 sticky top-0 bg-white/96 backdrop-blur-xl py-6 z-20 border-b border-gray-200/80 shadow-sm mb-16">
+      <a href="#cambios" class="nav-btn rounded-xl px-6 py-3 bg-white border border-gray-200/80 text-gray-700 shadow-sm">
+        <div class="flex items-center gap-3">
+          <div class="w-7 h-7 bold-gradient-primary rounded-lg flex items-center justify-center">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <span class="font-medium">Cambios de Procesos</span>
+        </div>
+      </a>
+      <a href="#valor-agregado" class="nav-btn rounded-xl px-6 py-3 bg-white border border-gray-200/80 text-gray-700 shadow-sm">
+        <div class="flex items-center gap-3">
+          <div class="w-7 h-7 bold-gradient-primary rounded-lg flex items-center justify-center">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
+            </svg>
+          </div>
+          <span class="font-medium">Valor Agregado</span>
+        </div>
+      </a>
+      <a href="#automatizaciones" class="nav-btn rounded-xl px-6 py-3 bg-white border border-gray-200/80 text-gray-700 shadow-sm">
+        <div class="flex items-center gap-3">
+          <div class="w-7 h-7 bold-gradient-primary rounded-lg flex items-center justify-center">
+            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <span class="font-medium">Automatizaciones</span>
+        </div>
+      </a>
+    </nav>
+
 
     <!-- ========== CAMBIOS (LISTADO) ========== -->
-    <section id="viewCambios" class="mt-6 hidden">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
-        <div class="md:col-span-2">
-          <label class="block text-xs text-slate-500 mb-1">Buscar</label>
+    <section id="cambios" class="mt-16 scroll-mt-32">
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bold-gradient-primary rounded-xl flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl md:text-3xl heading-secondary bold-primary">
+            Cambios de <span class="bold-coral">Procesos</span>
+          </h2>
+        </div>
+        <p class="text-base text-corporate max-w-2xl mx-auto">
+          Registro y seguimiento de creaciones, actualizaciones y modificaciones de procesos organizacionales
+        </p>
+      </div>
+      <!-- Búsqueda global y reset -->
+      <div class="flex items-center gap-3 mb-4">
+        <div class="flex-1">
           <div class="relative">
-            <input id="q2" type="text" placeholder="Código, documento, dueño, detalle" class="pl-9 w-full rounded-xl border border-slate-300 h-10 px-3 outline-none focus:ring-2 focus:ring-indigo-300" />
+            <input id="q2" type="text" placeholder="Buscar en toda la tabla..." class="pl-9 w-full rounded-xl border border-slate-300 h-10 px-3 outline-none focus:ring-2 focus:ring-indigo-300" />
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">🔎</span>
           </div>
         </div>
-        <div>
-          <label class="block text-xs text-slate-500 mb-1">Tipo de cambio</label>
-          <select id="tipoSel" class="w-full h-10 rounded-xl border border-slate-300 px-3">
-            <option value="">Todos</option>
-            <option>Creación</option>
-            <option>Actualización</option>
-          </select>
-        </div>
-        <div class="flex gap-2 justify-end">
-          <button id="sortBtn2" class="h-10 rounded-xl border px-3 text-sm bg-white border-slate-300 hover:bg-slate-50">Ordenar por Fecha</button>
-          <button id="resetBtn2" class="h-10 rounded-xl px-3 text-sm border border-transparent hover:bg-slate-100">↻ Limpiar</button>
-        </div>
+        <button id="resetBtn2" class="bold-button">↻ Limpiar todo</button>
       </div>
-      <div class="mt-4 overflow-x-auto border border-slate-200 rounded-2xl">
-        <table class="w-full text-sm">
-          <thead>
-            <tr>
-              <th class="sticky px-3 py-2 text-left whitespace-nowrap">Código</th>
-              <th class="sticky px-3 py-2 text-left">Documento</th>
-              <th class="sticky px-3 py-2 text-left whitespace-nowrap">Dueño</th>
-              <th class="sticky px-3 py-2 text-left">Detalle</th>
-              <th class="sticky px-3 py-2 text-left">Compañía</th>
-              <th class="sticky px-3 py-2 text-left">Tipo</th>
-              <th class="sticky px-3 py-2 text-left">Aprobación</th>
-              <th class="sticky px-3 py-2 text-left">VA</th>
-            </tr>
-          </thead>
-          <tbody id="tbodyCambios" class="bg-white"></tbody>
-        </table>
-      </div>
-      <div class="flex items-center justify-between mt-3 text-xs text-slate-600">
+      
+      <!-- Paginación y contador arriba de la tabla -->
+      <div class="flex items-center justify-between mt-4 mb-2 text-xs text-slate-600">
         <div id="countCambios">0 resultados</div>
         <div class="flex gap-2">
           <button id="prevPage" class="rounded-md border px-2 py-1 bg-white border-slate-300 hover:bg-slate-50">«</button>
@@ -113,36 +227,221 @@
           <button id="nextPage" class="rounded-md border px-2 py-1 bg-white border-slate-300 hover:bg-slate-50">»</button>
         </div>
       </div>
+      
+      <div class="overflow-x-auto border border-slate-200 rounded-2xl">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-slate-900">
+              <th class="sticky px-3 py-2 text-left w-32">
+                <div class="flex items-center justify-between">
+                  <span class="text-white text-sm font-medium">Código</span>
+                  <button class="filter-btn text-white/70 hover:text-white" data-column="codigo" onclick="showFilterDropdown('codigo', event)">
+                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
+                      <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
+                    </svg>
+                  </button>
+                </div>
+              </th>
+              <th class="sticky px-3 py-2 text-left">
+                <div class="flex items-center justify-between">
+                  <span class="text-white text-sm font-medium">Documento</span>
+                  <button class="filter-btn text-white/70 hover:text-white" data-column="documento" onclick="showFilterDropdown('documento', event)">
+                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
+                      <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
+                    </svg>
+                  </button>
+                </div>
+              </th>
+              <th class="sticky px-3 py-2 text-left w-48">
+                <div class="flex items-center justify-between">
+                  <span class="text-white text-sm font-medium">Dueño</span>
+                  <button class="filter-btn text-white/70 hover:text-white" data-column="dueno" onclick="showFilterDropdown('dueno', event)">
+                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
+                      <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
+                    </svg>
+                  </button>
+                </div>
+              </th>
+              <th class="sticky px-3 py-2 text-left">
+                <div class="flex items-center justify-between">
+                  <span class="text-white text-sm font-medium">Detalle</span>
+                  <button class="filter-btn text-white/70 hover:text-white" data-column="detalle" onclick="showFilterDropdown('detalle', event)">
+                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
+                      <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
+                    </svg>
+                  </button>
+                </div>
+              </th>
+              <th class="sticky px-3 py-2 text-left w-20">
+                <div class="flex items-center justify-between">
+                  <span class="text-white text-sm font-medium">Compañía</span>
+                  <button class="filter-btn text-white/70 hover:text-white" data-column="compania" onclick="showFilterDropdown('compania', event)">
+                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
+                      <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
+                    </svg>
+                  </button>
+                </div>
+              </th>
+              <th class="sticky px-3 py-2 text-left w-24">
+                <div class="flex items-center justify-between">
+                  <span class="text-white text-sm font-medium">Tipo</span>
+                  <button class="filter-btn text-white/70 hover:text-white" data-column="tipo" onclick="showFilterDropdown('tipo', event)">
+                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
+                      <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
+                    </svg>
+                  </button>
+                </div>
+              </th>
+              <th class="sticky px-3 py-2 text-left w-28">
+                <div class="flex items-center justify-between">
+                  <span class="text-white text-sm font-medium">Fecha</span>
+                  <button class="filter-btn text-white/70 hover:text-white" data-column="fecha" onclick="showFilterDropdown('fecha', event)">
+                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
+                      <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
+                    </svg>
+                  </button>
+                </div>
+              </th>
+              <th class="sticky px-3 py-2 text-left w-20">
+                <div class="flex items-center justify-between">
+                  <span class="text-white text-sm font-medium">VA</span>
+                  <button class="filter-btn text-white/70 hover:text-white" data-column="va" onclick="showFilterDropdown('va', event)">
+                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
+                      <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
+                    </svg>
+                  </button>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody id="tbodyCambios" class="bg-white"></tbody>
+        </table>
+      </div>
+      
+      <!-- Dropdown de filtro estilo Google Sheets -->
+      <div id="filterDropdown" class="hidden fixed bg-white border border-gray-300 rounded-lg shadow-lg z-50 w-64">
+        <div class="p-3">
+          <!-- Opciones de ordenamiento -->
+          <div class="border-b pb-2 mb-2">
+            <button onclick="applySortFilter('asc')" class="w-full text-left px-2 py-1 hover:bg-gray-100 rounded text-sm flex items-center gap-2">
+              <span>↑</span> Ordenar A → Z
+            </button>
+            <button onclick="applySortFilter('desc')" class="w-full text-left px-2 py-1 hover:bg-gray-100 rounded text-sm flex items-center gap-2">
+              <span>↓</span> Ordenar Z → A
+            </button>
+          </div>
+          
+          <!-- Filtros -->
+          <div class="mb-2">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-sm font-medium">Filtrar por:</span>
+              <button onclick="clearColumnFilter()" class="text-xs text-blue-600 hover:text-blue-800">Limpiar</button>
+            </div>
+            
+            <!-- Buscar dentro de la columna -->
+            <div class="mb-2">
+              <input id="columnSearch" type="text" placeholder="Buscar..." class="w-full text-xs border border-gray-300 rounded px-2 py-1">
+            </div>
+            
+            <!-- Checkboxes de selección -->
+            <div class="max-h-48 overflow-y-auto">
+              <label class="flex items-center gap-2 px-2 py-1 hover:bg-gray-50 text-sm">
+                <input type="checkbox" id="selectAll" onchange="toggleAllFilters()" checked>
+                <span class="font-medium">(Seleccionar todo)</span>
+              </label>
+              <div id="filterOptions" class="border-t pt-1 mt-1">
+                <!-- Opciones dinámicas se cargarán aquí -->
+              </div>
+            </div>
+          </div>
+          
+          <!-- Botones de acción -->
+          <div class="flex gap-2 pt-2 border-t">
+            <button onclick="applyColumnFilter()" class="flex-1 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">OK</button>
+            <button onclick="hideFilterDropdown()" class="flex-1 bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm hover:bg-gray-300">Cancelar</button>
+          </div>
+        </div>
+      </div>
     </section>
+
     <!-- ========== VALOR AGREGADO POR UNIDAD DE NEGOCIO (IMÁGENES) ========== -->
-<section id="viewVAUN" class="mt-6 hidden">
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-    <figure class="rounded-2xl overflow-hidden border border-slate-200 bg-white">
-      <div class="p-3 text-sm text-slate-600 border-b">
-        Unidad de negocio – Valor agregado (SAS)
+    <section id="valor-agregado" class="mt-24 scroll-mt-32">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold bold-navy mb-4">
+          Valor <span class="bold-blue">Agregado</span> por Unidad de Negocio
+        </h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Visualización del impacto y rendimiento por cada unidad organizacional
+        </p>
       </div>
-      <div class="p-3">
-        <!-- Pega aquí la URL o ruta local de la imagen SAS -->
-        <img id="img1" alt="Valor agregado SAS" class="w-full h-auto rounded-lg cursor-zoom-in">
-      </div>
-    </figure>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <figure class="rounded-2xl overflow-hidden border border-slate-200 bg-white">
+          <div class="p-3 text-sm text-slate-600 border-b">
+            Unidad de negocio – Valor agregado (SAS)
+          </div>
+          <div class="p-3">
+            <!-- Pega aquí la URL o ruta local de la imagen SAS -->
+            <img id="img1" alt="Valor agregado SAS" class="w-full h-auto rounded-lg cursor-zoom-in">
+          </div>
+        </figure>
 
-    <figure class="rounded-2xl overflow-hidden border border-slate-200 bg-white">
-      <div class="p-3 text-sm text-slate-600 border-b">
-        Unidad de negocio – Valor agregado (CF)
+        <figure class="rounded-2xl overflow-hidden border border-slate-200 bg-white">
+          <div class="p-3 text-sm text-slate-600 border-b">
+            Unidad de negocio – Valor agregado (CF)
+          </div>
+          <div class="p-3">
+            <!-- Pega aquí la URL o ruta local de la imagen CF -->
+            <img id="img2" alt="Valor agregado CF" class="w-full h-auto rounded-lg cursor-zoom-in">
+          </div>
+        </figure>
       </div>
-      <div class="p-3">
-        <!-- Pega aquí la URL o ruta local de la imagen CF -->
-        <img id="img2" alt="Valor agregado CF" class="w-full h-auto rounded-lg cursor-zoom-in">
-      </div>
-    </figure>
-  </div>
 
-  <!-- Modal/lightbox para ampliar -->
-  <div id="lightbox" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
-    <img id="lightboxImg" class="max-h-[90vh] max-w-[95vw] rounded-xl shadow-2xl">
-  </div>
-</section>
+      <!-- Modal/lightbox para ampliar -->
+      <div id="lightbox" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
+        <img id="lightboxImg" class="max-h-[90vh] max-w-[95vw] rounded-xl shadow-2xl">
+      </div>
+    </section>
+
+    <!-- ========== AUTOMATIZACIONES (TARJETAS) ========== -->
+    <section id="automatizaciones" class="mt-24 scroll-mt-32">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold bold-navy mb-4">
+          <span class="bold-coral">Automatizaciones</span> Implementadas
+        </h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Seguimiento del progreso y valor agregado de las automatizaciones en producción
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Buscar automatizaciones</label>
+          <div class="relative">
+            <input id="q" type="text" placeholder="Buscar por aplicación, proceso o compañía..." class="pl-10 w-full rounded-xl border border-gray-300 h-12 px-4 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900" />
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="flex gap-3 justify-end">
+          <button id="sortBtn" class="h-12 rounded-xl border-2 border-gray-200 px-6 text-sm font-medium bg-white hover:bg-gray-50 hover:border-gray-300 transition-colors">
+            ↕️ Ordenar por % VA
+          </button>
+          <button id="resetBtn" class="bold-button h-12">
+            ↻ Limpiar filtros
+          </button>
+        </div>
+      </div>
+      
+      <!-- Filtros de compañía -->
+      <div class="mt-6 flex flex-wrap gap-3 items-center">
+        <span class="text-sm font-medium text-gray-600">Filtrar por compañía:</span>
+        <button data-company="" class="company-btn bg-white border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 rounded-full px-4 py-2 text-sm font-medium transition-all">
+          Todas las compañías
+        </button>
+        <span id="companyBadges" class="flex flex-wrap gap-2"></span>
+      </div>
+      <div id="cards" class="mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+    </section>
 
     <div class="mt-8 text-xs text-slate-500">
 
@@ -157,16 +456,126 @@
   const cambios = [{"codigo": "OP-PR-022", "documento": "Gestión de transferencias ACH", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Inclusión de RPA Appian en las actividades que realizaba el Analista de Operaciones Financieras (Back) Bold.co SAS\nInclusión como output del proceso, el proceso OP-PR-036 Contabilización y conciliación de Cash In y Cash Out", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "70.45%"}, {"codigo": "OP-IN-030-05", "documento": "Instructivo Actualización Fuente de Adquirencia", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es asegurar la adecuada actualización de la base de datos del área de adquirencia mediante la inclusión de información consolidada, completa y precisa, en relación con el origen de los datos y las fechas establecidas en cada uno de los archivos consolidados. Esto con el fin de reflejar los resultados obtenidos a nivel operativo y mostrarlos al área de FinOps, generando valor a través de la visualización de datos.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-27", "valor_agregado": "N/A"}, {"codigo": "OP-IN-030-06", "documento": "Instructivo Pago y liquidación de Bold CF a Bold CO SAS", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es validar correctamente el pago a BOLD CO SAS de los montos resultantes del cuadre operativo y la conciliación de las franquicias para todos los tipos de procesamiento (doméstico e internacional), asegurando que las transacciones procesadas sean liquidadas por Bold CF a Bold CO SAS, a través de la liquidación de Payouts, el traslado entre cuentas y la generación de un informe al área de tesorería respecto a la operación.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-27", "valor_agregado": "N/A"}, {"codigo": "OP-PR-033", "documento": "Ajustes de adquirencia", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Inclusión de Appian\nAjuste general del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "66.67%"}, {"codigo": "GM-PR-001", "documento": "Comunicaciones a clientes", "dueno": "María Paula Machado Pantoja", "detalle": "Se añade actividad 21. \"Notificar los resultados de la campaña\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-20", "valor_agregado": "77.27%"}, {"codigo": "TH-PR-001", "documento": "Reclutamiento de personal", "dueno": "Lina Meza", "detalle": "Eliminación de actividades correspondientes a convocatoria interna ya que están dentro del proceso TH-PR-024 Cambio interno de rol\nAclaración de actividades de prueba de polígrafo para las distintas áreas\nInclusión de actividades relacionadas al cálculo de acciones con Appian", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "43.33%"}, {"codigo": "TH-PR-008", "documento": "Offboarding de personal", "dueno": "Lina Meza", "detalle": "Se eliminan las actividades correspondientes al rol Inventory Analyst\nAjuste general del flujo", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "42.11%"}, {"codigo": "TH-PR-011", "documento": "Gestión programa ESOP", "dueno": "Lina Meza", "detalle": "Eliminación de Carta como gestor de plan de acciones, ahora todo se visualiza en BambooHR y se gestionan con un módulo de Appian.\nCambio del nombre del proceso.", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "93.10%"}, {"codigo": "TH-PR-012", "documento": "Liquidación y pago de aportes", "dueno": "Lina Meza", "detalle": "Adición de la actividad 6. \"Conciliar planilla vs. Contabilidad\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-024", "documento": "Cambio interno de rol", "dueno": "Lina Meza", "detalle": "Ajuste del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-12", "valor_agregado": "45.16%"}, {"codigo": "GF-IN-005-02", "documento": "Instructivo Generación Informe IRL", "dueno": "Nicoll Albornoz Blanco", "detalle": "Inclusión de actividades de el Analista de Operaciones Financieras Senior Bold.co SAS relacionadas a la validación de la reportería de microcrédito tarjeta\nInclusión de actividades de el Analista de Operaciones Financieras Bold.co SAS relacionadas a la validación de la reportería de emisión\nAjuste de las actividades del responsable del reporte", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-005-03", "documento": "Instructivo Generación Informe CFEN", "dueno": "Nicoll Albornoz Blanco", "detalle": "Ajuste de las actividades del responsable del reporte", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-030-01", "documento": "Instructivo conciliación cobro y recaudo tarjeta de crédito", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es conciliar los pagos realizados por los clientes de microcrédito tarjeta a través de los medios habilitados contra los registros internos y contables.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-030-02", "documento": "Instructivo control y seguimiento de cupos", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es conciliar y validar la consistencia de los cupos de microcrédito tarjeta (aprobado, utilizado y disponible) entre los reportes, identificando y gestionando las diferencias hasta registrar en el ERP.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "SI-PR-004", "documento": "Gestión de Compras", "dueno": "Erick Verbel Facouseh", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-29", "valor_agregado": "12.50%"}, {"codigo": "SI-PR-006", "documento": "Selección y creación de terceros", "dueno": "Erick Verbel Facouseh", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-29", "valor_agregado": "38.46%"}, {"codigo": "SI-PR-008", "documento": "Recolección de activos fijos e implementos de trabajo en offboarding", "dueno": "Lina Meza", "detalle": "Ajuste general en las actividades del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "33.33%"}, {"codigo": "LC-MA-006", "documento": "Manual Ejecución Debida Diligencia Intensificada (DDI) CF", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-007", "documento": "Manual Metodológico Matriz de Riesgos SARLAFT", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-009", "documento": "Manual Metodología Segmentación de Riesgo Clientes", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "SI-PO-002", "documento": "Política activos fijos y elementos de trabajo", "dueno": "Lina Meza", "detalle": "Se añade política de cobertura para equipos en caso de accidentes de tránsito ocurridos en horario laboral.\nSe especifica el procedimiento a seguir y los soportes a presentar en caso de robo de equipos.", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "N/A"}, {"codigo": "OP-PR-169", "documento": "Cierre diario de turno para clientes master merchant SAS", "dueno": "Juan Camilo Salgado Marín", "detalle": "Su objetivo es garantizar el envío oportuno y seguro del archivo diario de transacciones a comercios master merchant, consolidando la información correspondiente al cierre del turno, y asegurando que nuevos clientes reciban correctamente las instrucciones para el acceso al archivo.", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-04", "valor_agregado": "16.67%"}, {"codigo": "GM-PR-101", "documento": "Comunicaciones a clientes SAS", "dueno": "Jacob Abadia Garcia", "detalle": "Se añade actividad 21. \"Notificar los resultados de la campaña\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-20", "valor_agregado": "77.27%"}, {"codigo": "TH-PR-108", "documento": "Offboarding de personal", "dueno": "Maria Fernanda Navia Rey", "detalle": "Se eliminan las actividades correspondientes al rol Inventory Analyst\nSe incluye la participación del Sales Ops Analyst\nAjuste general del flujo", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-111", "documento": "Gestión programa ESOP", "dueno": "Maria Fernanda Navia Rey", "detalle": "Eliminación de Carta como gestor de plan de acciones, ahora todo se visualiza en BambooHR y se gestionan con un módulo de Appian.\nCambio del nombre del proceso.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "93.10%"}, {"codigo": "TH-PR-112", "documento": "Liquidación y pago de aportes", "dueno": "Maria Fernanda Navia Rey", "detalle": "Adición de la actividad 6. \"Conciliar planilla vs. Contabilidad\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-124", "documento": "Cambio interno de rol SAS", "dueno": "Maria Fernanda Navia Rey", "detalle": "Ajuste del proceso", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-11", "valor_agregado": "45.16%"}, {"codigo": "SI-PR-108", "documento": "Recolección de activos fijos e implementos de trabajo en offboarding SAS", "dueno": "Maria Fernanda Navia Rey", "detalle": "Inclusión actividades de recolección de activos fijos de manera presencial, y actividades de recolección de activos fijos a domicilio.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "52.17%"}, {"codigo": "LC-MA-106", "documento": "Manual Ejecución Debida Diligencia Intensificada (DDI) SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-107", "documento": "Documento Metodológico Matriz de Riesgos SAGRILAFT SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-108", "documento": "Documento Metodológico Matriz de Riesgos PTEE (C/ST) - Programa de Transparencia y Ética Empresarial SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-109", "documento": "Manual Metodología Segmentación de Riesgo Clientes SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}];
 
   const cardsEl = document.getElementById('cards');
-  let query = '', company = '', minVA = 0, sortMode='fecha';
+  let query = '', company = '', sortMode='fecha';
   const pctColor = (p)=> p>=100?'bg-emerald-500':p>=80?'bg-green-500':p>=50?'bg-amber-500':'bg-slate-300';
   const status = (p)=> p>=100?['¡Listo!','bg-emerald-600 text-white']:p>=80?['Casi','bg-green-600 text-white']:['En curso','bg-slate-200 text-slate-800'];
 
-  function renderCompanies(){ const set=[...new Set(rows.map(r=>r.compania))]; const wrap=document.getElementById('companyBadges'); wrap.innerHTML=''; set.forEach(c=>{ const b=document.createElement('button'); b.className='company-btn rounded-full px-3 py-1 text-sm bg-white border border-slate-300 hover:bg-slate-50'; b.textContent=c; b.dataset.company=c; wrap.appendChild(b);});}
-  function renderAuto(){ const list=rows.filter(r=>!company||r.compania===company).filter(r=>Number(r.vaFinal)>=minVA).filter(r=>(r.aplicativo+' '+r.aplicacion+' '+r.proceso+' '+r.detalle+' '+r.compania).toLowerCase().includes(query.toLowerCase())).sort((a,b)=> sortMode==='fecha'?(parseLocalDate(b.fecha)-parseLocalDate(a.fecha)):(Number(b.vaFinal)-Number(a.vaFinal))); cardsEl.innerHTML=''; list.forEach(r=>{ const s=status(Number(r.vaFinal)); const lbl=s[0], cls=s[1]; const card=document.createElement('div'); card.className='fade-in rounded-2xl shadow-sm border border-slate-200 bg-white'; card.innerHTML='<div class="p-4 space-y-3"><div class="flex items-center justify-between"><span class="text-xs px-2 py-1 rounded-full border border-slate-300">'+(r.aplicativo||'')+'</span><span class="text-xs px-2 py-1 rounded-full bg-slate-900 text-white">'+(r.compania||'')+'</span></div><div class="font-semibold text-lg leading-snug">'+(r.aplicacion||'')+'</div><div class="text-sm text-slate-600">'+(r.proceso||'')+'</div><p class="text-sm text-slate-700 mt-1">'+(r.detalle||'')+'</p><div class="space-y-2"><div><div class="flex justify-between text-xs text-slate-500 mb-1"><span>% VA Final</span><span>'+Number(r.vaFinal) +'%</span></div><div class="h-2.5 bg-slate-100 rounded-full overflow-hidden"><div class="bar h-full '+pctColor(Number(r.vaFinal))+' rounded-full" style="width:'+Number(r.vaFinal)+'%"></div></div></div><div><div class="flex justify-between text-xs text-slate-500 mb-1"><span>Incremento VA</span><span>'+Number(r.incrementoVA)+'%</span></div><div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="bar h-full bg-sky-500 rounded-full" style="width:'+Number(r.incrementoVA)+'%"></div></div></div></div><div class="flex items-center justify-between pt-2"><div class="text-xs text-slate-500">📅 Salida a prod.: <span class="font-medium text-slate-700">'+formatDate(r.fecha)+'</span></div><span class="text-xs px-2 py-1 rounded-full '+cls+'">'+lbl+'</span></div></div>'; cardsEl.appendChild(card); }); document.querySelectorAll('.company-btn').forEach(btn=>{ ((btn.dataset.company||'')===company) ? btn.classList.add('ring-2','ring-slate-400') : btn.classList.remove('ring-2','ring-slate-400');});}
+  function renderCompanies(){ 
+    const set=[...new Set(rows.map(r=>r.compania))]; 
+    const wrap=document.getElementById('companyBadges'); 
+    wrap.innerHTML=''; 
+    set.forEach(c=>{ 
+      const b=document.createElement('button'); 
+      b.className='company-btn bg-white border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 rounded-full px-4 py-2 text-sm font-medium transition-all'; 
+      b.textContent=c; 
+      b.dataset.company=c; 
+      wrap.appendChild(b);
+    });
+  }
+  function renderAuto(){ 
+    const list = rows.filter(r => !company || r.compania === company)
+                    .filter(r => (r.aplicativo + ' ' + r.aplicacion + ' ' + r.proceso + ' ' + r.detalle + ' ' + r.compania).toLowerCase().includes(query.toLowerCase()))
+                    .sort((a,b) => sortMode === 'fecha' ? (parseLocalDate(b.fecha) - parseLocalDate(a.fecha)) : (Number(b.vaFinal) - Number(a.vaFinal)));
+    
+    cardsEl.innerHTML = ''; 
+    
+    list.forEach(r => {
+      const card = document.createElement('div');
+      card.className = 'fade-in rounded-3xl card-shadow bg-white transition-all duration-300';
+      
+      // Procesar los procesos para mostrarlos como lista con viñetas
+      let procesosHtml = '';
+      if (r.proceso) {
+        const procesos = r.proceso.split('\n').filter(p => p.trim());
+        if (procesos.length > 1) {
+          procesosHtml = '<div class="text-sm font-medium text-slate-700 mb-2">Procesos involucrados:</div><ul class="text-sm text-slate-600 space-y-1 ml-2">';
+          procesos.forEach(proceso => {
+            procesosHtml += `<li class="flex items-start"><span class="text-indigo-500 mr-2 mt-0.5">•</span><span>${proceso.trim()}</span></li>`;
+          });
+          procesosHtml += '</ul>';
+        } else {
+          procesosHtml = `<div class="text-sm font-medium text-slate-700 mb-1">Procesos involucrados:</div><div class="text-sm text-slate-600">${procesos[0]}</div>`;
+        }
+      }
+      
+      // Procesar detalle (manejar NaN)
+      const detalleText = (r.detalle && !isNaN(r.detalle) === false) ? r.detalle : (r.detalle || 'Sin detalles específicos');
+      
+      card.innerHTML = `
+        <div class="p-4 space-y-4">
+          <!-- Header con aplicativo y compañía -->
+          <div class="flex items-center justify-between">
+            <span class="text-xs px-2 py-1 rounded-full border border-slate-300 bg-gray-50">${r.aplicativo || ''}</span>
+            <span class="text-xs px-2 py-1 rounded-full bg-slate-900 text-white">${r.compania || ''}</span>
+          </div>
+          
+          <!-- Título de la aplicación -->
+          <div class="font-semibold text-lg leading-snug text-slate-800">${r.aplicacion || ''}</div>
+          
+          <!-- Procesos afectados -->
+          <div class="border-l-4 border-indigo-200 pl-3">
+            ${procesosHtml}
+          </div>
+          
+          <!-- Detalle de la automatización -->
+          <div class="bg-gray-50 p-3 rounded-lg">
+            <div class="text-xs font-medium text-slate-500 mb-1">Detalle de la automatización:</div>
+            <p class="text-sm text-slate-700">${detalleText}</p>
+          </div>
+          
+          <!-- Footer con fecha y porcentajes -->
+          <div class="pt-2 border-t border-gray-100 space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="text-xs text-slate-500">
+                🚀 Fecha en prod.: <span class="font-medium text-slate-700">${formatDate(r.fecha)}</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-3 text-xs">
+              <div class="text-center">
+                <div class="text-xs text-corporate font-medium">VA Inicial</div>
+                <div class="font-bold bold-error text-lg">${Math.max(0, Number(r.vaFinal) - Number(r.incrementoVA))}%</div>
+              </div>
+              <div class="text-center">
+                <div class="text-xs text-corporate font-medium">Incremento</div>
+                <div class="font-bold bold-success text-lg">+${Number(r.incrementoVA)}%</div>
+              </div>
+              <div class="text-center">
+                <div class="text-xs text-corporate font-medium">VA Final</div>
+                <div class="font-bold bold-primary text-lg">${Number(r.vaFinal)}%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      cardsEl.appendChild(card);
+    });
+    
+    // Actualizar filtros de compañía
+    document.querySelectorAll('.company-btn').forEach(btn => {
+      if ((btn.dataset.company || '') === company) {
+        btn.classList.add('border-blue-500', 'bg-blue-50', 'text-blue-700');
+        btn.classList.remove('border-gray-200', 'bg-white');
+      } else {
+        btn.classList.remove('border-blue-500', 'bg-blue-50', 'text-blue-700');
+        btn.classList.add('border-gray-200', 'bg-white');
+      }
+    });
+  }
   document.getElementById('q').addEventListener('input',(e)=>{query=e.target.value;renderAuto();});
-  document.getElementById('minVA').addEventListener('input',(e)=>{minVA=+e.target.value;document.getElementById('minVAVal').textContent=minVA;renderAuto();});
-  document.getElementById('sortBtn').addEventListener('click',()=>{sortMode=sortMode==='fecha'?'va':'fecha';document.getElementById('sortBtn').textContent=sortMode==='fecha'?'Ordenar por % VA':'Ordenar por Fecha';renderAuto();});
-  document.getElementById('resetBtn').addEventListener('click',()=>{query='';company='';minVA=0;sortMode='fecha';document.getElementById('q').value='';document.getElementById('minVA').value=0;document.getElementById('minVAVal').textContent='0';renderAuto();});
+  document.getElementById('sortBtn').addEventListener('click',()=>{
+    sortMode=sortMode==='fecha'?'va':'fecha';
+    document.getElementById('sortBtn').innerHTML = sortMode==='fecha'?'↕️ Ordenar por % VA':'↕️ Ordenar por Fecha';
+    renderAuto();
+  });
+  document.getElementById('resetBtn').addEventListener('click',()=>{
+    query='';
+    company='';
+    sortMode='fecha';
+    document.getElementById('q').value='';
+    document.getElementById('sortBtn').innerHTML='↕️ Ordenar por % VA';
+    renderAuto();
+  });
   document.addEventListener('click',(e)=>{const b=e.target.closest('.company-btn');if(b){company=b.dataset.company||'';renderAuto();}});
 
   // ======== CAMBIOS — listado con paginación ========
@@ -175,87 +584,321 @@
   const pageInfo=document.getElementById('pageInfo');
   const prevBtn=document.getElementById('prevPage');
   const nextBtn=document.getElementById('nextPage');
-  let q2='', tipoSel='', sort2='fecha', page=1, pageSize=10;
+  let q2 = '', sort2 = 'fecha', page = 1, pageSize = 10;
+  let columnFilters = {}; // Objeto para guardar filtros por columna
+  let currentFilterColumn = '';
+  
+  // Función para mostrar dropdown de filtro
+  window.showFilterDropdown = function(column, event) {
+    event.stopPropagation();
+    currentFilterColumn = column;
+    
+    const dropdown = document.getElementById('filterDropdown');
+    const rect = event.target.getBoundingClientRect();
+    
+    // Posicionar dropdown
+    dropdown.style.left = Math.min(rect.left, window.innerWidth - 280) + 'px';
+    dropdown.style.top = (rect.bottom + 5) + 'px';
+    
+    // Poblar opciones de filtro para la columna
+    populateFilterOptions(column);
+    
+    dropdown.classList.remove('hidden');
+    
+    // Cerrar dropdown al hacer click fuera
+    setTimeout(() => {
+      document.addEventListener('click', hideFilterDropdownOutside);
+    }, 100);
+  }
+  
+  // Función para ocultar dropdown
+  window.hideFilterDropdown = function() {
+    const dropdown = document.getElementById('filterDropdown');
+    dropdown.classList.add('hidden');
+    document.removeEventListener('click', hideFilterDropdownOutside);
+  }
+  
+  function hideFilterDropdownOutside(event) {
+    const dropdown = document.getElementById('filterDropdown');
+    if (!dropdown.contains(event.target)) {
+      hideFilterDropdown();
+    }
+  }
+  
+  // Función para poblar las opciones de filtro de una columna
+  function populateFilterOptions(column) {
+    const filterOptions = document.getElementById('filterOptions');
+    const columnSearch = document.getElementById('columnSearch');
+    
+    // Obtener valores únicos de la columna
+    let values = [];
+    cambios.forEach(row => {
+      let value = '';
+      switch(column) {
+        case 'codigo': value = row.codigo || ''; break;
+        case 'documento': value = row.documento || ''; break;
+        case 'dueno': value = row.dueno || ''; break;
+        case 'detalle': value = row.detalle || ''; break;
+        case 'compania': value = row.compania || ''; break;
+        case 'tipo': value = row.tipo || ''; break;
+        case 'fecha': value = formatDate(row.fecha) || ''; break;
+        case 'va': value = row.valor_agregado || 'N/A'; break;
+      }
+      if (value && !values.includes(value)) {
+        values.push(value);
+      }
+    });
+    
+    values.sort();
+    
+    // Limpiar opciones anteriores
+    filterOptions.innerHTML = '';
+    columnSearch.value = '';
+    
+    // Crear checkboxes para cada valor
+    const currentFilters = columnFilters[column] || [];
+    const allSelected = currentFilters.length === 0;
+    
+    values.forEach(value => {
+      const isSelected = allSelected || currentFilters.includes(value);
+      
+      const label = document.createElement('label');
+      label.className = 'flex items-center gap-2 px-2 py-1 hover:bg-gray-50 text-sm filter-option';
+      label.innerHTML = `
+        <input type="checkbox" value="${value}" ${isSelected ? 'checked' : ''} onchange="updateSelectAll()">
+        <span>${value}</span>
+      `;
+      filterOptions.appendChild(label);
+    });
+    
+    // Actualizar estado del "Seleccionar todo"
+    document.getElementById('selectAll').checked = allSelected;
+    
+    // Event listener para búsqueda dentro de la columna
+    columnSearch.oninput = function() {
+      const searchTerm = this.value.toLowerCase();
+      const options = filterOptions.querySelectorAll('.filter-option');
+      options.forEach(option => {
+        const text = option.textContent.toLowerCase();
+        option.style.display = text.includes(searchTerm) ? 'flex' : 'none';
+      });
+    };
+  }
+  
+  // Función para toggle de "Seleccionar todo"
+  window.toggleAllFilters = function() {
+    const selectAll = document.getElementById('selectAll');
+    const checkboxes = document.querySelectorAll('#filterOptions input[type="checkbox"]');
+    
+    checkboxes.forEach(checkbox => {
+      if (checkbox.closest('.filter-option').style.display !== 'none') {
+        checkbox.checked = selectAll.checked;
+      }
+    });
+  }
+  
+  // Función para actualizar estado del "Seleccionar todo"
+  window.updateSelectAll = function() {
+    const checkboxes = Array.from(document.querySelectorAll('#filterOptions input[type="checkbox"]'));
+    const visibleCheckboxes = checkboxes.filter(cb => cb.closest('.filter-option').style.display !== 'none');
+    const checkedBoxes = visibleCheckboxes.filter(cb => cb.checked);
+    
+    const selectAll = document.getElementById('selectAll');
+    selectAll.checked = checkedBoxes.length === visibleCheckboxes.length;
+    selectAll.indeterminate = checkedBoxes.length > 0 && checkedBoxes.length < visibleCheckboxes.length;
+  }
+  
+  // Función para aplicar ordenamiento desde el dropdown
+  window.applySortFilter = function(direction) {
+    sort2 = currentFilterColumn + (direction === 'asc' ? '-asc' : '');
+    page = 1;
+    renderCambios();
+    hideFilterDropdown();
+  }
+  
+  // Función para aplicar filtros de columna
+  window.applyColumnFilter = function() {
+    const checkboxes = document.querySelectorAll('#filterOptions input[type="checkbox"]:checked');
+    const selectedValues = Array.from(checkboxes).map(cb => cb.value);
+    
+    if (selectedValues.length === document.querySelectorAll('#filterOptions input[type="checkbox"]').length) {
+      // Si todos están seleccionados, no aplicar filtro
+      delete columnFilters[currentFilterColumn];
+    } else {
+      // Aplicar filtro con valores seleccionados
+      columnFilters[currentFilterColumn] = selectedValues;
+    }
+    
+    page = 1;
+    renderCambios();
+    hideFilterDropdown();
+  }
+  
+  // Función para limpiar filtro de la columna actual
+  window.clearColumnFilter = function() {
+    delete columnFilters[currentFilterColumn];
+    page = 1;
+    renderCambios();
+    hideFilterDropdown();
+  }
+  
  function rowCambios(r){
-  const tipoClass = r.tipo === 'Creación'
-    ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-    : 'bg-amber-50 text-amber-700 border border-amber-200';
+    const tipoClass = r.tipo === 'Creación'
+      ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+      : 'bg-amber-50 text-amber-700 border border-amber-200';
     const va = (!r.valor_agregado || String(r.valor_agregado).trim() === '' || String(r.valor_agregado).toUpperCase() === 'N/A')
-  ? 'No aplica'
-  : r.valor_agregado;
+      ? 'No aplica'
+      : r.valor_agregado;
 
-  return `
-    <tr class="border-b border-slate-100 hover:bg-slate-50">
-      <!-- Código: no-wrap, ocupa lo justo -->
-      <td class="px-3 py-2 font-medium text-slate-800 whitespace-nowrap">${r.codigo}</td>
-
-      <!-- Documento: lo dejas como lo tenías -->
-      <td class="px-3 py-2">${r.documento || ''}</td>
-
-      <!-- Dueño: no-wrap, pero con elipsis para no empujar columnas; tooltip con el nombre completo -->
-      <td class="px-3 py-2 whitespace-nowrap overflow-hidden text-ellipsis max-w-[18ch]" title="${r.dueno || ''}">
-        ${r.dueno || ''}
-      </td>
-
-      <td class="px-3 py-2 text-slate-700">${r.detalle || ''}</td>
-      <td class="px-3 py-2">${r.compania || ''}</td>
-      <td class="px-3 py-2">
-        <span class="text-xs px-2 py-1 rounded-full ${tipoClass}">${r.tipo}</span>
-      </td>
-      <td class="px-3 py-2">${formatDate(r.fecha)}</td>
-      <td class="px-3 py-2">${va}</td>
-    </tr>
-  `;
-}
-  function rowCambios(r){ const tipoClass = r.tipo==='Creación' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-amber-50 text-amber-700 border border-amber-200'; const va = (!r.valor_agregado || String(r.valor_agregado).trim() === '' || String(r.valor_agregado).toUpperCase() === 'N/A')
-  ? 'No aplica'
-  : r.valor_agregado;return '<tr class="border-b border-slate-100 hover:bg-slate-50"><td class="px-3 py-2 font-medium text-slate-800">'+r.codigo+'</td><td class="px-3 py-2">'+r.documento+'</td><td class="px-3 py-2">'+(r.dueno||'')+'</td><td class="px-3 py-2 text-slate-700">'+(r.detalle||'')+'</td><td class="px-3 py-2">'+(r.compania||'')+'</td><td class="px-3 py-2"><span class="text-xs px-2 py-1 rounded-full '+tipoClass+'">'+r.tipo+'</span></td><td class="px-3 py-2">'+formatDate(r.fecha)+'</td><td class="px-3 py-2">'+va+'</td></tr>'; }
-  function getFilteredCambios(){ return cambios.filter(r=>!tipoSel||r.tipo===tipoSel).filter(r=>(r.codigo+' '+r.documento+' '+(r.dueno||'')+' '+(r.detalle||'')+' '+(r.compania||'')+' '+(r.valor_agregado||'')).toLowerCase().includes(q2.toLowerCase())).sort((a,b)=> sort2==='fecha' ? (parseLocalDate(b.fecha)-parseLocalDate(a.fecha)) : (a.codigo.localeCompare(b.codigo))); }
-  function renderCambios(){ const all=getFilteredCambios(); const totalPages=Math.max(1, Math.ceil(all.length/pageSize)); if(page>totalPages) page=totalPages; const start=(page-1)*pageSize; const list=all.slice(start,start+pageSize); tbodyCambios.innerHTML=list.map(rowCambios).join(''); countCambios.textContent=all.length+' resultado'+(all.length!==1?'s':''); pageInfo.textContent=page+' / '+totalPages; prevBtn.disabled=page<=1; nextBtn.disabled=page>=totalPages; }
-  document.getElementById('q2').addEventListener('input',(e)=>{q2=e.target.value;page=1;renderCambios();});
-  document.getElementById('tipoSel').addEventListener('change',(e)=>{tipoSel=e.target.value;page=1;renderCambios();});
-  document.getElementById('sortBtn2').addEventListener('click',()=>{sort2=sort2==='fecha'?'codigo':'fecha';document.getElementById('sortBtn2').textContent=sort2==='fecha'?'Ordenar por Fecha':'Ordenar por Código';page=1;renderCambios();});
-  document.getElementById('resetBtn2').addEventListener('click',()=>{q2='';tipoSel='';sort2='fecha';page=1;document.getElementById('q2').value='';document.getElementById('tipoSel').value='';document.getElementById('sortBtn2').textContent='Ordenar por Fecha';renderCambios();});
+    return `
+      <tr class="border-b border-slate-100 hover:bg-slate-50">
+        <td class="px-3 py-2 font-medium text-slate-800 w-32">${r.codigo}</td>
+        <td class="px-3 py-2">${r.documento || ''}</td>
+        <td class="px-3 py-2 w-48 text-sm" title="${r.dueno || ''}">${r.dueno || ''}</td>
+        <td class="px-3 py-2 text-slate-700">${r.detalle || ''}</td>
+        <td class="px-3 py-2 w-20 text-center">${r.compania || ''}</td>
+        <td class="px-3 py-2 w-24">
+          <span class="text-xs px-2 py-1 rounded-full ${tipoClass}">${r.tipo}</span>
+        </td>
+        <td class="px-3 py-2 w-28 text-center">${formatDate(r.fecha)}</td>
+        <td class="px-3 py-2 w-20 text-center">${va}</td>
+      </tr>
+    `;
+  }
+  function getFilteredCambios(){ 
+    return cambios
+      .filter(r => {
+        // Filtro de búsqueda global
+        if (q2) {
+          const searchStr = (r.codigo + ' ' + r.documento + ' ' + (r.dueno || '') + ' ' + (r.detalle || '') + ' ' + (r.compania || '') + ' ' + (r.valor_agregado || '')).toLowerCase();
+          if (!searchStr.includes(q2.toLowerCase())) return false;
+        }
+        
+        // Filtros por columna
+        for (const [column, filters] of Object.entries(columnFilters)) {
+          if (filters && filters.length > 0) {
+            let value = '';
+            switch(column) {
+              case 'codigo': value = r.codigo || ''; break;
+              case 'documento': value = r.documento || ''; break;
+              case 'dueno': value = r.dueno || ''; break;
+              case 'detalle': value = r.detalle || ''; break;
+              case 'compania': value = r.compania || ''; break;
+              case 'tipo': value = r.tipo || ''; break;
+              case 'fecha': value = formatDate(r.fecha) || ''; break;
+              case 'va': value = r.valor_agregado || 'N/A'; break;
+            }
+            if (!filters.includes(value)) return false;
+          }
+        }
+        
+        return true;
+      })
+      .sort((a, b) => {
+        if (sort2 === 'fecha') return parseLocalDate(b.fecha) - parseLocalDate(a.fecha);
+        if (sort2 === 'fecha-asc') return parseLocalDate(a.fecha) - parseLocalDate(b.fecha);
+        if (sort2 === 'codigo') return (b.codigo || '').localeCompare(a.codigo || '');
+        if (sort2 === 'codigo-asc') return (a.codigo || '').localeCompare(b.codigo || '');
+        if (sort2 === 'documento') return (b.documento || '').localeCompare(a.documento || '');
+        if (sort2 === 'documento-asc') return (a.documento || '').localeCompare(b.documento || '');
+        if (sort2 === 'dueno') return (b.dueno || '').localeCompare(a.dueno || '');
+        if (sort2 === 'dueno-asc') return (a.dueno || '').localeCompare(b.dueno || '');
+        if (sort2 === 'compania') return (b.compania || '').localeCompare(a.compania || '');
+        if (sort2 === 'compania-asc') return (a.compania || '').localeCompare(b.compania || '');
+        if (sort2 === 'tipo') return (b.tipo || '').localeCompare(a.tipo || '');
+        if (sort2 === 'tipo-asc') return (a.tipo || '').localeCompare(b.tipo || '');
+        if (sort2 === 'va') {
+          const aVal = parseFloat(String(a.valor_agregado).replace('%', '')) || 0;
+          const bVal = parseFloat(String(b.valor_agregado).replace('%', '')) || 0;
+          return bVal - aVal;
+        }
+        if (sort2 === 'va-asc') {
+          const aVal = parseFloat(String(a.valor_agregado).replace('%', '')) || 0;
+          const bVal = parseFloat(String(b.valor_agregado).replace('%', '')) || 0;
+          return aVal - bVal;
+        }
+        return 0;
+      }); 
+  }
+  function renderCambios(){ 
+    const all = getFilteredCambios(); 
+    const totalPages = Math.max(1, Math.ceil(all.length / pageSize)); 
+    if (page > totalPages) page = totalPages; 
+    const start = (page - 1) * pageSize; 
+    const list = all.slice(start, start + pageSize); 
+    
+    tbodyCambios.innerHTML = list.map(rowCambios).join(''); 
+    countCambios.textContent = all.length + ' resultado' + (all.length !== 1 ? 's' : ''); 
+    pageInfo.textContent = page + ' / ' + totalPages; 
+    prevBtn.disabled = page <= 1; 
+    nextBtn.disabled = page >= totalPages;
+    
+    updateFilterIndicators();
+  }
+  
+  // Función para actualizar indicadores visuales de filtros activos
+  function updateFilterIndicators() {
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      const column = btn.dataset.column;
+      if (columnFilters[column] && columnFilters[column].length > 0) {
+        btn.style.color = '#3b82f6'; // azul para indicar filtro activo
+      } else {
+        btn.style.color = ''; // color por defecto
+      }
+    });
+  }
+  document.getElementById('q2').addEventListener('input', (e) => { 
+    q2 = e.target.value; 
+    page = 1; 
+    renderCambios(); 
+  });
+    
+  document.getElementById('resetBtn2').addEventListener('click', () => {
+    q2 = '';
+    columnFilters = {};
+    sort2 = 'fecha';
+    page = 1;
+    
+    document.getElementById('q2').value = '';
+    
+    renderCambios();
+  });
   prevBtn.addEventListener('click',()=>{if(page>1){page--;renderCambios();}});
   nextBtn.addEventListener('click',()=>{page++;renderCambios();});
 
-  // ======== TABS ========
-  const tabAuto=document.getElementById('tabAuto');
-  const tabCambios=document.getElementById('tabCambios');
-  const viewAuto=document.getElementById('viewAuto');
-  const viewCambios=document.getElementById('viewCambios');
-  const tabVAUN = document.getElementById('tabVAUN');
-  const viewVAUN = document.getElementById('viewVAUN');
-  function activate(tab){
-  // Quitar activo / ocultar todo
-  tabAuto.classList.remove('tab-active');
-  tabCambios.classList.remove('tab-active');
-  tabVAUN.classList.remove('tab-active');
-
-  viewAuto.classList.add('hidden');
-  viewCambios.classList.add('hidden');
-  viewVAUN.classList.add('hidden');
-
-  if (tab === 'auto') {
-    tabAuto.classList.add('tab-active');
-    viewAuto.classList.remove('hidden');
-  } else if (tab === 'cambios') {
-    tabCambios.classList.add('tab-active');
-    viewCambios.classList.remove('hidden');
-  } else { // 'vaun'
-    tabVAUN.classList.add('tab-active');
-    viewVAUN.classList.remove('hidden');
+  // ======== NAVEGACIÓN CON SMOOTH SCROLL ========
+  // Agregar efecto de highlight en navegación
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const sections = document.querySelectorAll('section[id]');
+  
+  // Función para actualizar botón activo basado en posición de scroll
+  function updateActiveNavButton() {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.getBoundingClientRect().top;
+      if (sectionTop <= 100) { // offset para navegación sticky
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navBtns.forEach(btn => {
+      btn.classList.remove('bg-slate-800', 'text-white', 'border-slate-800');
+      btn.classList.add('bg-white', 'text-slate-800', 'border-slate-300');
+      if (btn.getAttribute('href') === `#${current}`) {
+        btn.classList.remove('bg-white', 'text-slate-800', 'border-slate-300');
+        btn.classList.add('bg-slate-800', 'text-white', 'border-slate-800');
+      }
+    });
   }
-}
-  tabAuto.addEventListener('click',()=>activate('auto'));
-  tabCambios.addEventListener('click',()=>activate('cambios'));
-  tabVAUN.addEventListener('click', ()=>activate('vaun'));
-
-  // // Init
-  activate('auto');
+  
+  // Escuchar scroll para actualizar navegación activa
+  window.addEventListener('scroll', updateActiveNavButton);
+  
+  // ======== INICIALIZACIÓN ========
   renderCompanies();
   renderAuto();
   renderCambios();
+  updateActiveNavButton();
 
   // ======== VA por Unidad de Negocio: imágenes fijas + lightbox ========
   const img1 = document.getElementById('img1');
