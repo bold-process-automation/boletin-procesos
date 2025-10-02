@@ -134,72 +134,131 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+    
+    /* Animaciones para botones del hero */
+    .hero-nav-btn {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform, box-shadow;
+    }
+    
+    /* Navegación sticky con animación suave */
+    .sticky-nav-btn {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform, box-shadow;
+    }
+    
+    /* Mejoras de smooth scroll */
+    html {
+      scroll-padding-top: 100px;
+    }
   </style>
 </head>
 <body class="min-h-screen">
-  <div class="mx-auto max-w-7xl p-6 md:p-12">
-    <!-- Header principal corporativo -->
-    <header class="text-center mb-20">
-      <div class="inline-flex items-center gap-6 mb-8 px-8 py-4 bg-white rounded-3xl shadow-lg border border-gray-100">
-        <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-4 shadow-inner">
-          <img src="logo-bold.png" alt="Bold Logo" class="w-14 h-14 object-contain">
+  <!-- Hero Section estilo Bold.co -->
+  <div class="relative min-h-screen overflow-hidden">
+    <!-- Fondo con gradiente sutil -->
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-blue-50"></div>
+    
+    <!-- Contenido principal -->
+    <div class="relative flex items-center justify-center min-h-screen">
+      <div class="mx-auto max-w-6xl px-6 md:px-12 py-20 text-center">
+        <!-- Etiqueta superior -->
+        <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 border border-gray-200/50 shadow-sm mb-8">
+          <div class="w-2 h-2 bg-gradient-to-r from-[#121f6c] to-[#4d2864] rounded-full"></div>
+          <span class="text-gray-700 text-sm font-semibold tracking-wide uppercase">Arquitectura de Negocio</span>
         </div>
-        <div class="text-left">
-          <h1 class="text-3xl md:text-5xl heading-primary bold-primary">
-            Boletín de Procesos
+        
+        <!-- Título principal -->
+        <div class="space-y-6 mb-12">
+          <h1 class="text-6xl md:text-7xl lg:text-8xl font-black leading-none">
+            <span class="bg-gradient-to-r from-[#121f6c] via-[#4d2864] to-[#692e60] bg-clip-text text-transparent">
+              Boletín de Procesos
+            </span>
           </h1>
-          <p class="text-sm md:text-base bold-secondary font-medium mt-1">
-            Arquitectura de Negocio | Bold
+          
+          <p class="text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto text-gray-600">
+            Información actualizada sobre cambios, automatizaciones y mejoras continuas en Bold CF y Bold.co SAS
           </p>
         </div>
+        
+        <!-- Botones de navegación estilo Bold.co -->
+        <div id="heroNavButtons" class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#cambios" class="hero-nav-btn group bg-gradient-to-r from-[#121f6c] to-[#4d2864] text-white rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 min-w-[200px]">
+            <div class="flex items-center justify-center gap-3">
+              <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <span>Cambios</span>
+            </div>
+          </a>
+          
+          <a href="#valor-agregado" class="hero-nav-btn group bg-gradient-to-r from-[#692e60] to-[#9c3559] text-white rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 min-w-[200px]">
+            <div class="flex items-center justify-center gap-3">
+              <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
+                </svg>
+              </div>
+              <span>Valor Agregado</span>
+            </div>
+          </a>
+          
+          <a href="#automatizaciones" class="hero-nav-btn group bg-gradient-to-r from-[#bf3b51] to-[#ee424e] text-white rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 min-w-[200px]">
+            <div class="flex items-center justify-center gap-3">
+              <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <span>Automatizaciones</span>
+            </div>
+          </a>
+        </div>
       </div>
-      
-      <div class="max-w-4xl mx-auto mb-8">
-        <p class="text-lg md:text-xl text-corporate leading-relaxed">
-          Información actualizada sobre los <span class="bold-coral font-semibold">cambios realizados en la documentación</span> 
-          asociada a la ejecución de procesos de <span class="bold-primary font-semibold">Bold CF y Bold.co SAS</span>, 
-          <span class="bold-accent font-semibold">automatizaciones</span> y mejoras continuas
-        </p>
-      </div>
-    </header>
-
-    <!-- Navegación corporativa -->
-    <nav class="flex justify-center gap-2 sticky top-0 bg-white/96 backdrop-blur-xl py-6 z-20 border-b border-gray-200/80 shadow-sm mb-16">
-      <a href="#cambios" class="nav-btn rounded-xl px-6 py-3 bg-white border border-gray-200/80 text-gray-700 shadow-sm">
-        <div class="flex items-center gap-3">
-          <div class="w-7 h-7 bold-gradient-primary rounded-lg flex items-center justify-center">
-            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+    </div>
+  </div>
+  
+  <!-- Navegación sticky (se transforma desde los botones del hero) -->
+  <nav id="stickyNav" class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-xl py-4 z-50 border-b border-gray-200/50 shadow-lg transition-all duration-500 translate-y-[-100%] opacity-0">
+    <div class="mx-auto max-w-4xl px-6">
+      <div class="flex justify-center gap-3">
+        <a href="#cambios" class="sticky-nav-btn bg-gradient-to-r from-[#121f6c] to-[#4d2864] text-white rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg hover:scale-105">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"/>
             </svg>
-          </div>
-          <span class="font-medium">Cambios de Procesos</span>
-        </div>
-      </a>
-      <a href="#valor-agregado" class="nav-btn rounded-xl px-6 py-3 bg-white border border-gray-200/80 text-gray-700 shadow-sm">
-        <div class="flex items-center gap-3">
-          <div class="w-7 h-7 bold-gradient-primary rounded-lg flex items-center justify-center">
-            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <span class="hidden sm:inline">Cambios</span>
+          </span>
+        </a>
+        
+        <a href="#valor-agregado" class="sticky-nav-btn bg-gradient-to-r from-[#692e60] to-[#9c3559] text-white rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg hover:scale-105">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
             </svg>
-          </div>
-          <span class="font-medium">Valor Agregado</span>
-        </div>
-      </a>
-      <a href="#automatizaciones" class="nav-btn rounded-xl px-6 py-3 bg-white border border-gray-200/80 text-gray-700 shadow-sm">
-        <div class="flex items-center gap-3">
-          <div class="w-7 h-7 bold-gradient-primary rounded-lg flex items-center justify-center">
-            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <span class="hidden sm:inline">Valor Agregado</span>
+          </span>
+        </a>
+        
+        <a href="#automatizaciones" class="sticky-nav-btn bg-gradient-to-r from-[#bf3b51] to-[#ee424e] text-white rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg hover:scale-105">
+          <span class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
             </svg>
-          </div>
-          <span class="font-medium">Automatizaciones</span>
-        </div>
-      </a>
-    </nav>
+            <span class="hidden sm:inline">Automatizaciones</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="mx-auto max-w-7xl p-6 md:p-12">
 
 
     <!-- ========== CAMBIOS (LISTADO) ========== -->
-    <section id="cambios" class="mt-16 scroll-mt-32">
+    <section id="cambios" class="mt-24 scroll-mt-32">
       <div class="text-center mb-12">
         <div class="inline-flex items-center gap-3 mb-4">
           <div class="w-10 h-10 bold-gradient-primary rounded-xl flex items-center justify-center">
@@ -374,83 +433,92 @@
 
     <!-- ========== VALOR AGREGADO POR UNIDAD DE NEGOCIO ========== -->
     <section id="valor-agregado" class="mt-24 scroll-mt-32">
-      <!-- Header estilo Bold.co -->
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold bold-navy mb-6">
-          El valor perfecto para cada <span class="bold-coral">Unidad de Negocio</span>
-        </h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Visualiza el impacto y rendimiento detallado de cada unidad organizacional. 
-          Datos actualizados y métricas clave para la toma de decisiones.
-        </p>
-      </div>
-      
-      <!-- Tarjetas mejoradas estilo automatizaciones -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <!-- Tarjeta SAS -->
-        <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300">
-          <!-- Header con gradiente -->
-          <div class="bg-gradient-to-br from-blue-50 to-indigo-100 p-6 relative">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center card-shadow">
-                <!-- Logo Bold SAS -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#gradient1)"/>
-                  <path d="M2 17L12 22L22 17" stroke="url(#gradient1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M2 12L12 17L22 12" stroke="url(#gradient1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  <defs>
-                    <linearGradient id="gradient1" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#3B82F6"/>
-                      <stop offset="1" stop-color="#6366F1"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-            </div>
-            
-            <h3 class="text-2xl font-bold text-gray-900 mb-2">Bold.co SAS</h3>
-            <p class="text-gray-600 text-sm">Valor agregado por unidad de negocio</p>
-          </div>
-          
-          <!-- Contenido principal -->
-          <div class="p-6">
-            <!-- Panel de gráficos limpio -->
-            <div class="bg-gradient-to-br from-gray-50 to-white p-4 rounded-2xl border border-gray-100">
-              <img id="img1" alt="Valor agregado SAS" class="w-full h-auto rounded-xl cursor-zoom-in hover:scale-[1.02] transition-transform duration-300 border border-gray-200">
-            </div>
+      <!-- Layout horizontal con título a la izquierda y gráficos lado a lado -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Columna izquierda: Título y descripción (4 columnas) -->
+        <div class="lg:col-span-4 space-y-6">
+          <div>
+            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">ANÁLISIS</p>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black leading-none mb-6">
+              <span class="bg-gradient-to-r from-[#121f6c] via-[#4d2864] to-[#692e60] bg-clip-text text-transparent">
+                Valor agregado por
+              </span>
+              <br>
+              <span class="bg-gradient-to-r from-[#121f6c] via-[#4d2864] to-[#692e60] bg-clip-text text-transparent">
+                unidad de negocio
+              </span>
+            </h2>
+            <p class="text-base md:text-lg leading-relaxed" style="color: #121f6c;">
+              Visualiza el impacto y rendimiento detallado de cada unidad organizacional con datos actualizados y métricas clave.
+            </p>
           </div>
         </div>
         
-        <!-- Tarjeta CF -->
-        <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300">
-          <!-- Header con gradiente -->
-          <div class="bg-gradient-to-br from-purple-50 to-pink-100 p-6 relative">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center card-shadow">
-                <!-- Logo Bold CF -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="3" y="3" width="18" height="18" rx="4" fill="url(#gradient2)"/>
-                  <path d="M8 12H16M12 8V16" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                  <circle cx="12" cy="12" r="2" fill="white"/>
-                  <defs>
-                    <linearGradient id="gradient2" x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
-                      <stop stop-color="#A855F7"/>
-                      <stop offset="1" stop-color="#EC4899"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
+        <!-- Columna derecha: Tarjetas de gráficos lado a lado (8 columnas) -->
+        <div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Tarjeta SAS -->
+          <div class="bg-white rounded-2xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[350px]">
+            <!-- Header compacto -->
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-100 p-3">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-white rounded-md flex items-center justify-center">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="url(#gradient1)"/>
+                    <path d="M2 17L12 22L22 17" stroke="url(#gradient1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12L12 17L22 12" stroke="url(#gradient1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                      <linearGradient id="gradient1" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#3B82F6"/>
+                        <stop offset="1" stop-color="#6366F1"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-base font-bold text-gray-900">Bold.co SAS</h3>
+                  <p class="text-gray-600 text-xs">Valor agregado</p>
+                </div>
               </div>
             </div>
             
-            <h3 class="text-2xl font-bold text-gray-900 mb-2">Bold CF</h3>
-            <p class="text-gray-600 text-sm">Valor agregado por unidad de negocio</p>
+            <!-- Contenido del gráfico -->
+            <div class="p-3 flex-1">
+              <div class="bg-gradient-to-br from-gray-50 to-white p-2 rounded-lg border border-gray-100 h-full">
+                <img id="img1" alt="Valor agregado SAS" class="w-full h-full object-contain rounded cursor-zoom-in hover:scale-[1.02] transition-transform duration-300">
+              </div>
+            </div>
           </div>
           
-          <!-- Contenido principal -->
-          <div class="p-6">
-            <!-- Panel de gráficos limpio -->
-            <div class="bg-gradient-to-br from-gray-50 to-white p-4 rounded-2xl border border-gray-100">
-              <img id="img2" alt="Valor agregado CF" class="w-full h-auto rounded-xl cursor-zoom-in hover:scale-[1.02] transition-transform duration-300 border border-gray-200">
+          <!-- Tarjeta CF -->
+          <div class="bg-white rounded-2xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[350px]">
+            <!-- Header compacto -->
+            <div class="bg-gradient-to-br from-purple-50 to-pink-100 p-3">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 bg-white rounded-md flex items-center justify-center">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="3" width="18" height="18" rx="4" fill="url(#gradient2)"/>
+                    <path d="M8 12H16M12 8V16" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="12" cy="12" r="2" fill="white"/>
+                    <defs>
+                      <linearGradient id="gradient2" x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#A855F7"/>
+                        <stop offset="1" stop-color="#EC4899"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="text-base font-bold text-gray-900">Bold CF</h3>
+                  <p class="text-gray-600 text-xs">Valor agregado</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Contenido del gráfico -->
+            <div class="p-3 flex-1">
+              <div class="bg-gradient-to-br from-gray-50 to-white p-2 rounded-lg border border-gray-100 h-full">
+                <img id="img2" alt="Valor agregado CF" class="w-full h-full object-contain rounded cursor-zoom-in hover:scale-[1.02] transition-transform duration-300">
+              </div>
             </div>
           </div>
         </div>
@@ -464,15 +532,23 @@
 
     <!-- ========== AUTOMATIZACIONES (TARJETAS) ========== -->
     <section id="automatizaciones" class="mt-24 scroll-mt-32">
-      <!-- Header con estilo Bold.co -->
+      <!-- Header estilo de las imágenes con tipografía moderna -->
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold bold-navy mb-6">
-          <span class="bold-coral">Automatizaciones</span> Implementadas
-        </h2>
-        <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Seguimiento del progreso y valor agregado de las automatizaciones en producción. 
-          Cada tarjeta muestra el estado actual, impacto y detalles de implementación.
-        </p>
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8">
+            <span class="bg-gradient-to-r from-[#121f6c] via-[#4d2864] to-[#692e60] bg-clip-text text-transparent">
+              Automatizaciones
+            </span>
+            <span class="text-gray-900 ml-4">
+              Implementadas
+            </span>
+          </h2>
+          
+          <p class="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-8" style="color: #121f6c;">
+            Seguimiento del progreso y valor agregado de las automatizaciones en producción. 
+            Cada tarjeta muestra el estado actual, impacto y detalles de implementación.
+          </p>
+        </div>
       </div>
       
       <!-- Controles mejorados estilo Bold.co -->
@@ -514,10 +590,23 @@
       <div id="cards" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
     </section>
 
-    <div class="mt-8 text-xs text-slate-500">
-
+    <!-- Botón volver arriba -->
+    <div class="mt-24 text-center">
+      <button onclick="scrollToTop()" class="inline-flex items-center gap-3 bg-gradient-to-r from-[#121f6c] to-[#4d2864] text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+        </svg>
+        Volver arriba
+      </button>
     </div>
   </div>
+  
+  <!-- Botón flotante volver arriba (visible solo en scroll) -->
+  <button id="scrollToTopFloat" onclick="scrollToTop()" class="fixed bottom-8 right-8 bg-gradient-to-r from-[#121f6c] to-[#4d2864] text-white w-14 h-14 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 z-50 opacity-0 pointer-events-none">
+    <svg class="w-6 h-6 mx-auto" fill="currentColor" viewBox="0 0 20 20">
+      <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+    </svg>
+  </button>
 
 <script>
   function parseLocalDate(ymd){ const p=String(ymd||'').split('-').map(Number); return new Date(p[0]||1970,(p[1]||1)-1,p[2]||1); }
@@ -989,38 +1078,94 @@
   prevBtn.addEventListener('click',()=>{if(page>1){page--;renderCambios();}});
   nextBtn.addEventListener('click',()=>{page++;renderCambios();});
 
-  // ======== NAVEGACIÓN CON SMOOTH SCROLL ========
-  // Agregar efecto de highlight en navegación
-  const navBtns = document.querySelectorAll('.nav-btn');
+  // ======== NAVEGACIÓN STICKY TRANSFORMADA ========
+  const stickyNav = document.getElementById('stickyNav');
+  const heroNavButtons = document.getElementById('heroNavButtons');
   const sections = document.querySelectorAll('section[id]');
+  const stickyNavBtns = document.querySelectorAll('.sticky-nav-btn');
+  const heroNavBtns = document.querySelectorAll('.hero-nav-btn');
+  
+  // Función para mostrar/ocultar navegación sticky
+  function toggleStickyNav() {
+    const heroRect = heroNavButtons.getBoundingClientRect();
+    const shouldShow = heroRect.bottom < 0; // Hero nav ya no es visible
+    
+    if (shouldShow) {
+      stickyNav.classList.remove('translate-y-[-100%]', 'opacity-0');
+      stickyNav.classList.add('translate-y-0', 'opacity-100');
+    } else {
+      stickyNav.classList.add('translate-y-[-100%]', 'opacity-0');
+      stickyNav.classList.remove('translate-y-0', 'opacity-100');
+    }
+  }
   
   // Función para actualizar botón activo basado en posición de scroll
   function updateActiveNavButton() {
     let current = '';
     sections.forEach(section => {
       const sectionTop = section.getBoundingClientRect().top;
-      if (sectionTop <= 100) { // offset para navegación sticky
+      if (sectionTop <= 200) { // offset para detección de sección
         current = section.getAttribute('id');
       }
     });
     
-    navBtns.forEach(btn => {
-      btn.classList.remove('bg-slate-800', 'text-white', 'border-slate-800');
-      btn.classList.add('bg-white', 'text-slate-800', 'border-slate-300');
-      if (btn.getAttribute('href') === `#${current}`) {
-        btn.classList.remove('bg-white', 'text-slate-800', 'border-slate-300');
-        btn.classList.add('bg-slate-800', 'text-white', 'border-slate-800');
+    // Actualizar botones del hero
+    heroNavBtns.forEach(btn => {
+      const href = btn.getAttribute('href');
+      if (href === `#${current}`) {
+        btn.style.transform = 'scale(1.05)';
+        btn.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+      } else {
+        btn.style.transform = 'scale(1)';
+        btn.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+      }
+    });
+    
+    // Actualizar botones sticky
+    stickyNavBtns.forEach(btn => {
+      const href = btn.getAttribute('href');
+      if (href === `#${current}`) {
+        btn.style.transform = 'scale(1.1)';
+        btn.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+      } else {
+        btn.style.transform = 'scale(1)';
+        btn.style.boxShadow = '';
       }
     });
   }
   
-  // Escuchar scroll para actualizar navegación activa
-  window.addEventListener('scroll', updateActiveNavButton);
+  // ======== BOTÓN VOLVER ARRIBA ========
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+  
+  // Mostrar/ocultar botón flotante
+  const scrollToTopFloat = document.getElementById('scrollToTopFloat');
+  function toggleScrollButton() {
+    if (window.pageYOffset > 300) {
+      scrollToTopFloat.classList.remove('opacity-0', 'pointer-events-none');
+      scrollToTopFloat.classList.add('opacity-100', 'pointer-events-auto');
+    } else {
+      scrollToTopFloat.classList.add('opacity-0', 'pointer-events-none');
+      scrollToTopFloat.classList.remove('opacity-100', 'pointer-events-auto');
+    }
+  }
+  
+  // Escuchar scroll para navegación activa, sticky nav y botón flotante
+  window.addEventListener('scroll', () => {
+    toggleStickyNav();
+    updateActiveNavButton();
+    toggleScrollButton();
+  });
   
   // ======== INICIALIZACIÓN ========
   renderCompanies();
   renderAuto();
   renderCambios();
+  toggleStickyNav();
   updateActiveNavButton();
 
   // ======== VA por Unidad de Negocio: imágenes fijas + lightbox ========
