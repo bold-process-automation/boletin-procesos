@@ -259,30 +259,37 @@
 
     <!-- ========== CAMBIOS (LISTADO) ========== -->
     <section id="cambios" class="mt-24 scroll-mt-32">
-      <div class="text-center mb-12">
-        <div class="inline-flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 bold-gradient-primary rounded-xl flex items-center justify-center">
-            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"/>
+      <!-- Header estilo consistente con las otras secciones -->
+      <div class="text-center mb-16">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8">
+            <span class="bg-gradient-to-r from-[#121f6c] via-[#4d2864] to-[#692e60] bg-clip-text text-transparent">
+              Cambios de
+            </span>
+            <span class="text-gray-900 ml-4">
+              Procesos
+            </span>
+          </h2>
+          
+          <p class="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed mb-8" style="color: #121f6c;">
+            Registro y seguimiento detallado de creaciones, actualizaciones y modificaciones en los procesos organizacionales de Bold CF y Bold.co SAS.
+          </p>
+        </div>
+      </div>
+      <!-- Controles mejorados estilo Bold.co -->
+      <div class="bg-white rounded-2xl card-shadow p-6 mb-8">
+        <!-- Búsqueda principal -->
+        <div class="flex items-center gap-4">
+          <div class="flex-1 relative">
+            <input id="q2" type="text" placeholder="Buscar procesos, documentos, responsables..." class="pl-12 w-full rounded-2xl border border-gray-200 h-12 px-6 text-base outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 card-shadow" />
+            <svg class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
           </div>
-          <h2 class="text-2xl md:text-3xl heading-secondary bold-primary">
-            <span class="bold-coral">Procesos</span> Organizacionales
-          </h2>
+          <button id="resetBtn2" class="bold-button px-6 py-3 whitespace-nowrap">
+            ↻ Limpiar filtros
+          </button>
         </div>
-        <p class="text-base text-corporate max-w-2xl mx-auto">
-          Registro y seguimiento de creaciones, actualizaciones y modificaciones de procesos organizacionales
-        </p>
-      </div>
-      <!-- Búsqueda global y reset -->
-      <div class="flex items-center gap-3 mb-4">
-        <div class="flex-1">
-          <div class="relative">
-            <input id="q2" type="text" placeholder="Buscar en toda la tabla..." class="pl-9 w-full rounded-xl border border-slate-300 h-10 px-3 outline-none focus:ring-2 focus:ring-indigo-300" />
-            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">🔎</span>
-          </div>
-        </div>
-        <button id="resetBtn2" class="bold-button">↻ Limpiar todo</button>
       </div>
       
       <!-- Paginación y contador arriba de la tabla -->
@@ -438,7 +445,6 @@
         <!-- Título centrado y grande -->
         <div class="text-center mb-16">
           <div class="max-w-6xl mx-auto">
-            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-8">ANÁLISIS</p>
             <h2 class="text-5xl md:text-6xl lg:text-7xl font-black leading-none mb-8">
               <span class="bg-gradient-to-r from-[#121f6c] via-[#4d2864] via-[#692e60] via-[#9c3559] to-[#bf3b51] bg-clip-text text-transparent">
                 Valor agregado por unidad de negocio
