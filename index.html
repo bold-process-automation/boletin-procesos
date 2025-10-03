@@ -467,7 +467,7 @@
             <!-- Tarjeta SAS -->
             <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[450px]">
               <!-- Header estilo Bold.co -->
-              <div class="p-6" style="background-color: #969BBD;">
+              <div class="p-6" style="background: linear-gradient(to right, #121E6C, #EE424E);">
                 <div class="flex items-center gap-4">
                 <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-md p-2">
                   <!-- Icono actualizado con design system Bold -->
@@ -491,7 +491,7 @@
             <!-- Tarjeta CF -->
             <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[450px]">
               <!-- Header estilo Bold.co -->
-              <div class="p-6" style="background-color: #F48990;">
+              <div class="p-6" style="background: linear-gradient(to right, #121E6C, #1E23A2);">
                 <div class="flex items-center gap-4">
                 <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-md p-2">
                   <img src="banco-bold.png" alt="Banco Bold" class="w-full h-full object-contain">
@@ -924,9 +924,8 @@
   }
   
  function rowCambios(r){
-    const tipoClass = r.tipo === 'Creación'
-      ? 'bg-indigo-50 text-indigo-700 border border-indigo-200'
-      : 'bg-amber-50 text-amber-700 border border-amber-200';
+    const tipoClass = 'font-semibold';
+    const tipoStyle = 'background-color: #D2D4E1; color: #091144;';
     const va = (!r.valor_agregado || String(r.valor_agregado).trim() === '' || String(r.valor_agregado).toUpperCase() === 'N/A')
       ? 'No aplica'
       : r.valor_agregado;
@@ -946,7 +945,7 @@
         <td class="px-3 py-2 text-slate-700">${r.detalle || ''}</td>
         <td class="px-3 py-2 w-20 text-center">${r.compania || ''}</td>
         <td class="px-3 py-2 w-24">
-          <span class="text-xs px-2 py-1 rounded-full ${tipoClass}">${r.tipo}</span>
+          <span class="text-xs px-3 py-2 rounded-full ${tipoClass}" style="${tipoStyle}">${r.tipo}</span>
         </td>
         <td class="px-3 py-2 w-28 text-center">${formatDate(r.fecha)}</td>
         <td class="px-3 py-2 w-20 text-center">${va}</td>
