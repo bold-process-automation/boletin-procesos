@@ -438,6 +438,15 @@
         </table>
       </div>
       
+      <!-- Mensaje de no resultados para Gestión de Procesos -->
+      <div id="noResultsCambios" class="hidden bg-gray-50 rounded-2xl p-8 text-center">
+        <div class="flex items-center justify-center mb-4">
+          <img src="unfound-icon.png" alt="No encontrado" class="w-12 h-12 opacity-60">
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No hay resultados</h3>
+        <p id="noResultsTextCambios" class="text-gray-600">No se encontraron procesos que coincidan con tu búsqueda.</p>
+      </div>
+      
       <!-- Dropdown de filtro estilo Google Sheets -->
       <div id="filterDropdown" class="hidden fixed bg-white border border-gray-300 rounded-lg shadow-lg z-50 w-64">
         <div class="p-3">
@@ -597,6 +606,15 @@
       
       <!-- Grid de tarjetas -->
       <div id="cards" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+      
+      <!-- Mensaje de no resultados para Automatización -->
+      <div id="noResultsAuto" class="hidden bg-gray-50 rounded-2xl p-8 text-center">
+        <div class="flex items-center justify-center mb-4">
+          <img src="unfound-icon.png" alt="No encontrado" class="w-12 h-12 opacity-60">
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No hay resultados</h3>
+        <p id="noResultsTextAuto" class="text-gray-600">No se encontraron automatizaciones que coincidan con tu búsqueda.</p>
+      </div>
     </section>
 
     <!-- ========== FOOTER ESPACIADO ========== -->
@@ -717,7 +735,29 @@
                     .filter(r => (r.aplicativo + ' ' + r.aplicacion + ' ' + r.proceso + ' ' + r.detalle + ' ' + r.compania).toLowerCase().includes(query.toLowerCase()))
                     .sort((a,b) => sortMode === 'fecha' ? (parseLocalDate(b.fecha) - parseLocalDate(a.fecha)) : (Number(b.vaFinal) - Number(a.vaFinal)));
     
+    const noResultsDiv = document.getElementById('noResultsAuto');
+    const noResultsText = document.getElementById('noResultsTextAuto');
+    
     cardsEl.innerHTML = ''; 
+    
+    if (list.length === 0) {
+      // No hay resultados - mostrar mensaje
+      noResultsDiv.classList.remove('hidden');
+      
+      // Personalizar mensaje según el tipo de filtro activo
+      if (query.trim()) {
+        noResultsText.textContent = `No hay resultados para "${query.trim()}"`;
+      } else if (company) {
+        noResultsText.textContent = `No se encontraron automatizaciones para la compañía "${company}"`;
+      } else {
+        noResultsText.textContent = 'No se encontraron automatizaciones que coincidan con tu búsqueda.';
+      }
+      
+      return; // Salir temprano si no hay resultados
+    } else {
+      // Hay resultados - ocultar mensaje
+      noResultsDiv.classList.add('hidden');
+    }
     
     list.forEach(r => {
       const card = document.createElement('div');
@@ -1076,11 +1116,40 @@
     const start = (page - 1) * pageSize; 
     const list = all.slice(start, start + pageSize); 
     
-    tbodyCambios.innerHTML = list.map(rowCambios).join(''); 
-    countCambios.textContent = all.length + ' resultado' + (all.length !== 1 ? 's' : ''); 
-    pageInfo.textContent = page + ' / ' + totalPages; 
-    prevBtn.disabled = page <= 1; 
-    nextBtn.disabled = page >= totalPages;
+    const tableContainer = document.querySelector('.overflow-x-auto');
+    const noResultsDiv = document.getElementById('noResultsCambios');
+    const noResultsText = document.getElementById('noResultsTextCambios');
+    
+    if (all.length === 0) {
+      // No hay resultados - ocultar tabla y mostrar mensaje
+      tableContainer.style.display = 'none';
+      noResultsDiv.classList.remove('hidden');
+      
+      // Personalizar mensaje según el tipo de filtro activo
+      if (q2.trim()) {
+        noResultsText.textContent = `No hay resultados para "${q2.trim()}"`;
+      } else if (Object.keys(columnFilters).length > 0) {
+        noResultsText.textContent = 'No se encontraron procesos que coincidan con los filtros aplicados.';
+      } else {
+        noResultsText.textContent = 'No se encontraron procesos que coincidan con tu búsqueda.';
+      }
+      
+      // Actualizar contador
+      countCambios.textContent = '0 resultados';
+      pageInfo.textContent = '0 / 0';
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
+    } else {
+      // Hay resultados - mostrar tabla y ocultar mensaje
+      tableContainer.style.display = 'block';
+      noResultsDiv.classList.add('hidden');
+      
+      tbodyCambios.innerHTML = list.map(rowCambios).join(''); 
+      countCambios.textContent = all.length + ' resultado' + (all.length !== 1 ? 's' : ''); 
+      pageInfo.textContent = page + ' / ' + totalPages; 
+      prevBtn.disabled = page <= 1; 
+      nextBtn.disabled = page >= totalPages;
+    }
     
     updateFilterIndicators();
   }
