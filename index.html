@@ -151,6 +151,71 @@
     html {
       scroll-padding-top: 100px;
     }
+    
+    /* Navegación lateral */
+    #sideNav {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(-80px) translateY(-50%); /* Sale más de la pantalla */
+    }
+    
+    #sideNav.show {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(0) translateY(-50%);
+    }
+    
+    /* Contenedor de la barra que se expande */
+    .side-nav-container {
+      width: 60px;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+    
+    .side-nav-container:hover {
+      width: 200px;
+    }
+    
+    .side-nav-item {
+      position: relative;
+      border-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    
+    /* Texto que aparece en hover */
+    .side-nav-text {
+      margin-left: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .side-nav-container:hover .side-nav-text {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    /* Centrar iconos cuando no hay hover */
+    .side-nav-icon {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      #sideNav {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body class="min-h-screen">
@@ -227,38 +292,8 @@
     </div>
   </div>
   
-  <!-- Navegación sticky (se transforma desde los botones del hero) -->
-  <nav id="stickyNav" class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-xl py-4 z-50 border-b border-gray-200/50 shadow-lg transition-all duration-500 translate-y-[-100%] opacity-0">
-    <div class="mx-auto max-w-4xl px-6">
-      <div class="flex justify-center gap-3">
-        <a href="#cambios" class="sticky-nav-btn bg-white hover:bg-gray-50 border-2 border-gray-200 rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg hover:scale-105">
-          <span class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#FF2947]" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"/>
-            </svg>
-            <span class="hidden sm:inline text-[#FF2947]">Procesos</span>
-          </span>
-        </a>
-        
-        <a href="#valor-agregado" class="sticky-nav-btn bg-white hover:bg-gray-50 border-2 border-gray-200 rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg hover:scale-105">
-          <span class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#FF2947]" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
-            </svg>
-            <span class="hidden sm:inline text-[#FF2947]">Valor Agregado</span>
-          </span>
-        </a>
-        
-        <a href="#automatizaciones" class="sticky-nav-btn bg-white hover:bg-gray-50 border-2 border-gray-200 rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg hover:scale-105">
-          <span class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#FF2947]" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
-            </svg>
-            <span class="hidden sm:inline text-[#FF2947]">Automatización</span>
-          </span>
-        </a>
-      </div>
-    </div>
+  <!-- Navegación sticky (oculta ya que usamos la lateral) -->
+  <nav id="stickyNav" class="hidden">
   </nav>
   
   <div class="mx-auto max-w-7xl p-6 md:p-12">
@@ -268,7 +303,6 @@
     <section id="cambios" class="mt-24 scroll-mt-32">
       <!-- Header estilo consistente con las otras secciones -->
       <div class="mb-16">
-        <div class="max-w-4xl mx-auto">
           <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8 text-left">
             <span style="color: #121E6C;">
               Gestión de Procesos
@@ -278,7 +312,6 @@
           <p class="text-lg md:text-xl max-w-3xl leading-relaxed mb-8 text-left" style="color: #606060;">
             A continuación podrás consultar el registro y seguimiento detallado de creaciones, actualizaciones y modificaciones en los procesos organizacionales de Bold CF y Bold.co SAS.
           </p>
-        </div>
       </div>
       <!-- Barra de búsqueda sencilla -->
       <div class="mb-8">
@@ -358,7 +391,7 @@
                   </button>
                 </div>
               </th>
-              <th class="sticky px-3 py-2 text-left w-24">
+              <th class="sticky px-3 py-2 text-left w-32">
                 <div class="flex items-center justify-between">
                   <span class="text-white text-sm font-medium">Tipo</span>
                   <button class="filter-btn text-white/70 hover:text-white" data-column="tipo" onclick="showFilterDropdown('tipo', event)">
@@ -445,9 +478,8 @@
       <!-- Sección expandida a ancho completo -->
       <div class="w-full">
         <!-- Título alineado a la izquierda -->
-        <div class="mb-16">
-          <div class="max-w-6xl mx-auto">
-            <h2 class="text-5xl md:text-6xl lg:text-7xl font-black leading-none mb-8 text-left">
+        <div class="mb-16 px-6 md:px-12">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8 text-left">
               <span style="color: #121E6C;">
                 Valor Agregado
               </span>
@@ -455,7 +487,6 @@
             <p class="text-lg md:text-xl leading-relaxed max-w-4xl text-left" style="color: #606060;">
               Visualiza el impacto y rendimiento detallado de cada unidad de negocio con datos actualizados y métricas clave.
             </p>
-          </div>
         </div>
         
         <!-- Grid de tarjetas expandido -->
@@ -521,7 +552,6 @@
     <section id="automatizaciones" class="mt-24 scroll-mt-32">
       <!-- Header estilo de las imágenes con tipografía moderna -->
       <div class="mb-16">
-        <div class="max-w-4xl mx-auto">
           <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8 text-left">
             <span style="color: #121E6C;">
               Automatización
@@ -532,7 +562,6 @@
             Aquí puedes ver el seguimiento del progreso y valor agregado de las automatizaciones implementadas en producción. 
             Cada tarjeta muestra el estado actual, impacto y detalles de implementación.
           </p>
-        </div>
       </div>
       
       <!-- Controles sin contenedor, en el aire -->
@@ -572,6 +601,16 @@
       <div id="cards" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
     </section>
 
+    <!-- ========== FOOTER ESPACIADO ========== -->
+    <footer class="mt-32 py-16">
+      <div class="text-center">
+        <div class="w-16 h-1 bg-gradient-to-r from-[#121E6C] to-[#1E23A2] rounded-full mx-auto mb-6"></div>
+        <p class="text-sm text-gray-500 font-medium">
+          Arquitectura de Negocio y Automatización | Bold.co
+        </p>
+      </div>
+    </footer>
+
   </div>
   
   <!-- Botón flotante volver arriba (visible solo en scroll) -->
@@ -580,6 +619,51 @@
       <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
     </svg>
   </button>
+
+  <!-- Navegación lateral izquierda -->
+  <nav id="sideNav" class="fixed left-4 top-1/2 -translate-y-1/2 z-40 opacity-0 pointer-events-none transition-all duration-500 ease-in-out">
+    <div class="side-nav-container rounded-2xl shadow-2xl overflow-hidden" style="background: linear-gradient(to bottom, #121E6C, #1E23A2);">
+      <!-- Icono Home (scroll to top) -->
+      <a href="#" onclick="scrollToTop()" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300">
+        <div class="side-nav-icon">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+          </svg>
+        </div>
+        <span class="side-nav-text">Inicio</span>
+      </a>
+      
+      <!-- Procesos -->
+      <a href="#cambios" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300">
+        <div class="side-nav-icon">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+        <span class="side-nav-text">Gestión de Procesos</span>
+      </a>
+      
+      <!-- Valor Agregado -->
+      <a href="#valor-agregado" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300">
+        <div class="side-nav-icon">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
+          </svg>
+        </div>
+        <span class="side-nav-text">Valor Agregado</span>
+      </a>
+      
+      <!-- Automatización -->
+      <a href="#automatizaciones" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300">
+        <div class="side-nav-icon">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+        <span class="side-nav-text">Automatización</span>
+      </a>
+    </div>
+  </nav>
 
 <script>
   function parseLocalDate(ymd){ const p=String(ymd||'').split('-').map(Number); return new Date(p[0]||1970,(p[1]||1)-1,p[2]||1); }
@@ -918,8 +1002,8 @@
   }
   
  function rowCambios(r){
-    const tipoClass = 'font-semibold';
-    const tipoStyle = 'background-color: #D2D4E1; color: #091144;';
+    // Nuevo estilo para las etiquetas: sin negrita, fondo gris claro, centradas
+    const tipoStyle = 'background-color: #f1f2f6; color: #6b7280;';
     const va = (!r.valor_agregado || String(r.valor_agregado).trim() === '' || String(r.valor_agregado).toUpperCase() === 'N/A')
       ? 'No aplica'
       : r.valor_agregado;
@@ -938,8 +1022,8 @@
         <td class="px-3 py-2 w-48 text-sm" title="${r.dueno || ''}">${r.dueno || ''}</td>
         <td class="px-3 py-2 text-slate-700">${r.detalle || ''}</td>
         <td class="px-3 py-2 w-20 text-center">${r.compania || ''}</td>
-        <td class="px-3 py-2 w-24">
-          <span class="text-xs px-3 py-2 rounded-full ${tipoClass}" style="${tipoStyle}">${r.tipo}</span>
+        <td class="px-3 py-2 w-32 text-center">
+          <span class="inline-flex items-center justify-center text-xs px-3 py-2 rounded-full min-w-[90px] h-6" style="${tipoStyle}">${r.tipo}</span>
         </td>
         <td class="px-3 py-2 w-28 text-center">${formatDate(r.fecha)}</td>
         <td class="px-3 py-2 w-20 text-center">${va}</td>
@@ -1047,24 +1131,22 @@
   prevBtn.addEventListener('click',()=>{if(page>1){page--;renderCambios();}});
   nextBtn.addEventListener('click',()=>{page++;renderCambios();});
 
-  // ======== NAVEGACIÓN STICKY TRANSFORMADA ========
-  const stickyNav = document.getElementById('stickyNav');
+  // ======== NAVEGACIÓN LATERAL Y HERO ========
+  const sideNav = document.getElementById('sideNav');
   const heroNavButtons = document.getElementById('heroNavButtons');
   const sections = document.querySelectorAll('section[id]');
-  const stickyNavBtns = document.querySelectorAll('.sticky-nav-btn');
   const heroNavBtns = document.querySelectorAll('.hero-nav-btn');
+  const sideNavBtns = document.querySelectorAll('#sideNav .side-nav-item');
   
-  // Función para mostrar/ocultar navegación sticky
-  function toggleStickyNav() {
+  // Función para mostrar/ocultar navegación lateral
+  function toggleSideNav() {
     const heroRect = heroNavButtons.getBoundingClientRect();
-    const shouldShow = heroRect.bottom < 0; // Hero nav ya no es visible
+    const shouldShow = heroRect.bottom < -50; // Mostrar cuando el hero esté bien arriba
     
     if (shouldShow) {
-      stickyNav.classList.remove('translate-y-[-100%]', 'opacity-0');
-      stickyNav.classList.add('translate-y-0', 'opacity-100');
+      sideNav.classList.add('show');
     } else {
-      stickyNav.classList.add('translate-y-[-100%]', 'opacity-0');
-      stickyNav.classList.remove('translate-y-0', 'opacity-100');
+      sideNav.classList.remove('show');
     }
   }
   
@@ -1090,15 +1172,15 @@
       }
     });
     
-    // Actualizar botones sticky
-    stickyNavBtns.forEach(btn => {
+    // Actualizar botones de navegación lateral
+    sideNavBtns.forEach(btn => {
       const href = btn.getAttribute('href');
       if (href === `#${current}`) {
-        btn.style.transform = 'scale(1.1)';
-        btn.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+        btn.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+        btn.style.transform = 'scale(1.05)';
       } else {
+        btn.style.backgroundColor = '';
         btn.style.transform = 'scale(1)';
-        btn.style.boxShadow = '';
       }
     });
   }
@@ -1123,9 +1205,9 @@
     }
   }
   
-  // Escuchar scroll para navegación activa, sticky nav y botón flotante
+  // Escuchar scroll para navegación activa, side nav y botón flotante
   window.addEventListener('scroll', () => {
-    toggleStickyNav();
+    toggleSideNav();
     updateActiveNavButton();
     toggleScrollButton();
   });
@@ -1134,7 +1216,7 @@
   renderCompanies();
   renderAuto();
   renderCambios();
-  toggleStickyNav();
+  toggleSideNav();
   updateActiveNavButton();
 
   // ======== VA por Unidad de Negocio: imágenes fijas + lightbox ========
