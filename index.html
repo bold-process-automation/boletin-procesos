@@ -242,6 +242,19 @@
         display: none;
       }
     }
+    
+    /* Checkboxes personalizados para filtros - color coral */
+    #filterDropdown input[type="checkbox"] {
+      accent-color: #FF2947; /* Color coral para checkboxes */
+      width: 16px;
+      height: 16px;
+    }
+    
+    /* Mejor compatibilidad para navegadores que no soportan accent-color */
+    #filterDropdown input[type="checkbox"]:checked {
+      background-color: #FF2947;
+      border-color: #FF2947;
+    }
   </style>
 </head>
 <body class="min-h-screen">
@@ -351,81 +364,81 @@
       <div class="overflow-x-auto rounded-2xl">
         <table class="w-full text-sm">
           <thead>
-            <tr class="bg-slate-900">
-              <th class="sticky px-3 py-2 text-left w-32">
+            <tr class="bg-white" style="background-color: white !important;">
+              <th class="sticky px-3 py-2 text-left w-32" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
-                  <span class="text-white text-sm font-medium">Código</span>
-                  <button class="filter-btn text-white/70 hover:text-white" data-column="codigo" onclick="showFilterDropdown('codigo', event)">
+                  <span class="text-sm font-bold" style="color: #121E6C;">Código</span>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="codigo" onclick="showFilterDropdown('codigo', event)">
                     <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
                       <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
                     </svg>
                   </button>
                 </div>
               </th>
-              <th class="sticky px-3 py-2 text-left">
+              <th class="sticky px-3 py-2 text-left" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
-                  <span class="text-white text-sm font-medium">Documento</span>
-                  <button class="filter-btn text-white/70 hover:text-white" data-column="documento" onclick="showFilterDropdown('documento', event)">
+                  <span class="text-sm font-bold" style="color: #121E6C;">Documento</span>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="documento" onclick="showFilterDropdown('documento', event)">
                     <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
                       <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
                     </svg>
                   </button>
                 </div>
               </th>
-              <th class="sticky px-3 py-2 text-left w-48">
+              <th class="sticky px-3 py-2 text-left w-48" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
-                  <span class="text-white text-sm font-medium">Dueño</span>
-                  <button class="filter-btn text-white/70 hover:text-white" data-column="dueno" onclick="showFilterDropdown('dueno', event)">
+                  <span class="text-sm font-bold" style="color: #121E6C;">Dueño</span>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="dueno" onclick="showFilterDropdown('dueno', event)">
                     <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
                       <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
                     </svg>
                   </button>
                 </div>
               </th>
-              <th class="sticky px-3 py-2 text-left">
+              <th class="sticky px-3 py-2 text-left" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
-                  <span class="text-white text-sm font-medium">Detalle</span>
-                  <button class="filter-btn text-white/70 hover:text-white" data-column="detalle" onclick="showFilterDropdown('detalle', event)">
+                  <span class="text-sm font-bold" style="color: #121E6C;">Detalle</span>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="detalle" onclick="showFilterDropdown('detalle', event)">
                     <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
                       <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
                     </svg>
                   </button>
                 </div>
               </th>
-              <th class="sticky px-3 py-2 text-left w-20">
+              <th class="sticky px-3 py-2 text-left w-20" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
-                  <span class="text-white text-sm font-medium">Compañía</span>
-                  <button class="filter-btn text-white/70 hover:text-white" data-column="compania" onclick="showFilterDropdown('compania', event)">
+                  <span class="text-sm font-bold" style="color: #121E6C;">Compañía</span>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="compania" onclick="showFilterDropdown('compania', event)">
                     <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
                       <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
                     </svg>
                   </button>
                 </div>
               </th>
-              <th class="sticky px-3 py-2 text-left w-32">
+              <th class="sticky px-3 py-2 text-left w-32" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
-                  <span class="text-white text-sm font-medium">Tipo</span>
-                  <button class="filter-btn text-white/70 hover:text-white" data-column="tipo" onclick="showFilterDropdown('tipo', event)">
+                  <span class="text-sm font-bold" style="color: #121E6C;">Tipo</span>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="tipo" onclick="showFilterDropdown('tipo', event)">
                     <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
                       <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
                     </svg>
                   </button>
                 </div>
               </th>
-              <th class="sticky px-3 py-2 text-left w-28">
+              <th class="sticky px-3 py-2 text-left w-28" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
-                  <span class="text-white text-sm font-medium">Fecha</span>
-                  <button class="filter-btn text-white/70 hover:text-white" data-column="fecha" onclick="showFilterDropdown('fecha', event)">
+                  <span class="text-sm font-bold" style="color: #121E6C;">Fecha</span>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="fecha" onclick="showFilterDropdown('fecha', event)">
                     <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
                       <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
                     </svg>
                   </button>
                 </div>
               </th>
-              <th class="sticky px-3 py-2 text-left w-20">
+              <th class="sticky px-3 py-2 text-left w-20" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
-                  <span class="text-white text-sm font-medium">VA</span>
-                  <button class="filter-btn text-white/70 hover:text-white" data-column="va" onclick="showFilterDropdown('va', event)">
+                  <span class="text-sm font-bold" style="color: #121E6C;">VA</span>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="va" onclick="showFilterDropdown('va', event)">
                     <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
                       <path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/>
                     </svg>
@@ -464,7 +477,7 @@
           <div class="mb-2">
             <div class="flex items-center justify-between mb-2">
               <span class="text-sm font-medium">Filtrar por:</span>
-              <button onclick="clearColumnFilter()" class="text-xs text-blue-600 hover:text-blue-800">Limpiar</button>
+              <button onclick="clearColumnFilter()" class="text-xs hover:opacity-80" style="color: #FF2947;">Limpiar</button>
             </div>
             
             <!-- Buscar dentro de la columna -->
@@ -486,7 +499,7 @@
           
           <!-- Botones de acción -->
           <div class="flex gap-2 pt-2 border-t">
-            <button onclick="applyColumnFilter()" class="flex-1 bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">OK</button>
+            <button onclick="applyColumnFilter()" class="flex-1 text-white px-3 py-1 rounded text-sm hover:opacity-90" style="background-color: #FF2947;">OK</button>
             <button onclick="hideFilterDropdown()" class="flex-1 bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm hover:bg-gray-300">Cancelar</button>
           </div>
         </div>
@@ -831,7 +844,7 @@
           <!-- Footer con fecha -->
           <div class="px-6 pb-6">
             <div class="text-xs text-gray-500 flex items-center justify-center gap-2 py-3 bg-gray-50 rounded-xl">
-              📅 Fecha en prod: <span class="font-semibold text-gray-700">${formatDate(r.fecha)}</span>
+              <img src="calendar-icon.png" alt="Calendario" class="w-4 h-4 opacity-60"> Fecha en prod: <span class="font-semibold text-gray-700">${formatDate(r.fecha)}</span>
             </div>
           </div>
         </div>
@@ -1159,9 +1172,9 @@
     document.querySelectorAll('.filter-btn').forEach(btn => {
       const column = btn.dataset.column;
       if (columnFilters[column] && columnFilters[column].length > 0) {
-        btn.style.color = '#3b82f6'; // azul para indicar filtro activo
+        btn.style.color = '#FF2947'; // coral para indicar filtro activo
       } else {
-        btn.style.color = ''; // color por defecto
+        btn.style.color = '#121E6C'; // color azul por defecto igual al header
       }
     });
   }
@@ -1283,6 +1296,12 @@
     toggleSideNav();
     updateActiveNavButton();
     toggleScrollButton();
+    
+    // Cerrar filtro dropdown si está abierto
+    const dropdown = document.getElementById('filterDropdown');
+    if (dropdown && !dropdown.classList.contains('hidden')) {
+      hideFilterDropdown();
+    }
   });
   
   // ======== INICIALIZACIÓN ========
