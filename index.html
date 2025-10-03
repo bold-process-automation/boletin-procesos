@@ -531,7 +531,7 @@
                 <div class="flex items-center gap-4">
                   <img src="banco-bold.png" alt="Banco Bold" class="w-12 h-12 object-contain">
                 <div>
-                  <h3 class="text-lg font-bold text-white">Bold.co CF</h3>
+                  <h3 class="text-lg font-bold text-white">Bold CF</h3>
                   <p class="text-white/90 text-sm">Valor agregado por proceso</p>
                 </div>
                 </div>
@@ -572,34 +572,26 @@
       
       <!-- Controles sin contenedor, en el aire -->
       <div class="mb-8">
-        <!-- Búsqueda principal -->
+        <!-- Búsqueda principal con botón de limpiar -->
         <div class="mb-6">
-          <div class="relative">
-            <input id="q" type="text" placeholder="Buscar" class="pl-12 w-full rounded-full h-12 px-6 text-base outline-none text-gray-600 bg-white" style="font-family: 'Montserrat', sans-serif;" />
-            <img src="lupa-bold.png" alt="Buscar" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 opacity-60">
-          </div>
-        </div>
-        
-        <!-- Filtros y controles -->
-        <div class="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-          <!-- Filtros de compañía -->
-          <div class="flex flex-wrap gap-3 items-center">
-            <span class="text-sm font-semibold text-gray-700">Compañía:</span>
-            <button data-company="" class="company-btn bg-gray-50 border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 rounded-full px-4 py-2 text-sm font-medium transition-all">
-              Todas
-            </button>
-            <span id="companyBadges" class="flex flex-wrap gap-2"></span>
-          </div>
-          
-          <!-- Botones de control -->
-          <div class="flex gap-3">
-            <button id="sortBtn" class="rounded-xl border-2 border-gray-200 px-6 py-3 text-sm font-medium bg-white hover:bg-gray-50 hover:border-gray-300 transition-all card-shadow">
-              📈 Ordenar por % VA
-            </button>
-            <button id="resetBtn" class="bg-white rounded-full px-6 py-3 font-semibold transition-all hover:shadow-md" style="font-family: 'Montserrat', sans-serif; color: #121E6C;">
+          <div class="flex items-center gap-4">
+            <div class="flex-1 relative">
+              <input id="q" type="text" placeholder="Buscar" class="pl-12 w-full rounded-full h-12 px-6 text-base outline-none text-gray-600 bg-white" style="font-family: 'Montserrat', sans-serif;" />
+              <img src="lupa-bold.png" alt="Buscar" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 opacity-60">
+            </div>
+            <button id="resetBtn" class="bg-white rounded-full px-6 py-3 h-12 whitespace-nowrap font-semibold transition-all hover:shadow-md" style="font-family: 'Montserrat', sans-serif; color: #121E6C;">
               ↻ Limpiar filtros
             </button>
           </div>
+        </div>
+        
+        <!-- Filtros de compañía -->
+        <div class="flex flex-wrap gap-3 items-center">
+          <span class="text-sm font-semibold text-gray-700">Compañía:</span>
+          <button data-company="" class="company-btn bg-gray-50 border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 rounded-full px-4 py-2 text-sm font-medium transition-all">
+            Todas
+          </button>
+          <span id="companyBadges" class="flex flex-wrap gap-2"></span>
         </div>
       </div>
       
@@ -786,7 +778,7 @@
                 </div>
                 <div>
                   <div class="text-xs text-gray-500 font-medium mb-1">Incremento</div>
-                  <div class="font-bold text-lg text-emerald-600">+${Number(r.incrementoVA)}%</div>
+                  <div class="font-bold text-lg" style="color: #6CDCAB">+${Number(r.incrementoVA)}%</div>
                 </div>
                 <div>
                   <div class="text-xs text-gray-500 font-medium mb-1">VA Final</div>
@@ -820,17 +812,11 @@
     });
   }
   document.getElementById('q').addEventListener('input',(e)=>{query=e.target.value;renderAuto();});
-  document.getElementById('sortBtn').addEventListener('click',()=>{
-    sortMode=sortMode==='fecha'?'va':'fecha';
-    document.getElementById('sortBtn').innerHTML = sortMode==='fecha'?'📈 Ordenar por % VA':'📅 Ordenar por Fecha';
-    renderAuto();
-  });
   document.getElementById('resetBtn').addEventListener('click',()=>{
     query='';
     company='';
     sortMode='fecha';
     document.getElementById('q').value='';
-    document.getElementById('sortBtn').innerHTML='📈 Ordenar por % VA';
     renderAuto();
   });
   document.addEventListener('click',(e)=>{const b=e.target.closest('.company-btn');if(b){company=b.dataset.company||'';renderAuto();}});
