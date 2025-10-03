@@ -541,8 +541,8 @@
         </div>
       </div>
       
-      <!-- Controles mejorados estilo Bold.co -->
-      <div class="bg-white rounded-2xl card-shadow p-6 mb-8">
+      <!-- Controles sin contenedor, en el aire -->
+      <div class="mb-8">
         <!-- Búsqueda principal -->
         <div class="mb-6">
           <div class="relative">
@@ -653,7 +653,7 @@
     
     list.forEach(r => {
       const card = document.createElement('div');
-      card.className = 'fade-in rounded-3xl card-shadow bg-white transition-all duration-300';
+      card.className = 'fade-in rounded-3xl card-shadow bg-white transition-all duration-300 min-h-[420px] flex flex-col';
       
       // Procesar los procesos para mostrarlos como lista con viñetas
       let procesosHtml = '';
@@ -675,14 +675,8 @@
       
       card.innerHTML = `
         <div class="h-full flex flex-col">
-          <!-- Header con imagen/icono estilo Bold.co -->
+          <!-- Header sin icono -->
           <div class="bg-gradient-to-br from-slate-50 to-gray-100 p-6 rounded-t-3xl">
-            <div class="flex items-center justify-between mb-4">
-              <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center card-shadow">
-                <div class="w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg"></div>
-              </div>
-            </div>
-            
             <!-- Título y aplicativo -->
             <h3 class="font-bold text-lg text-gray-900 mb-2 leading-tight">${r.aplicacion || ''}</h3>
             <div class="flex items-center gap-2">
@@ -692,20 +686,23 @@
           </div>
           
           <!-- Contenido principal -->
-          <div class="flex-1 p-6 space-y-4">
-            <!-- Procesos involucrados -->
-            <div>
-              ${procesosHtml}
+          <div class="flex-1 p-6 flex flex-col justify-between">
+            <!-- Contenido superior -->
+            <div class="space-y-4 mb-4">
+              <!-- Procesos involucrados -->
+              <div>
+                ${procesosHtml}
+              </div>
+              
+              <!-- Detalle (limitado para mantener tarjetas uniformes) -->
+              <div class="bg-gray-50 p-4 rounded-xl">
+                <div class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Detalle</div>
+                <p class="text-sm text-gray-700 line-clamp-3">${detalleText}</p>
+              </div>
             </div>
             
-            <!-- Detalle (limitado para mantener tarjetas uniformes) -->
-            <div class="bg-gray-50 p-4 rounded-xl">
-              <div class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Detalle</div>
-              <p class="text-sm text-gray-700 line-clamp-3">${detalleText}</p>
-            </div>
-            
-            <!-- Métricas estilo Bold.co -->
-            <div class="bg-gray-50 p-4 rounded-xl">
+            <!-- Métricas siempre al final -->
+            <div class="bg-gray-50 p-4 rounded-xl mt-auto">
               <div class="grid grid-cols-3 gap-4 text-center">
                 <div>
                   <div class="text-xs text-gray-500 font-medium mb-1">VA Inicial</div>
