@@ -8,7 +8,7 @@
   <link rel="icon" type="image/x-icon" href="favicon-bold.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23121f6c'/><text x='16' y='22' text-anchor='middle' fill='white' font-family='Arial, sans-serif' font-weight='bold' font-size='14'>B</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --bold-primary: #121f6c;     /* Azul principal Bold */
@@ -27,7 +27,7 @@
       --bold-bg-light: #f8fafc;
     }
     
-    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    * { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif; }
     html { scroll-behavior: smooth; }
     body { 
       background: var(--bold-bg-light);
@@ -163,61 +163,65 @@
     <!-- Header actualizado con design system Bold -->
     
     <!-- Contenido principal -->
-    <div class="relative flex items-center justify-center min-h-screen">
-      <div class="mx-auto max-w-6xl px-6 md:px-12 py-20 text-center">
-        <!-- Etiqueta superior -->
-        <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 border border-gray-200/50 shadow-sm mb-8">
-          <div class="w-2 h-2 bg-gradient-to-r from-[#121f6c] to-[#4d2864] rounded-full"></div>
-          <span class="text-gray-700 text-sm font-semibold tracking-wide uppercase">Arquitectura de Negocio</span>
-        </div>
-        
-        <!-- Título principal -->
-        <div class="space-y-6 mb-12">
-          <h1 class="text-6xl md:text-7xl lg:text-8xl font-black leading-none">
-            <span class="bg-gradient-to-r from-[#121f6c] via-[#4d2864] to-[#692e60] bg-clip-text text-transparent">
-              Boletín de Procesos
-            </span>
-          </h1>
-          
-          <p class="text-xl md:text-2xl leading-relaxed max-w-4xl mx-auto text-gray-600">
-            Información actualizada sobre cambios, automatizaciones y mejoras continuas en Bold CF y Bold.co SAS
-          </p>
-        </div>
-        
-        <!-- Botones de navegación estilo Bold.co -->
-        <div id="heroNavButtons" class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="#cambios" class="hero-nav-btn group bg-gradient-to-r from-[#121f6c] to-[#4d2864] text-white rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 min-w-[200px]">
-            <div class="flex items-center justify-center gap-3">
-              <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"/>
-                </svg>
-              </div>
-              <span>Procesos</span>
+    <div class="relative flex items-center min-h-screen">
+      <div class="mx-auto max-w-7xl px-6 md:px-12 py-20 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
+          <!-- Columna izquierda: Contenido -->
+          <div class="space-y-8 text-left">
+            <!-- Etiqueta superior -->
+            <div class="mb-6">
+              <span class="text-white text-lg font-semibold tracking-wide uppercase">Arquitectura de Negocio y Automatización</span>
             </div>
-          </a>
-          
-          <a href="#valor-agregado" class="hero-nav-btn group bg-gradient-to-r from-[#692e60] to-[#9c3559] text-white rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 min-w-[200px]">
-            <div class="flex items-center justify-center gap-3">
-              <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
-                </svg>
-              </div>
-              <span>Valor Agregado</span>
+            
+            <!-- Título principal -->
+            <div class="space-y-6">
+              <h1 class="text-5xl md:text-6xl lg:text-7xl font-black leading-tight text-white">
+                Boletín de Procesos
+              </h1>
+              
+              <p class="text-xl md:text-2xl leading-relaxed text-white/90 max-w-2xl">
+                Información actualizada sobre cambios, automatizaciones y mejoras continuas en Bold CF y Bold.co SAS
+              </p>
             </div>
-          </a>
+          </div>
           
-          <a href="#automatizaciones" class="hero-nav-btn group bg-gradient-to-r from-[#bf3b51] to-[#ee424e] text-white rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 min-w-[200px]">
-            <div class="flex items-center justify-center gap-3">
-              <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
-                </svg>
-              </div>
-              <span>Automatizaciones</span>
+          <!-- Columna derecha: Botones -->
+          <div class="flex flex-col items-center lg:items-end justify-center space-y-6">
+            <div id="heroNavButtons" class="flex flex-col gap-4 w-full max-w-md">
+              <a href="#cambios" class="hero-nav-btn group bg-white hover:bg-gray-50 rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
+                <div class="flex items-center justify-center gap-3">
+                  <div class="w-8 h-8 bg-[#FF2947]/10 rounded-full flex items-center justify-center group-hover:bg-[#FF2947]/20 transition-colors">
+                    <svg class="w-4 h-4 text-[#FF2947]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  <span class="text-[#FF2947]">Procesos</span>
+                </div>
+              </a>
+              
+              <a href="#valor-agregado" class="hero-nav-btn group bg-white hover:bg-gray-50 rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
+                <div class="flex items-center justify-center gap-3">
+                  <div class="w-8 h-8 bg-[#FF2947]/10 rounded-full flex items-center justify-center group-hover:bg-[#FF2947]/20 transition-colors">
+                    <svg class="w-4 h-4 text-[#FF2947]" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
+                    </svg>
+                  </div>
+                  <span class="text-[#FF2947]">Valor Agregado</span>
+                </div>
+              </a>
+              
+              <a href="#automatizaciones" class="hero-nav-btn group bg-white hover:bg-gray-50 rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
+                <div class="flex items-center justify-center gap-3">
+                  <div class="w-8 h-8 bg-[#FF2947]/10 rounded-full flex items-center justify-center group-hover:bg-[#FF2947]/20 transition-colors">
+                    <svg class="w-4 h-4 text-[#FF2947]" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
+                    </svg>
+                  </div>
+                  <span class="text-[#FF2947]">Automatizaciones</span>
+                </div>
+              </a>
             </div>
-          </a>
+          </div>
         </div>
       </div>
     </div>
@@ -227,30 +231,30 @@
   <nav id="stickyNav" class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-xl py-4 z-50 border-b border-gray-200/50 shadow-lg transition-all duration-500 translate-y-[-100%] opacity-0">
     <div class="mx-auto max-w-4xl px-6">
       <div class="flex justify-center gap-3">
-        <a href="#cambios" class="sticky-nav-btn bg-gradient-to-r from-[#121f6c] to-[#4d2864] text-white rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg hover:scale-105">
+        <a href="#cambios" class="sticky-nav-btn bg-white hover:bg-gray-50 border-2 border-gray-200 rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg hover:scale-105">
           <span class="flex items-center gap-2">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-4 h-4 text-[#FF2947]" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"/>
             </svg>
-            <span class="hidden sm:inline">Procesos</span>
+            <span class="hidden sm:inline text-[#FF2947]">Procesos</span>
           </span>
         </a>
         
-        <a href="#valor-agregado" class="sticky-nav-btn bg-gradient-to-r from-[#692e60] to-[#9c3559] text-white rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg hover:scale-105">
+        <a href="#valor-agregado" class="sticky-nav-btn bg-white hover:bg-gray-50 border-2 border-gray-200 rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg hover:scale-105">
           <span class="flex items-center gap-2">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-4 h-4 text-[#FF2947]" fill="currentColor" viewBox="0 0 20 20">
               <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
             </svg>
-            <span class="hidden sm:inline">Valor Agregado</span>
+            <span class="hidden sm:inline text-[#FF2947]">Valor Agregado</span>
           </span>
         </a>
         
-        <a href="#automatizaciones" class="sticky-nav-btn bg-gradient-to-r from-[#bf3b51] to-[#ee424e] text-white rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg hover:scale-105">
+        <a href="#automatizaciones" class="sticky-nav-btn bg-white hover:bg-gray-50 border-2 border-gray-200 rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:shadow-lg hover:scale-105">
           <span class="flex items-center gap-2">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-4 h-4 text-[#FF2947]" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
             </svg>
-            <span class="hidden sm:inline">Automatizaciones</span>
+            <span class="hidden sm:inline text-[#FF2947]">Automatizaciones</span>
           </span>
         </a>
       </div>
