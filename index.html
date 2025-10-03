@@ -243,17 +243,71 @@
       }
     }
     
-    /* Checkboxes personalizados para filtros - color coral */
+    /* Checkboxes personalizados para filtros - usando imágenes personalizadas */
     #filterDropdown input[type="checkbox"] {
-      accent-color: #FF2947; /* Color coral para checkboxes */
-      width: 16px;
-      height: 16px;
+      width: 16px !important;
+      height: 16px !important;
+      min-width: 16px;
+      min-height: 16px;
+      max-width: 16px;
+      max-height: 16px;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      position: relative;
+      margin: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url('uncheckbox-icon.png');
+      background-size: 16px 16px;
+      background-position: center;
+      background-repeat: no-repeat;
     }
     
-    /* Mejor compatibilidad para navegadores que no soportan accent-color */
+    /* Checkbox seleccionado - usar imagen checkbox-icon */
     #filterDropdown input[type="checkbox"]:checked {
-      background-color: #FF2947;
-      border-color: #FF2947;
+      background-image: url('checkbox-icon.png');
+      background-size: 16px 16px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    
+    /* Texto de las opciones del filtro en azul Bold */
+    #filterDropdown .filter-option {
+      color: #121E6C;
+      font-weight: 500;
+    }
+    
+    /* Hover effect para las opciones */
+    #filterDropdown .filter-option:hover {
+      background-color: rgba(18, 30, 108, 0.05);
+      border-radius: 4px;
+    }
+    
+    /* Botón volver arriba - efecto hover similar a la barra lateral */
+    .scroll-to-top-btn {
+      transition: all 0.3s ease;
+    }
+    
+    .scroll-to-top-btn:hover {
+      width: auto;
+      min-width: 120px;
+      border-radius: 28px;
+    }
+    
+    .scroll-to-top-btn:hover .scroll-to-top-icon {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    
+    .scroll-to-top-btn:hover .scroll-to-top-text {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .scroll-to-top-btn .scroll-to-top-text {
+      padding: 0 20px;
     }
   </style>
 </head>
@@ -634,11 +688,16 @@
 
   </div>
   
-  <!-- Botón flotante volver arriba (visible solo en scroll) -->
-  <button id="scrollToTopFloat" onclick="scrollToTop()" class="fixed bottom-8 right-8 text-white w-14 h-14 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 z-50 opacity-0 pointer-events-none" style="background-color: #121E6C;">
-    <svg class="w-6 h-6 mx-auto" fill="currentColor" viewBox="0 0 20 20">
-      <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-    </svg>
+  <!-- Botón flotante volver arriba (visible solo en scroll) con efecto hover -->
+  <button id="scrollToTopFloat" onclick="scrollToTop()" class="scroll-to-top-btn fixed bottom-8 right-8 text-white w-14 h-14 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 z-50 opacity-0 pointer-events-none overflow-hidden" style="background-color: #121E6C;">
+    <!-- Icono -->
+    <div class="scroll-to-top-icon flex items-center justify-center w-full h-full transition-all duration-300">
+      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      </svg>
+    </div>
+    <!-- Texto que aparece en hover -->
+    <span class="scroll-to-top-text absolute inset-0 flex items-center justify-center text-xs font-semibold whitespace-nowrap opacity-0 transform translate-x-full transition-all duration-300">Volver arriba</span>
   </button>
 
   <!-- Navegación lateral izquierda -->
