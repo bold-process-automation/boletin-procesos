@@ -167,12 +167,15 @@
     /* Contenedor de la barra que se expande */
     .side-nav-container {
       width: 60px;
-      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       overflow: hidden;
+      position: relative;
     }
     
     .side-nav-container:hover {
-      width: 200px;
+      width: 240px;
+      background: white !important;
+      color: #121E6C;
     }
     
     .side-nav-item {
@@ -183,6 +186,16 @@
       justify-content: flex-start;
       padding-left: 16px;
       padding-right: 16px;
+      transition: all 0.3s ease;
+      color: white;
+    }
+    
+    .side-nav-container:hover .side-nav-item {
+      color: #121E6C;
+    }
+    
+    .side-nav-container:hover .side-nav-item:hover {
+      background-color: rgba(18, 30, 108, 0.1) !important;
     }
     
     /* Texto que aparece en hover */
@@ -192,8 +205,9 @@
       opacity: 0;
       transform: translateX(-10px);
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      font-weight: 600;
+      font-weight: 500;
       font-size: 14px;
+      color: inherit;
     }
     
     .side-nav-container:hover .side-nav-text {
@@ -208,6 +222,7 @@
       align-items: center;
       justify-content: center;
       min-width: 24px;
+      color: inherit;
     }
     
     /* Responsive adjustments */
@@ -254,34 +269,19 @@
           <div class="w-1/2 flex justify-center items-center pr-4 lg:pr-8">
             <div id="heroNavButtons" class="flex flex-col gap-5 w-full max-w-sm">
               <a href="#cambios" class="hero-nav-btn group bg-white hover:bg-gray-50 rounded-full px-10 py-5 font-bold text-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
-                <div class="flex items-center justify-center gap-4">
-                  <div class="w-10 h-10 bg-[#FF2947]/10 rounded-full flex items-center justify-center group-hover:bg-[#FF2947]/20 transition-colors">
-                    <svg class="w-5 h-5 text-[#FF2947]" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"/>
-                    </svg>
-                  </div>
+                <div class="flex items-center justify-center">
                   <span class="text-[#FF2947]">Procesos</span>
                 </div>
               </a>
               
               <a href="#valor-agregado" class="hero-nav-btn group bg-white hover:bg-gray-50 rounded-full px-10 py-5 font-bold text-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
-                <div class="flex items-center justify-center gap-4">
-                  <div class="w-10 h-10 bg-[#FF2947]/10 rounded-full flex items-center justify-center group-hover:bg-[#FF2947]/20 transition-colors">
-                    <svg class="w-5 h-5 text-[#FF2947]" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
-                    </svg>
-                  </div>
+                <div class="flex items-center justify-center">
                   <span class="text-[#FF2947]">Valor Agregado</span>
                 </div>
               </a>
               
               <a href="#automatizaciones" class="hero-nav-btn group bg-white hover:bg-gray-50 rounded-full px-10 py-5 font-bold text-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
-                <div class="flex items-center justify-center gap-4">
-                  <div class="w-10 h-10 bg-[#FF2947]/10 rounded-full flex items-center justify-center group-hover:bg-[#FF2947]/20 transition-colors">
-                    <svg class="w-5 h-5 text-[#FF2947]" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
-                    </svg>
-                  </div>
+                <div class="flex items-center justify-center">
                   <span class="text-[#FF2947]">Automatización</span>
                 </div>
               </a>
@@ -497,10 +497,7 @@
               <!-- Header estilo Bold.co -->
               <div class="p-6" style="background: linear-gradient(to right, #121E6C, #EE424E);">
                 <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-md p-2">
-                  <!-- Icono actualizado con design system Bold -->
-                  <img src="datafono-bold.png" alt="Datáfono Bold" class="w-full h-full object-contain">
-                </div>
+                  <img src="datafono-bold.png" alt="Datáfono Bold" class="w-12 h-12 object-contain">
                 <div>
                   <h3 class="text-lg font-bold text-white">Bold.co SAS</h3>
                   <p class="text-white/90 text-sm">Valor agregado por proceso</p>
@@ -521,9 +518,7 @@
               <!-- Header estilo Bold.co -->
               <div class="p-6" style="background: linear-gradient(to right, #121E6C, #1E23A2);">
                 <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-md p-2">
-                  <img src="banco-bold.png" alt="Banco Bold" class="w-full h-full object-contain">
-                </div>
+                  <img src="banco-bold.png" alt="Banco Bold" class="w-12 h-12 object-contain">
                 <div>
                   <h3 class="text-lg font-bold text-white">Bold.co CF</h3>
                   <p class="text-white/90 text-sm">Valor agregado por proceso</p>
@@ -636,9 +631,7 @@
       <!-- Procesos -->
       <a href="#cambios" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300">
         <div class="side-nav-icon">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"/>
-          </svg>
+          <img src="icon-process.png" alt="Procesos" class="w-6 h-6 object-contain">
         </div>
         <span class="side-nav-text">Gestión de Procesos</span>
       </a>
@@ -646,9 +639,7 @@
       <!-- Valor Agregado -->
       <a href="#valor-agregado" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300">
         <div class="side-nav-icon">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
-          </svg>
+          <img src="icon-va.png" alt="Valor Agregado" class="w-6 h-6 object-contain">
         </div>
         <span class="side-nav-text">Valor Agregado</span>
       </a>
@@ -656,9 +647,7 @@
       <!-- Automatización -->
       <a href="#automatizaciones" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300">
         <div class="side-nav-icon">
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd"/>
-          </svg>
+          <img src="icon-auto.png" alt="Automatización" class="w-6 h-6 object-contain">
         </div>
         <span class="side-nav-text">Automatización</span>
       </a>
@@ -1153,9 +1142,29 @@
   // Función para actualizar botón activo basado en posición de scroll
   function updateActiveNavButton() {
     let current = '';
+    let closestDistance = Infinity;
+    
     sections.forEach(section => {
       const sectionTop = section.getBoundingClientRect().top;
-      if (sectionTop <= 200) { // offset para detección de sección
+      const sectionBottom = section.getBoundingClientRect().bottom;
+      const sectionHeight = sectionBottom - sectionTop;
+      const sectionCenter = sectionTop + (sectionHeight / 2);
+      
+      // Si la sección está visible en el viewport
+      if (sectionTop <= window.innerHeight && sectionBottom >= 0) {
+        // Calcular la distancia al centro del viewport
+        const viewportCenter = window.innerHeight / 2;
+        const distanceToCenter = Math.abs(sectionCenter - viewportCenter);
+        
+        // Si esta sección está más cerca del centro, asignarla como activa
+        if (distanceToCenter < closestDistance) {
+          closestDistance = distanceToCenter;
+          current = section.getAttribute('id');
+        }
+      }
+      
+      // También considerar si estamos en la parte superior de una sección
+      if (sectionTop <= 150 && sectionTop > -100) {
         current = section.getAttribute('id');
       }
     });
