@@ -225,6 +225,17 @@
       color: inherit;
     }
     
+    /* Filtro para convertir iconos PNG a blanco cuando está contraído */
+    .side-nav-icon img {
+      transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: brightness(0) invert(1); /* Convierte a blanco */
+    }
+    
+    /* Restaurar colores originales cuando la barra está expandida */
+    .side-nav-container:hover .side-nav-icon img {
+      filter: none; /* Colores originales */
+    }
+    
     /* Responsive adjustments */
     @media (max-width: 768px) {
       #sideNav {
