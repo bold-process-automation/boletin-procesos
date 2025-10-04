@@ -236,9 +236,57 @@
       filter: none; /* Colores originales */
     }
     
+    /* Selector de fechas flotante derecho */
+    #dateNav {
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(80px) translateY(-50%); /* Sale más de la pantalla */
+    }
+    
+    #dateNav.show {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateX(0) translateY(-50%);
+    }
+    
+    /* Panel expandible en hover */
+    #dateNav:hover .floating-panel {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: all;
+    }
+    
+    /* Botón flotante efectos */
+    #floatingMonthSelector:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(255, 41, 71, 0.3);
+    }
+    
+    /* Opciones del panel flotante */
+    .floating-month-option {
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+    }
+    
+    .floating-month-option:hover {
+      background-color: rgba(255, 41, 71, 0.1);
+      color: #FF2947;
+      font-weight: 600;
+    }
+    
+    .floating-month-option.active {
+      background-color: #FF2947;
+      color: white;
+      font-weight: 600;
+    }
+    
     /* Responsive adjustments */
     @media (max-width: 768px) {
-      #sideNav {
+      #sideNav, #dateNav {
         display: none;
       }
     }
@@ -309,6 +357,7 @@
     .scroll-to-top-btn .scroll-to-top-text {
       padding: 0 20px;
     }
+    
   </style>
 </head>
 <body class="min-h-screen">
@@ -447,14 +496,6 @@
                   </div>
                 </div>
                 
-                <div class="flex gap-3 mt-6">
-                  <button onclick="hideMonthDropdown()" class="flex-1 px-4 py-2 text-sm font-semibold rounded-full transition-colors hover:bg-gray-100" style="color: #121E6C; background-color: #f8fafc; border: 1px solid #e2e8f0;">
-                    Cancelar
-                  </button>
-                  <button id="confirmSelection" class="flex-1 px-4 py-2 text-sm font-semibold rounded-full text-white transition-colors hover:opacity-90" style="background-color: #FF2947;">
-                    Confirmar
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -808,6 +849,7 @@
       </a>
     </div>
   </nav>
+  
 
 <script>
   function parseLocalDate(ymd){ const p=String(ymd||'').split('-').map(Number); return new Date(p[0]||1970,(p[1]||1)-1,p[2]||1); }
@@ -836,6 +878,20 @@
     "Manual Metodológico Matriz de Riesgos SARLAFT": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/LC-MA-007-Manual-Metodologico-Matriz-de-Riesgos-SARLAFT_suzr4F8x?docIds%5B0%5D=PZrHIIUQg-&search=Manual%20Metodol%C3%B3gico%20Matriz%20de%20Riesgos%20SARLAFT",
     "Manual Metodología Segmentación de Riesgo Clientes": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/LC-MA-009-Manual-Metodologia-Segmentacion-de-Riesgo-Clientes_suWtffT_?docIds%5B0%5D=PZrHIIUQg-&search=Manual%20Metodolog%C3%ADa%20Segmentaci%C3%B3n%20de%20Riesgo%20Clientes",
     "Política activos fijos y elementos de trabajo": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/SI-PO-002-Politica-activos-fijos-y-elementos-de-trabajo_suY6mGAt?docIds%5B0%5D=PZrHIIUQg-&search=Pol%C3%ADtica%20activos%20fijos%20y%20elementos%20de%20trabajo",
+    // ========== NUEVOS ENLACES DE SEPTIEMBRE 2025 ==========
+    "Solicitud QR Bold (Entre cuentas)": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/AP-PR-010-Solicitud-QR-Bold-Entre-cuentas_suzb2RZ0?docIds%5B0%5D=PZrHIIUQg-&search=Solicitud%20QR%20Bold%20%28Entre%20cuentas%29",
+    "Gestión comercial canal SMB": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/AP-PR-018-Gestion-comercial-canal-SMB_suix9GKp?docIds%5B0%5D=PZrHIIUQg-&search=Gesti%C3%B3n%20comercial%20canal%20SMB#Copy-of-Copy-6-of-ControlCambios-176_tuvOQ1P5/r3&columnId=c-M2SErj7365",
+    "Gestión de beneficios": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/TH-PR-007-Gestion-de-beneficios_suN5hBT6?docIds%5B0%5D=PZrHIIUQg-&search=Gesti%C3%B3n%20de%20beneficios",
+    "Liquidación y legalización de compras tarjetas corporativas": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/GF-PR-043-Liquidacion-y-legalizacion-de-compras-tarjetas-corpora_su4fFe1t?docIds%5B0%5D=PZrHIIUQg-&search=Liquidaci%C3%B3n%20y%20legalizaci%C3%B3n%20de%20compras%20tarjetas%20corporativas",
+    "Validación de cuentas - KYC SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/VP-PR-103-Validacion-manual-de-cuentas-KYC-SAS_suZFDP1S?docIds%5B0%5D=ywYtLrlDx7&search=Validaci%C3%B3n%20de%20cuentas%20-%20KYC%20SAS",
+    "Gestión comercial canal SMB SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/VP-PR-118-Gestion-comercial-canal-SMB-SAS_suC7ImXn?docIds%5B0%5D=ywYtLrlDx7&search=Gesti%C3%B3n%20comercial%20canal%20SMB%20SAS",
+    "Validación de identidad de cliente": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/AC-PR-101-Validacion-de-Identidad-del-Cliente-SAS_suqyIsK1?docIds%5B0%5D=ywYtLrlDx7&search=Validaci%C3%B3n%20de%20identidad%20de%20cliente",
+    "Gestión de beneficios SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/TH-PR-107-Gestion-de-beneficios-SAS_suj00PHg?docIds%5B0%5D=ywYtLrlDx7&search=Gesti%C3%B3n%20de%20beneficios%20SAS",
+    "Entrenamiento inicial para el área comercial SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/TH-PR-126-Entrenamiento-inicial-para-el-area-comercial-SAS_suycUc6V?docIds%5B0%5D=ywYtLrlDx7&search=Entrenamiento%20inicial%20para%20el%20%C3%A1rea%20comercial%20SAS",
+    "Entrenamiento continuo para el área comercial SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/TH-PR-127-Entrenamiento-continuo-para-el-area-comercial-SAS_su_ZHAwi?docIds%5B0%5D=ywYtLrlDx7&search=Entrenamiento%20continuo%20para%20el%20%C3%A1rea%20comercial%20SAS",
+    "Conciliación de Saldos de Cuentas Virtuales": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/GF-PR-137-Conciliacion-de-Saldos-de-Cuentas-Virtuales_suluMbDK?docIds%5B0%5D=ywYtLrlDx7&search=Conciliaci%C3%B3n%20de%20Saldos%20de%20Cuentas%20Virtuales",
+    "Liquidación y legalización de compras tarjetas corporativas SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/GF-PR-143-Liquidacion-y-legalizacion-de-compras-tarjetas-corpora_sugUGmqj?docIds%5B0%5D=ywYtLrlDx7&search=Liquidaci%C3%B3n%20y%20legalizaci%C3%B3n%20de%20compras%20tarjetas%20corporativas%20SAS",
+    "Control de fuentes SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/GF-PR-144-Control-de-fuentes-SAS_suUnVL4L?docIds%5B0%5D=ywYtLrlDx7&search=Control%20de%20fuentes%20SAS",
     "Cierre diario de turno para clientes master merchant SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/OP-PR-169-Cierre-diario-de-turno-para-clientes-master-merchant-S_suOTZYVu?docIds%5B0%5D=ywYtLrlDx7&search=Cierre%20diario%20de%20turno%20para%20clientes%20master%20merchant%20SAS",
     "Comunicaciones a clientes SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/GM-PR-101-Comunicaciones-a-clientes-SAS_suO2I39n?docIds%5B0%5D=ywYtLrlDx7&search=Comunicaciones%20a%20clientes%20SAS",
     "Cambio interno de rol SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/TH-PR-124-Cambio-interno-de-rol_suz20-ca?docIds%5B0%5D=ywYtLrlDx7&search=Cambio%20interno%20de%20rol%20SAS",
@@ -846,8 +902,25 @@
     "Manual Metodología Segmentación de Riesgo Clientes SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/LC-MA-109-Manual-Metodologia-Segmentacion-de-Riesgo-Clientes-SAS_suIAroNe?docIds%5B0%5D=ywYtLrlDx7&search=Manual%20Metodolog%C3%ADa%20Segmentaci%C3%B3n%20de%20Riesgo%20Clientes%20SAS"
   };
   
-  let rows = [{"aplicativo": "APPIAN", "aplicacion": "RPA Ciclo operativo ACH", "proceso": "OP-PR-022 Gestión de transferencias ACH", "detalle": "Cargue y descarga de transacciones en integra ACH y neurona para su posterior conciliación ", "compania": "CF", "vaFinal": 70.0, "incrementoVA": 38.0, "fecha": "2025-08-06"}, {"aplicativo": "APPIAN", "aplicacion": "Gestión de planes de acción de RO", "proceso": "GR-PR-005 Elaboración y Seguimiento a Planes de Acción de RO\nGR-PR-105 Elaboración y Seguimiento a Planes de Acción de RO SAS", "detalle": "Creación (Risk Manager) y seguimiento (responsables) a los planes de acción de RO", "compania": "SAS Y CF", "vaFinal": 100.0, "incrementoVA": 33.0, "fecha": "2025-08-05"}, {"aplicativo": "APPIAN", "aplicacion": "Gestión de eventos RO", "proceso": "GR-PR-006 Gestión de eventos de riesgo operacional\nGR-PR-106 Gestión de eventos de riesgo operacional SAS", "detalle": NaN, "compania": "SAS Y CF", "vaFinal": 80.0, "incrementoVA": 5.0, "fecha": "2025-08-05"}];
-  const cambios = [{"codigo": "OP-PR-022", "documento": "Gestión de transferencias ACH", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Inclusión de RPA Appian en las actividades que realizaba el Analista de Operaciones Financieras (Back) Bold.co SAS\nInclusión como output del proceso, el proceso OP-PR-036 Contabilización y conciliación de Cash In y Cash Out", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "70.45%"}, {"codigo": "OP-IN-030-05", "documento": "Instructivo Actualización Fuente de Adquirencia", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es asegurar la adecuada actualización de la base de datos del área de adquirencia mediante la inclusión de información consolidada, completa y precisa, en relación con el origen de los datos y las fechas establecidas en cada uno de los archivos consolidados. Esto con el fin de reflejar los resultados obtenidos a nivel operativo y mostrarlos al área de FinOps, generando valor a través de la visualización de datos.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-27", "valor_agregado": "N/A"}, {"codigo": "OP-IN-030-06", "documento": "Instructivo Pago y liquidación de Bold CF a Bold CO SAS", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es validar correctamente el pago a BOLD CO SAS de los montos resultantes del cuadre operativo y la conciliación de las franquicias para todos los tipos de procesamiento (doméstico e internacional), asegurando que las transacciones procesadas sean liquidadas por Bold CF a Bold CO SAS, a través de la liquidación de Payouts, el traslado entre cuentas y la generación de un informe al área de tesorería respecto a la operación.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-27", "valor_agregado": "N/A"}, {"codigo": "OP-PR-033", "documento": "Ajustes de adquirencia", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Inclusión de Appian\nAjuste general del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "66.67%"}, {"codigo": "GM-PR-001", "documento": "Comunicaciones a clientes", "dueno": "María Paula Machado Pantoja", "detalle": "Se añade actividad 21. \"Notificar los resultados de la campaña\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-20", "valor_agregado": "77.27%"}, {"codigo": "TH-PR-001", "documento": "Reclutamiento de personal", "dueno": "Lina Meza", "detalle": "Eliminación de actividades correspondientes a convocatoria interna ya que están dentro del proceso TH-PR-024 Cambio interno de rol\nAclaración de actividades de prueba de polígrafo para las distintas áreas\nInclusión de actividades relacionadas al cálculo de acciones con Appian", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "43.33%"}, {"codigo": "TH-PR-008", "documento": "Offboarding de personal", "dueno": "Lina Meza", "detalle": "Se eliminan las actividades correspondientes al rol Inventory Analyst\nAjuste general del flujo", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "42.11%"}, {"codigo": "TH-PR-011", "documento": "Gestión programa ESOP", "dueno": "Lina Meza", "detalle": "Eliminación de Carta como gestor de plan de acciones, ahora todo se visualiza en BambooHR y se gestionan con un módulo de Appian.\nCambio del nombre del proceso.", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "93.10%"}, {"codigo": "TH-PR-012", "documento": "Liquidación y pago de aportes", "dueno": "Lina Meza", "detalle": "Adición de la actividad 6. \"Conciliar planilla vs. Contabilidad\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-024", "documento": "Cambio interno de rol", "dueno": "Lina Meza", "detalle": "Ajuste del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-12", "valor_agregado": "45.16%"}, {"codigo": "GF-IN-005-02", "documento": "Instructivo Generación Informe IRL", "dueno": "Nicoll Albornoz Blanco", "detalle": "Inclusión de actividades de el Analista de Operaciones Financieras Senior Bold.co SAS relacionadas a la validación de la reportería de microcrédito tarjeta\nInclusión de actividades de el Analista de Operaciones Financieras Bold.co SAS relacionadas a la validación de la reportería de emisión\nAjuste de las actividades del responsable del reporte", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-005-03", "documento": "Instructivo Generación Informe CFEN", "dueno": "Nicoll Albornoz Blanco", "detalle": "Ajuste de las actividades del responsable del reporte", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-030-01", "documento": "Instructivo conciliación cobro y recaudo tarjeta de crédito", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es conciliar los pagos realizados por los clientes de microcrédito tarjeta a través de los medios habilitados contra los registros internos y contables.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-030-02", "documento": "Instructivo control y seguimiento de cupos", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es conciliar y validar la consistencia de los cupos de microcrédito tarjeta (aprobado, utilizado y disponible) entre los reportes, identificando y gestionando las diferencias hasta registrar en el ERP.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "SI-PR-004", "documento": "Gestión de Compras", "dueno": "Erick Verbel Facouseh", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-29", "valor_agregado": "12.50%"}, {"codigo": "SI-PR-006", "documento": "Selección y creación de terceros", "dueno": "Erick Verbel Facouseh", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-29", "valor_agregado": "38.46%"}, {"codigo": "SI-PR-008", "documento": "Recolección de activos fijos e implementos de trabajo en offboarding", "dueno": "Lina Meza", "detalle": "Ajuste general en las actividades del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "33.33%"}, {"codigo": "LC-MA-006", "documento": "Manual Ejecución Debida Diligencia Intensificada (DDI) CF", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-007", "documento": "Manual Metodológico Matriz de Riesgos SARLAFT", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-009", "documento": "Manual Metodología Segmentación de Riesgo Clientes", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "SI-PO-002", "documento": "Política activos fijos y elementos de trabajo", "dueno": "Lina Meza", "detalle": "Se añade política de cobertura para equipos en caso de accidentes de tránsito ocurridos en horario laboral.\nSe especifica el procedimiento a seguir y los soportes a presentar en caso de robo de equipos.", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "N/A"}, {"codigo": "OP-PR-169", "documento": "Cierre diario de turno para clientes master merchant SAS", "dueno": "Juan Camilo Salgado Marín", "detalle": "Su objetivo es garantizar el envío oportuno y seguro del archivo diario de transacciones a comercios master merchant, consolidando la información correspondiente al cierre del turno, y asegurando que nuevos clientes reciban correctamente las instrucciones para el acceso al archivo.", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-04", "valor_agregado": "16.67%"}, {"codigo": "GM-PR-101", "documento": "Comunicaciones a clientes SAS", "dueno": "Jacob Abadia Garcia", "detalle": "Se añade actividad 21. \"Notificar los resultados de la campaña\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-20", "valor_agregado": "77.27%"}, {"codigo": "TH-PR-108", "documento": "Offboarding de personal", "dueno": "Maria Fernanda Navia Rey", "detalle": "Se eliminan las actividades correspondientes al rol Inventory Analyst\nSe incluye la participación del Sales Ops Analyst\nAjuste general del flujo", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-111", "documento": "Gestión programa ESOP", "dueno": "Maria Fernanda Navia Rey", "detalle": "Eliminación de Carta como gestor de plan de acciones, ahora todo se visualiza en BambooHR y se gestionan con un módulo de Appian.\nCambio del nombre del proceso.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "93.10%"}, {"codigo": "TH-PR-112", "documento": "Liquidación y pago de aportes", "dueno": "Maria Fernanda Navia Rey", "detalle": "Adición de la actividad 6. \"Conciliar planilla vs. Contabilidad\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-124", "documento": "Cambio interno de rol SAS", "dueno": "Maria Fernanda Navia Rey", "detalle": "Ajuste del proceso", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-11", "valor_agregado": "45.16%"}, {"codigo": "SI-PR-108", "documento": "Recolección de activos fijos e implementos de trabajo en offboarding SAS", "dueno": "Maria Fernanda Navia Rey", "detalle": "Inclusión actividades de recolección de activos fijos de manera presencial, y actividades de recolección de activos fijos a domicilio.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "52.17%"}, {"codigo": "LC-MA-106", "documento": "Manual Ejecución Debida Diligencia Intensificada (DDI) SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-107", "documento": "Documento Metodológico Matriz de Riesgos SAGRILAFT SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-108", "documento": "Documento Metodológico Matriz de Riesgos PTEE (C/ST) - Programa de Transparencia y Ética Empresarial SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-109", "documento": "Manual Metodología Segmentación de Riesgo Clientes SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}];
+  let rows = [
+    // ========== AUTOMATIZACIONES DE AGOSTO 2025 ==========
+    {"aplicativo": "APPIAN", "aplicacion": "RPA Ciclo operativo ACH", "proceso": "OP-PR-022 Gestión de transferencias ACH", "detalle": "Cargue y descarga de transacciones en integra ACH y neurona para su posterior conciliación ", "compania": "CF", "vaFinal": 70.0, "incrementoVA": 38.0, "fecha": "2025-08-06"}, 
+    {"aplicativo": "APPIAN", "aplicacion": "Gestión de planes de acción de RO", "proceso": "GR-PR-005 Elaboración y Seguimiento a Planes de Acción de RO\nGR-PR-105 Elaboración y Seguimiento a Planes de Acción de RO SAS", "detalle": "Creación (Risk Manager) y seguimiento (responsables) a los planes de acción de RO", "compania": "SAS Y CF", "vaFinal": 100.0, "incrementoVA": 33.0, "fecha": "2025-08-05"}, 
+    {"aplicativo": "APPIAN", "aplicacion": "Gestión de eventos RO", "proceso": "GR-PR-006 Gestión de eventos de riesgo operacional\nGR-PR-106 Gestión de eventos de riesgo operacional SAS", "detalle": "Recepción y evaluación de los eventos de riesgo operacional", "compania": "SAS Y CF", "vaFinal": 80.0, "incrementoVA": 5.0, "fecha": "2025-08-05"},
+    
+    // ========== AUTOMATIZACIONES DE SEPTIEMBRE 2025 ==========
+    {"aplicativo": "APPIAN", "aplicacion": "Gestión de planes de acción de RO", "proceso": "GR-PR-005/GR-PR-105 Elaboración y Seguimiento a Planes de Acción de RO", "detalle": "Creación, aprobación y seguimiento a los planes de acción de riesgo operacional.", "compania": "CF/SAS", "vaFinal": 100.0, "incrementoVA": 33.0, "fecha": "2025-09-11"},
+    {"aplicativo": "APPIAN", "aplicacion": "Gestión de eventos RO", "proceso": "GR-PR-006/GR-PR-106 Gestión de eventos de riesgo operacional", "detalle": "Recepción y evaluación de los eventos de riesgo operacional.", "compania": "CF/SAS", "vaFinal": 80.0, "incrementoVA": 5.0, "fecha": "2025-09-11"},
+    {"aplicativo": "APPIAN", "aplicacion": "Simulador Estimación Pagos Cupo Bold", "proceso": "TBD", "detalle": "Simulación del cupo Bold para brindar a nuestros clientes una estimación de pagos mensual y alternativas de ahorro como abonos a capital o ajustes al plazo de su crédito.", "compania": "CF", "vaFinal": 0.0, "incrementoVA": 0.0, "fecha": "2025-09-15"},
+    {"aplicativo": "APPIAN", "aplicacion": "Gestión de Listas", "proceso": "TBD", "detalle": "Interacción en tiempo real con el servicio de listas del equipo de fraude, para la inclusión en listas blancas o negras de Venta presente, venta no presente o abonos inmediatos de diferentes items como: merchant ID, bines, correos, device ID, hashes de tarjeta, teléfonos o números de documento.", "compania": "SAS", "vaFinal": 0.0, "incrementoVA": 0.0, "fecha": "2025-09-18"},
+    {"aplicativo": "APPIAN", "aplicacion": "Ajustes de adquirencia", "proceso": "OP-PR-033 Ajustes de adquirencia", "detalle": "Recepción, asignación, validación y aprobación de los ajustes de transacciones.", "compania": "CF", "vaFinal": 67.0, "incrementoVA": 67.0, "fecha": "2025-09-24"},
+    {"aplicativo": "APPIAN", "aplicacion": "Gestión señales de alertas LAFT SAS /CF", "proceso": "LC-PR-011/LC-PR-011 Gestión de señales de alerta, operaciones inusuales y sospechosas de LAFT", "detalle": "Recepción, asignación, análisis y escalamiento de las diferentes fuentes de alertamiento gestionadas por el equipo de cumplimiento.", "compania": "CF/SAS", "vaFinal": 77.0, "incrementoVA": 38.0, "fecha": "2025-09-25"},
+    {"aplicativo": "DAPTA", "aplicacion": "Novedades en entrega de productos de logistica", "proceso": "OP-PR-038 Gestión de novedades en la entrega de productos", "detalle": "El agente de voz SofIA, se encarga de contactar a los clientes que presenten alguna novedad en la entrega de sus productos. Verifica información de contacto, coordina horarios y gestiona solicitudes de cancelación.", "compania": "CF", "vaFinal": 76.0, "incrementoVA": 4.0, "fecha": "2025-09-15"}
+  ];
+  const cambios = [{"codigo": "OP-PR-022", "documento": "Gestión de transferencias ACH", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Inclusión de RPA Appian en las actividades que realizaba el Analista de Operaciones Financieras (Back) Bold.co SAS\nInclusión como output del proceso, el proceso OP-PR-036 Contabilización y conciliación de Cash In y Cash Out", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "70.45%"}, {"codigo": "OP-IN-030-05", "documento": "Instructivo Actualización Fuente de Adquirencia", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es asegurar la adecuada actualización de la base de datos del área de adquirencia mediante la inclusión de información consolidada, completa y precisa, en relación con el origen de los datos y las fechas establecidas en cada uno de los archivos consolidados. Esto con el fin de reflejar los resultados obtenidos a nivel operativo y mostrarlos al área de FinOps, generando valor a través de la visualización de datos.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-27", "valor_agregado": "N/A"}, {"codigo": "OP-IN-030-06", "documento": "Instructivo Pago y liquidación de Bold CF a Bold CO SAS", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es validar correctamente el pago a BOLD CO SAS de los montos resultantes del cuadre operativo y la conciliación de las franquicias para todos los tipos de procesamiento (doméstico e internacional), asegurando que las transacciones procesadas sean liquidadas por Bold CF a Bold CO SAS, a través de la liquidación de Payouts, el traslado entre cuentas y la generación de un informe al área de tesorería respecto a la operación.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-27", "valor_agregado": "N/A"}, {"codigo": "OP-PR-033", "documento": "Ajustes de adquirencia", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Inclusión de Appian\nAjuste general del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "66.67%"}, {"codigo": "GM-PR-001", "documento": "Comunicaciones a clientes", "dueno": "María Paula Machado Pantoja", "detalle": "Se añade actividad 21. \"Notificar los resultados de la campaña\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-20", "valor_agregado": "77.27%"}, {"codigo": "TH-PR-001", "documento": "Reclutamiento de personal", "dueno": "Lina Meza", "detalle": "Eliminación de actividades correspondientes a convocatoria interna ya que están dentro del proceso TH-PR-024 Cambio interno de rol\nAclaración de actividades de prueba de polígrafo para las distintas áreas\nInclusión de actividades relacionadas al cálculo de acciones con Appian", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "43.33%"}, {"codigo": "TH-PR-008", "documento": "Offboarding de personal", "dueno": "Lina Meza", "detalle": "Se eliminan las actividades correspondientes al rol Inventory Analyst\nAjuste general del flujo", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "42.11%"}, {"codigo": "TH-PR-011", "documento": "Gestión programa ESOP", "dueno": "Lina Meza", "detalle": "Eliminación de Carta como gestor de plan de acciones, ahora todo se visualiza en BambooHR y se gestionan con un módulo de Appian.\nCambio del nombre del proceso.", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "93.10%"}, {"codigo": "TH-PR-012", "documento": "Liquidación y pago de aportes", "dueno": "Lina Meza", "detalle": "Adición de la actividad 6. \"Conciliar planilla vs. Contabilidad\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-024", "documento": "Cambio interno de rol", "dueno": "Lina Meza", "detalle": "Ajuste del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-12", "valor_agregado": "45.16%"}, {"codigo": "GF-IN-005-02", "documento": "Instructivo Generación Informe IRL", "dueno": "Nicoll Albornoz Blanco", "detalle": "Inclusión de actividades de el Analista de Operaciones Financieras Senior Bold.co SAS relacionadas a la validación de la reportería de microcrédito tarjeta\nInclusión de actividades de el Analista de Operaciones Financieras Bold.co SAS relacionadas a la validación de la reportería de emisión\nAjuste de las actividades del responsable del reporte", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-005-03", "documento": "Instructivo Generación Informe CFEN", "dueno": "Nicoll Albornoz Blanco", "detalle": "Ajuste de las actividades del responsable del reporte", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-030-01", "documento": "Instructivo conciliación cobro y recaudo tarjeta de crédito", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es conciliar los pagos realizados por los clientes de microcrédito tarjeta a través de los medios habilitados contra los registros internos y contables.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-030-02", "documento": "Instructivo control y seguimiento de cupos", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es conciliar y validar la consistencia de los cupos de microcrédito tarjeta (aprobado, utilizado y disponible) entre los reportes, identificando y gestionando las diferencias hasta registrar en el ERP.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "SI-PR-004", "documento": "Gestión de Compras", "dueno": "Erick Verbel Facouseh", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-29", "valor_agregado": "12.50%"}, {"codigo": "SI-PR-006", "documento": "Selección y creación de terceros", "dueno": "Erick Verbel Facouseh", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-29", "valor_agregado": "38.46%"}, {"codigo": "SI-PR-008", "documento": "Recolección de activos fijos e implementos de trabajo en offboarding", "dueno": "Lina Meza", "detalle": "Ajuste general en las actividades del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "33.33%"}, {"codigo": "LC-MA-006", "documento": "Manual Ejecución Debida Diligencia Intensificada (DDI) CF", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-007", "documento": "Manual Metodológico Matriz de Riesgos SARLAFT", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-009", "documento": "Manual Metodología Segmentación de Riesgo Clientes", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "SI-PO-002", "documento": "Política activos fijos y elementos de trabajo", "dueno": "Lina Meza", "detalle": "Se añade política de cobertura para equipos en caso de accidentes de tránsito ocurridos en horario laboral.\nSe especifica el procedimiento a seguir y los soportes a presentar en caso de robo de equipos.", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "N/A"}, 
+  // ========== PROCESOS DE SEPTIEMBRE 2025 ==========
+  {"codigo": "AP-PR-010", "documento": "Solicitud QR Bold (Entre cuentas)", "dueno": "Carlos Andrés Manrique", "detalle": "Se eliminan las actividades relacionadas a la desactivación del QR del cliente con otra entidad", "compania": "CF", "tipo": "Actualización", "fecha": "2025-09-19", "valor_agregado": "100.00%"}, {"codigo": "AP-PR-018", "documento": "Gestión comercial canal SMB", "dueno": "Antonio Plata", "detalle": "Reestructuración completa del proceso.", "compania": "CF", "tipo": "Actualización", "fecha": "2025-09-30", "valor_agregado": "100.00%"}, {"codigo": "TH-PR-007", "documento": "Gestión de beneficios", "dueno": "Lina Meza", "detalle": "Ajuste general en las actividades del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-09-11", "valor_agregado": "64.86%"}, {"codigo": "GF-PR-043", "documento": "Liquidación y legalización de compras tarjetas corporativas", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-09-17", "valor_agregado": "9.09%"}, {"codigo": "VP-PR-103", "documento": "Validación de cuentas - KYC SAS", "dueno": "Jonathan Alexis Rojas Quintero", "detalle": "Cambio de herramienta en la actividad \"Enviar OTP\" de Experian por Auth0\nLa actividad \"Enviar Link de Jumio\" se realiza automáticamente en los casos que se realice validación de identidad por medio de OTP\nInclusión de actividades relacionadas a validación por creación de cuenta compartiendo datos de cuentas ya existentes o compartiendo dispositivos para crear la cuenta.\nInclusión de actividades relacionadas a validación de comercios cuando van a utilizar los productos de Bold para realizar ventas con una franquicia\nInclusión de actividades para aprobación de los casos de jurisdicción de operación y actividad prohibida.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-09-18", "valor_agregado": "68.00%"}, {"codigo": "VP-PR-118", "documento": "Gestión comercial canal SMB SAS", "dueno": "Katherine Cardona Agudelo", "detalle": "Reestructuración completa del proceso.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-09-30", "valor_agregado": "100.00%"}, {"codigo": "AC-PR-101", "documento": "Validación de identidad de cliente", "dueno": "Daniela Jarrin Villa", "detalle": "Inclusión definición de Jumio\nInclusión de actividades relacionadas a la validación de identidad realizada por BolBot\nInclusión de actividades relacionadas a validación de identidad por Jumio para modificación de datos personales en caso de ser un cliente no verificado", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-09-22", "valor_agregado": "84.21%"}, {"codigo": "TH-PR-107", "documento": "Gestión de beneficios SAS", "dueno": "Carol Mallerly Cabrera Vargas", "detalle": "Ajuste general en las actividades del proceso", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-09-16", "valor_agregado": "64.86%"}, {"codigo": "TH-PR-126", "documento": "Entrenamiento inicial para el área comercial SAS", "dueno": "Sergio Giovanny Delgado Peña", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-09-30", "valor_agregado": "65.00%"}, {"codigo": "TH-PR-127", "documento": "Entrenamiento continuo para el área comercial SAS", "dueno": "Sergio Giovanny Delgado Peña", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-09-30", "valor_agregado": "68.75%"}, {"codigo": "GF-PR-137", "documento": "Conciliación de Saldos de Cuentas Virtuales", "dueno": "Jose Gabriel González Castañeda", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-09-26", "valor_agregado": "0.00%"}, {"codigo": "GF-PR-143", "documento": "Liquidación y legalización de compras tarjetas corporativas SAS", "dueno": "Duvan Camilo Parrado Ramirez", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-09-18", "valor_agregado": "9.09%"}, {"codigo": "GF-PR-144", "documento": "Control de fuentes SAS", "dueno": "Jose Gabriel González Castañeda", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-09-26", "valor_agregado": "0.00%"}, {"codigo": "SI-PR-104", "documento": "Gestión de Compras", "dueno": "Edison Diaz Suarez", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-09-08", "valor_agregado": "62.50%"}, {"codigo": "SI-PR-106", "documento": "Selección y creación de terceros", "dueno": "Edison Diaz Suarez", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-09-08", "valor_agregado": "92.31%"}, 
+  {"codigo": "OP-PR-169", "documento": "Cierre diario de turno para clientes master merchant SAS", "dueno": "Juan Camilo Salgado Marín", "detalle": "Su objetivo es garantizar el envío oportuno y seguro del archivo diario de transacciones a comercios master merchant, consolidando la información correspondiente al cierre del turno, y asegurando que nuevos clientes reciban correctamente las instrucciones para el acceso al archivo.", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-04", "valor_agregado": "16.67%"}, {"codigo": "GM-PR-101", "documento": "Comunicaciones a clientes SAS", "dueno": "Jacob Abadia Garcia", "detalle": "Se añade actividad 21. \"Notificar los resultados de la campaña\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-20", "valor_agregado": "77.27%"}, {"codigo": "TH-PR-108", "documento": "Offboarding de personal", "dueno": "Maria Fernanda Navia Rey", "detalle": "Se eliminan las actividades correspondientes al rol Inventory Analyst\nSe incluye la participación del Sales Ops Analyst\nAjuste general del flujo", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-111", "documento": "Gestión programa ESOP", "dueno": "Maria Fernanda Navia Rey", "detalle": "Eliminación de Carta como gestor de plan de acciones, ahora todo se visualiza en BambooHR y se gestionan con un módulo de Appian.\nCambio del nombre del proceso.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "93.10%"}, {"codigo": "TH-PR-112", "documento": "Liquidación y pago de aportes", "dueno": "Maria Fernanda Navia Rey", "detalle": "Adición de la actividad 6. \"Conciliar planilla vs. Contabilidad\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-124", "documento": "Cambio interno de rol SAS", "dueno": "Maria Fernanda Navia Rey", "detalle": "Ajuste del proceso", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-11", "valor_agregado": "45.16%"}, {"codigo": "SI-PR-108", "documento": "Recolección de activos fijos e implementos de trabajo en offboarding SAS", "dueno": "Maria Fernanda Navia Rey", "detalle": "Inclusión actividades de recolección de activos fijos de manera presencial, y actividades de recolección de activos fijos a domicilio.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "52.17%"}, {"codigo": "LC-MA-106", "documento": "Manual Ejecución Debida Diligencia Intensificada (DDI) SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-107", "documento": "Documento Metodológico Matriz de Riesgos SAGRILAFT SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-108", "documento": "Documento Metodológico Matriz de Riesgos PTEE (C/ST) - Programa de Transparencia y Ética Empresarial SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-109", "documento": "Manual Metodología Segmentación de Riesgo Clientes SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}];
 
   const cardsEl = document.getElementById('cards');
   let query = '', sortMode='fecha';
@@ -855,8 +928,9 @@
   const status = (p)=> p>=100?['¡Listo!','bg-emerald-600 text-white']:p>=80?['Casi','bg-green-600 text-white']:['En curso','bg-slate-200 text-slate-800'];
   
   // ======== SISTEMA DE FILTRADO POR MES/AÑO ========
-  let currentSelectedMonth = '';
-  let currentSelectedYear = '';
+  // Inicializar directamente con septiembre 2025 (se actualizará inmediatamente)
+  let currentSelectedMonth = 9; // Septiembre
+  let currentSelectedYear = 2025;
   
   // Mapeo de imágenes por mes/año (placeholders por ahora)
   const valueAddedImages = {
@@ -876,17 +950,34 @@
     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
   ];
   
-  // Función para obtener mes anterior
+  // Función para obtener mes anterior al actual
   function getPreviousMonth() {
     const now = new Date();
-    const prevMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    let year = now.getFullYear();
+    let month = now.getMonth(); // 0-based (enero = 0)
+    
+    // Si estamos en enero, ir a diciembre del año anterior
+    if (month === 0) {
+      month = 11; // diciembre (0-based)
+      year = year - 1;
+    } else {
+      month = month - 1; // mes anterior
+    }
+    
+    // Convertir a 1-based para consistencia
+    const monthNumber = month + 1;
+    
     return {
-      month: prevMonth.getMonth() + 1, // 1-based
-      year: prevMonth.getFullYear(),
-      name: monthNames[prevMonth.getMonth()],
-      key: `${prevMonth.getFullYear()}-${String(prevMonth.getMonth() + 1).padStart(2, '0')}`
+      month: monthNumber,
+      year: year,
+      name: monthNames[month], // usar índice 0-based para monthNames
+      key: `${year}-${String(monthNumber).padStart(2, '0')}`,
+      display: `${monthNames[month]} ${year}`
     };
   }
+  
+  // Función hasDataForMonth eliminada - ya no es necesaria
+  // SIEMPRE mostraremos el mes anterior, tengan datos o no
   
   // Función para obtener años disponibles
   function getAvailableYears() {
@@ -981,38 +1072,46 @@
     };
   }
   
-  // Función para inicializar el mes por defecto
+  // Función para inicializar el mes por defecto - SIEMPRE mes anterior
   function initializeDefaultMonth() {
-    const prevMonth = getPreviousMonth();
+    console.log('=== INICIALIZACIÓN SIMPLE ===');
     
-    // Verificar si hay datos para el mes anterior
-    const hasData = [...rows, ...cambios].some(item => {
-      if (!item.fecha) return false;
-      const itemDate = parseLocalDate(item.fecha);
-      return itemDate.getFullYear() === prevMonth.year && 
-             (itemDate.getMonth() + 1) === prevMonth.month;
-    });
+    // SIEMPRE usar el mes anterior al actual, sin verificaciones complicadas
+    const previousMonth = getPreviousMonth();
+    console.log('Mes anterior (será el seleccionado):', previousMonth.display);
     
-    let selectedMonth;
-    if (hasData) {
-      selectedMonth = prevMonth;
-    } else {
-      // Si no hay datos del mes anterior, usar el último mes con datos
-      selectedMonth = getLastAvailableMonth();
+    // Establecer directamente las variables globales
+    currentSelectedMonth = previousMonth.month;
+    currentSelectedYear = previousMonth.year;
+    
+    console.log('Variables establecidas:', { currentSelectedMonth, currentSelectedYear });
+    
+    // Actualizar UI inmediatamente
+    const selectedMonthElement = document.getElementById('selectedMonth');
+    if (selectedMonthElement) {
+      selectedMonthElement.textContent = previousMonth.display;
+      console.log('UI actualizada con:', previousMonth.display);
     }
     
-    currentSelectedMonth = selectedMonth.month;
-    currentSelectedYear = selectedMonth.year;
+    console.log('Actualizando todas las secciones...');
+    // Actualizar todas las secciones inmediatamente
+    updateAllSections();
     
-    // Actualizar UI
-    document.getElementById('selectedMonth').textContent = selectedMonth.display;
+    // Verificación final de que el DOM está actualizado
+    setTimeout(() => {
+      console.log('=== VERIFICACIÓN FINAL ===');
+      console.log('Contenedor automatizaciones:', document.getElementById('cards')?.children.length || 0, 'cards');
+      console.log('Tabla cambios filas:', document.getElementById('tbodyCambios')?.children.length || 0, 'filas');
+      console.log('Botón mes muestra:', document.getElementById('selectedMonth')?.textContent || 'N/A');
+    }, 100);
     
-    return selectedMonth;
+    console.log('=== INICIALIZACIÓN COMPLETADA ===');
+    return previousMonth;
   }
   
-  // Variables temporales para el selector
-  let tempSelectedYear = currentSelectedYear;
-  let tempSelectedMonth = currentSelectedMonth;
+  // Variables temporales para el selector (se inicializarán después)
+  let tempSelectedYear;
+  let tempSelectedMonth;
   
   // Funciones para dropdowns personalizados
   function populateMonthDropdown() {
@@ -1021,7 +1120,7 @@
     
     // Event listeners para dropdowns personalizados
     document.getElementById('yearSelectBtn').addEventListener('click', toggleYearDropdown);
-    document.getElementById('monthSelectBtn').addEventListener('click', toggleMonthDropdown);
+    document.getElementById('monthSelectBtn').addEventListener('click', toggleMonthDropdownInternal);
   }
   
   function populateCustomYearDropdown() {
@@ -1064,7 +1163,10 @@
       option.style.color = month.number === tempSelectedMonth ? '#121E6C' : '#374151';
       option.textContent = month.name;
       
-      option.addEventListener('click', () => selectMonth_internal(month.number));
+      option.addEventListener('click', () => {
+        // Usar directamente la función que sabemos que funciona
+        selectMonthDirectly(tempSelectedYear, month.number);
+      });
       monthOptions.appendChild(option);
     });
   }
@@ -1087,7 +1189,7 @@
     }
   }
   
-  function toggleMonthDropdown() {
+  function toggleMonthDropdownInternal() {
     const dropdown = document.getElementById('monthDropdownCustom');
     const icon = document.getElementById('monthDropIcon');
     const yearDropdown = document.getElementById('yearDropdown');
@@ -1115,13 +1217,8 @@
       tempSelectedMonth = monthNumbers[monthNumbers.length - 1]; // Seleccionar el último mes disponible
     }
     
-    // Actualizar ambos dropdowns
-    populateCustomYearDropdown();
-    populateCustomMonthDropdown();
-    
-    // Cerrar dropdown
-    document.getElementById('yearDropdown').classList.add('hidden');
-    document.getElementById('yearDropIcon').style.transform = 'rotate(0deg)';
+    // Cambiar directamente sin esperar confirmación
+    selectMonthDirectly(tempSelectedYear, tempSelectedMonth);
   }
   
   function selectMonth_internal(monthNumber) {
@@ -1133,6 +1230,23 @@
     // Cerrar dropdown
     document.getElementById('monthDropdownCustom').classList.add('hidden');
     document.getElementById('monthDropIcon').style.transform = 'rotate(0deg)';
+  }
+  
+  // Función directa para cambiar el mes inmediatamente (sin confirmación)
+  function selectMonthDirectly(year, month) {
+    currentSelectedMonth = month;
+    currentSelectedYear = year;
+    
+    // Actualizar UI inmediatamente
+    const monthName = monthNames[month - 1];
+    const display = `${monthName} ${year}`;
+    document.getElementById('selectedMonth').textContent = display;
+    
+    // Actualizar todas las secciones
+    updateAllSections();
+    
+    // Cerrar dropdown si está abierto
+    hideMonthDropdown();
   }
   
   // Esta función ya no se usa directamente, pero la mantenemos por compatibilidad
@@ -1150,7 +1264,7 @@
     updateAllSections();
   }
   
-  // Funciones para mostrar/ocultar dropdown
+  // Función principal para toggle del selector principal
   function toggleMonthDropdown() {
     const dropdown = document.getElementById('monthDropdown');
     const icon = document.getElementById('monthDropdownIcon');
@@ -1166,7 +1280,7 @@
     const dropdown = document.getElementById('monthDropdown');
     const icon = document.getElementById('monthDropdownIcon');
     
-    // Inicializar variables temporales con valores actuales
+    // Inicializar variables temporales con valores actuales (sin fallback que cause desincronización)
     tempSelectedYear = currentSelectedYear;
     tempSelectedMonth = currentSelectedMonth;
     
@@ -1174,7 +1288,7 @@
     const yearSelectBtn = document.getElementById('yearSelectBtn');
     const monthSelectBtn = document.getElementById('monthSelectBtn');
     if (yearSelectBtn) yearSelectBtn.removeEventListener('click', toggleYearDropdown);
-    if (monthSelectBtn) monthSelectBtn.removeEventListener('click', toggleMonthDropdown);
+    if (monthSelectBtn) monthSelectBtn.removeEventListener('click', toggleMonthDropdownInternal);
     
     populateMonthDropdown();
     dropdown.classList.remove('hidden');
@@ -1227,7 +1341,7 @@
     const yearSelectBtn = document.getElementById('yearSelectBtn');
     const monthSelectBtn = document.getElementById('monthSelectBtn');
     if (yearSelectBtn) yearSelectBtn.removeEventListener('click', toggleYearDropdown);
-    if (monthSelectBtn) monthSelectBtn.removeEventListener('click', toggleMonthDropdown);
+    if (monthSelectBtn) monthSelectBtn.removeEventListener('click', toggleMonthDropdownInternal);
   }
   
   function handleClickOutside(event) {
@@ -1259,20 +1373,38 @@
   
   // Función para actualizar todas las secciones
   function updateAllSections() {
+    console.log('updateAllSections() con:', { currentSelectedMonth, currentSelectedYear });
     updateValueAddedImages();
     renderAutoFiltered();
     renderCambios();
+    console.log('Todas las secciones actualizadas');
   }
   
   // Función mejorada de renderAuto con filtro de fecha
   function renderAutoFiltered() {
+    console.log('renderAutoFiltered() INICIO - Variables:', { currentSelectedMonth, currentSelectedYear });
+    
+    // Si no hay variables válidas, salir
+    if (!currentSelectedMonth || !currentSelectedYear) {
+      console.error('❌ renderAutoFiltered() - Variables inválidas:', { currentSelectedMonth, currentSelectedYear });
+      return;
+    }
+    
     const monthKey = `${currentSelectedYear}-${String(currentSelectedMonth).padStart(2, '0')}`;
+    console.log('renderAutoFiltered() - MonthKey calculado:', monthKey);
+    console.log('renderAutoFiltered() - Total automatizaciones disponibles:', rows.length);
     
     const list = rows.filter(r => {
       // Filtrar por fecha del mes seleccionado
       if (r.fecha) {
         const itemDate = parseLocalDate(r.fecha);
         const itemMonthKey = `${itemDate.getFullYear()}-${String(itemDate.getMonth() + 1).padStart(2, '0')}`;
+        
+        // Log para los primeros elementos para debugging
+        if (rows.indexOf(r) < 3) {
+          console.log(`Comparando automatización: ${r.aplicacion} - ${r.fecha} (${itemMonthKey}) vs ${monthKey}`);
+        }
+        
         if (itemMonthKey !== monthKey) return false;
       }
       
@@ -1281,10 +1413,22 @@
     })
     .sort((a,b) => sortMode === 'fecha' ? (parseLocalDate(b.fecha) - parseLocalDate(a.fecha)) : (Number(b.vaFinal) - Number(a.vaFinal)));
     
+    console.log('renderAutoFiltered() - Automatizaciones filtradas:', list.length);
+    if (list.length > 0) {
+      console.log('Primeras automatizaciones encontradas:', list.slice(0, 2).map(r => ({ aplicacion: r.aplicacion, fecha: r.fecha })));
+    }
+    
+    // Verificar que el contenedor existe
+    if (!cardsEl) {
+      console.error('❌ cardsEl no encontrado!');
+      return;
+    }
+    
     const noResultsDiv = document.getElementById('noResultsAuto');
     const noResultsText = document.getElementById('noResultsTextAuto');
     
-    cardsEl.innerHTML = ''; 
+    console.log('Limpiando contenedor cardsEl...');
+    cardsEl.innerHTML = '';
     
     if (list.length === 0) {
       noResultsDiv.classList.remove('hidden');
@@ -1334,7 +1478,7 @@
             <div class="space-y-4 mb-4">
               <div>${procesosHtml}</div>
               <div class="bg-gray-50 p-4 rounded-xl">
-                <div class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Detalle</div>
+                <div class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Descripción</div>
                 <p class="text-sm text-gray-700 line-clamp-3">${detalleText}</p>
               </div>
             </div>
@@ -1365,6 +1509,8 @@
       
       cardsEl.appendChild(card);
     });
+    
+    console.log(`✅ ${list.length} automatizaciones agregadas al contenedor`);
   }
   
   // Reemplazar la función renderAuto original
@@ -1573,13 +1719,22 @@
     `;
   }
   function getFilteredCambios(){ 
-    return cambios
+    console.log('getFilteredCambios() INICIO - Variables:', { currentSelectedMonth, currentSelectedYear });
+    console.log('Total cambios disponibles:', cambios.length);
+    
+    const filtered = cambios
       .filter(r => {
-        // Filtro por fecha del mes seleccionado
+        // Filtro por fecha del mes seleccionado - aplicar si las variables son válidas
         if (currentSelectedMonth && currentSelectedYear && r.fecha) {
           const itemDate = parseLocalDate(r.fecha);
           const itemMonth = itemDate.getMonth() + 1; // 1-based
           const itemYear = itemDate.getFullYear();
+          
+          // Log de comparación para los primeros elementos
+          if (cambios.indexOf(r) < 3) {
+            console.log(`Comparando cambio: ${r.codigo} - ${r.fecha} (${itemMonth}/${itemYear}) vs (${currentSelectedMonth}/${currentSelectedYear})`);
+          }
+          
           if (itemMonth !== currentSelectedMonth || itemYear !== currentSelectedYear) {
             return false;
           }
@@ -1635,14 +1790,23 @@
           return aVal - bVal;
         }
         return 0;
-      }); 
+      });
+    
+    console.log('getFilteredCambios() - Cambios filtrados:', filtered.length);
+    if (filtered.length > 0) {
+      console.log('Primeros cambios encontrados:', filtered.slice(0, 2).map(r => ({ codigo: r.codigo, fecha: r.fecha })));
+    }
+    
+    return filtered;
   }
   function renderCambios(){ 
+    console.log('renderCambios() INICIO');
     const all = getFilteredCambios(); 
+    console.log(`renderCambios() - Total filtrados: ${all.length}`);
     const totalPages = Math.max(1, Math.ceil(all.length / pageSize)); 
     if (page > totalPages) page = totalPages; 
     const start = (page - 1) * pageSize; 
-    const list = all.slice(start, start + pageSize); 
+    const list = all.slice(start, start + pageSize);
     
     const tableContainer = document.querySelector('.overflow-x-auto');
     const noResultsDiv = document.getElementById('noResultsCambios');
@@ -1712,7 +1876,7 @@
   prevBtn.addEventListener('click',()=>{if(page>1){page--;renderCambios();}});
   nextBtn.addEventListener('click',()=>{page++;renderCambios();});
 
-  // ======== NAVEGACIÓN LATERAL Y HERO ========
+  // ======== NAVEGACIÓN LATERAL ========
   const sideNav = document.getElementById('sideNav');
   const heroNavButtons = document.getElementById('heroNavButtons');
   const sections = document.querySelectorAll('section[id]');
@@ -1722,9 +1886,9 @@
   // Función para mostrar/ocultar navegación lateral
   function toggleSideNav() {
     const heroRect = heroNavButtons.getBoundingClientRect();
-    const shouldShow = heroRect.bottom < -50; // Mostrar cuando el hero esté bien arriba
+    const shouldShowSideNav = heroRect.bottom < -50;
     
-    if (shouldShow) {
+    if (shouldShowSideNav) {
       sideNav.classList.add('show');
     } else {
       sideNav.classList.remove('show');
@@ -1797,6 +1961,8 @@
   // Mostrar/ocultar botón flotante
   const scrollToTopFloat = document.getElementById('scrollToTopFloat');
   function toggleScrollButton() {
+    if (!scrollToTopFloat) return; // Salir si el botón no existe
+    
     if (window.pageYOffset > 300) {
       scrollToTopFloat.classList.remove('opacity-0', 'pointer-events-none');
       scrollToTopFloat.classList.add('opacity-100', 'pointer-events-auto');
@@ -1820,20 +1986,41 @@
   });
   
   // ======== INICIALIZACIÓN DEL SISTEMA DE MES/AÑO ========
-  // Event listener para el selector de mes
-  document.getElementById('monthSelector').addEventListener('click', toggleMonthDropdown);
+  // Event listener para el selector de mes principal
+  const monthSelector = document.getElementById('monthSelector');
+  if (monthSelector) {
+    monthSelector.addEventListener('click', toggleMonthDropdown);
+  } else {
+    console.warn('monthSelector no encontrado');
+  }
   
-  // Event listener para el botón confirmar
-  document.getElementById('confirmSelection').addEventListener('click', confirmSelection);
+  // Event listener para el botón confirmar principal (si existe)
+  const confirmSelectionBtn = document.getElementById('confirmSelection');
+  if (confirmSelectionBtn) {
+    confirmSelectionBtn.addEventListener('click', confirmSelection);
+  } else {
+    console.warn('confirmSelection no encontrado - continuando sin él');
+  }
   
   // Inicializar mes por defecto
   initializeDefaultMonth();
   
-  // ======== INICIALIZACIÓN ========
-  renderAuto();
-  renderCambios();
+  // Inicializar variables temporales después de establecer los valores actuales
+  tempSelectedYear = currentSelectedYear;
+  tempSelectedMonth = currentSelectedMonth;
+  
+  console.log('=== INICIALIZACIÓN PRINCIPAL COMPLETADA ===');
+  console.log('Variables finales:', { currentSelectedMonth, currentSelectedYear, tempSelectedMonth, tempSelectedYear });
+  
+  // ======== FIN DEL SCRIPT PRINCIPAL ========
   toggleSideNav();
   updateActiveNavButton();
+  
+  // Verificación final del estado
+  setTimeout(() => {
+    console.log('✅ INICIALIZACIÓN EXITOSA - Proyecto listo!');
+    console.log('Datos cargados automáticamente para:', document.getElementById('selectedMonth')?.textContent);
+  }, 200);
 
   // ======== VA por Unidad de Negocio: imágenes fijas + lightbox ========
   const img1 = document.getElementById('img1');
