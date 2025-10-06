@@ -932,16 +932,17 @@
   let currentSelectedMonth = 9; // Septiembre
   let currentSelectedYear = 2025;
   
-  // Mapeo de imágenes por mes/año (placeholders por ahora)
+  // Mapeo de imágenes por mes/año - solo imágenes específicas por mes
   const valueAddedImages = {
     '2025-08': {
       sas: "https://drive.google.com/file/d/1ZbS5WyojhMcdcZz5TINSL2yGTxwQbskb/view",
       cf: "https://drive.google.com/file/d/1fUxaxuNvT5EdzAai_NvUL773Qq_mjk2O/view"
     },
     '2025-09': {
-      sas: "https://drive.google.com/file/d/1ZbS5WyojhMcdcZz5TINSL2yGTxwQbskb/view", // placeholder
-      cf: "https://drive.google.com/file/d/1fUxaxuNvT5EdzAai_NvUL773Qq_mjk2O/view"  // placeholder
+      sas: "https://drive.google.com/file/d/1Wn9xYfCdwWz7sW20dN4sye2oKVqoqdDz/view",
+      cf: "https://drive.google.com/file/d/1DXerSbjHu3wzriAz5TFZfutwGs83e3N2/view"
     }
+    // Otros meses no tienen imágenes hasta que se agreguen específicamente
   };
   
   // Nombres de meses en español
@@ -1362,13 +1363,25 @@
   // Función para actualizar imágenes de valor agregado
   function updateValueAddedImages() {
     const monthKey = `${currentSelectedYear}-${String(currentSelectedMonth).padStart(2, '0')}`;
-    const images = valueAddedImages[monthKey] || valueAddedImages['2025-08']; // fallback
+    const images = valueAddedImages[monthKey]; // sin fallback - solo si hay datos específicos
     
     const img1 = document.getElementById('img1');
     const img2 = document.getElementById('img2');
     
-    if (img1 && images.sas) setDriveImage(img1, images.sas);
-    if (img2 && images.cf) setDriveImage(img2, images.cf);
+    // Solo mostrar imágenes si hay datos específicos para este mes
+    if (images && img1 && images.sas) {
+      setDriveImage(img1, images.sas);
+    } else if (img1) {
+      img1.src = ''; // limpiar imagen si no hay datos
+      img1.alt = `No hay imágenes disponibles para ${monthNames[currentSelectedMonth - 1]} ${currentSelectedYear}`;
+    }
+    
+    if (images && img2 && images.cf) {
+      setDriveImage(img2, images.cf);
+    } else if (img2) {
+      img2.src = ''; // limpiar imagen si no hay datos  
+      img2.alt = `No hay imágenes disponibles para ${monthNames[currentSelectedMonth - 1]} ${currentSelectedYear}`;
+    }
   }
   
   // Función para actualizar todas las secciones
