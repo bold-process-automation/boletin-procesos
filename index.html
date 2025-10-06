@@ -920,10 +920,15 @@
   };
   
   let rows = [
-    // ========== AUTOMATIZACIONES DE AGOSTO 2025 ==========
-    {"aplicativo": "APPIAN", "aplicacion": "RPA Ciclo operativo ACH", "proceso": "OP-PR-022 Gestión de transferencias ACH", "detalle": "Cargue y descarga de transacciones en integra ACH y neurona para su posterior conciliación ", "compania": "CF", "vaFinal": 70.0, "incrementoVA": 38.0, "fecha": "2025-08-06"}, 
-    {"aplicativo": "APPIAN", "aplicacion": "Gestión de planes de acción de RO", "proceso": "GR-PR-005 Elaboración y Seguimiento a Planes de Acción de RO\nGR-PR-105 Elaboración y Seguimiento a Planes de Acción de RO SAS", "detalle": "Creación (Risk Manager) y seguimiento (responsables) a los planes de acción de RO", "compania": "SAS Y CF", "vaFinal": 100.0, "incrementoVA": 33.0, "fecha": "2025-08-05"}, 
-    {"aplicativo": "APPIAN", "aplicacion": "Gestión de eventos RO", "proceso": "GR-PR-006 Gestión de eventos de riesgo operacional\nGR-PR-106 Gestión de eventos de riesgo operacional SAS", "detalle": "Recepción y evaluación de los eventos de riesgo operacional", "compania": "SAS Y CF", "vaFinal": 80.0, "incrementoVA": 5.0, "fecha": "2025-08-05"},
+    // ========== AUTOMATIZACIONES PARA MOSTRAR EN AGOSTO 2025 ==========
+    // Estas automatizaciones se muestran cuando el usuario selecciona agosto, independientemente de su fecha de paso a producción
+    {"aplicativo": "APPIAN", "aplicacion": "Gestión de planes de acción a empleados", "proceso": "TH-PR-111 Gestión programa ESOP SAS", "detalle": "Calculo de DRs, asignación de planes, registro de ventas y envío de información para consulta del estado de las acciones de los colaboradores en Bamboo.", "compania": "SAS Y CF", "vaFinal": 93.0, "incrementoVA": 23.0, "fecha": "2025-05-21", "mesAsignado": "2025-08"},
+    {"aplicativo": "APPIAN", "aplicacion": "RPA Facturación POS", "proceso": "VP-PR-122 Facturación de datáfonos y merchandising canales Hubs y Bold store SAS", "detalle": "Creación de la facturación de venta de datafonos en POS, a partir de la recepción de oportunidades de EPIC.", "compania": "SAS", "vaFinal": 70.0, "incrementoVA": 70.0, "fecha": "2025-01-23", "mesAsignado": "2025-08"},
+    {"aplicativo": "APPIAN", "aplicacion": "Automatización alerta monitoreo: Abonos, grafos, modelo y Anomaly", "proceso": "OP-PR-103 Monitoreo Transaccional y Gestión de Alertas SAS", "detalle": "Eliminación del cargue manual de archivos en Excel por parte de los analistas, correspondiente al 55% del alertas analizadas por el equipo de monitoreo.", "compania": "SAS", "vaFinal": 76.0, "incrementoVA": 11.0, "fecha": "2025-04-23", "mesAsignado": "2025-08"},
+    {"aplicativo": "APPIAN", "aplicacion": "Chelist de casos monitoreo - Score", "proceso": "OP-PR-103 Monitoreo Transaccional y Gestión de Alertas SAS", "detalle": "Cálculo de score para identificar si un comercio que ha sido detenido por una sospecha de fraude probablemente terminará siendo bloqueado.", "compania": "SAS", "vaFinal": 76.0, "incrementoVA": 11.0, "fecha": "2025-04-23", "mesAsignado": "2025-08"},
+    {"aplicativo": "APPIAN", "aplicacion": "RPA Activación facturación electrónica", "proceso": "VP-PR-115 Activación facturación electrónica ante la DIAN SAS", "detalle": "Habilitación de la facturación electronica del comercio en el portal de la DIAN y envío del Test Set ID al aplicativo POS.", "compania": "SAS", "vaFinal": 100.0, "incrementoVA": 100.0, "fecha": "2025-05-07", "mesAsignado": "2025-08"},
+    {"aplicativo": "APPIAN", "aplicacion": "Gestión de embargos V2", "proceso": "LC-PR-009 Gestión de embargos y congelación de recursos", "detalle": "Consulta de productos del embargado, generación y envio de respuesta a la entidad correspondiente.", "compania": "CF", "vaFinal": 82.0, "incrementoVA": 3.0, "fecha": "2025-06-10", "mesAsignado": "2025-08"},
+    {"aplicativo": "APPIAN", "aplicacion": "RPA Ciclo operativo ACH", "proceso": "OP-PR-022 Gestión de transferencias ACH", "detalle": "Cargue y descarga de transacciones en integra ACH y neurona para posterior conciliación.", "compania": "CF", "vaFinal": 70.0, "incrementoVA": 38.0, "fecha": "2025-08-06", "mesAsignado": "2025-08"},
     
     // ========== AUTOMATIZACIONES DE SEPTIEMBRE 2025 ==========
     {"aplicativo": "APPIAN", "aplicacion": "Gestión de planes de acción de RO", "proceso": "GR-PR-005/GR-PR-105 Elaboración y Seguimiento a Planes de Acción de RO", "detalle": "Creación, aprobación y seguimiento a los planes de acción de riesgo operacional.", "compania": "CF/SAS", "vaFinal": 100.0, "incrementoVA": 33.0, "fecha": "2025-09-11"},
@@ -1412,18 +1417,29 @@
     console.log('renderAutoFiltered() - Total automatizaciones disponibles:', rows.length);
     
     const list = rows.filter(r => {
-      // Filtrar por fecha del mes seleccionado
-      if (r.fecha) {
+      // Filtrar por mes asignado O por fecha del mes seleccionado
+      let belongsToMonth = false;
+      
+      // Opción 1: Verificar si tiene mesAsignado que coincida
+      if (r.mesAsignado && r.mesAsignado === monthKey) {
+        belongsToMonth = true;
+      }
+      // Opción 2: Verificar por fecha si no tiene mesAsignado
+      else if (!r.mesAsignado && r.fecha) {
         const itemDate = parseLocalDate(r.fecha);
         const itemMonthKey = `${itemDate.getFullYear()}-${String(itemDate.getMonth() + 1).padStart(2, '0')}`;
         
-        // Log para los primeros elementos para debugging
-        if (rows.indexOf(r) < 3) {
-          console.log(`Comparando automatización: ${r.aplicacion} - ${r.fecha} (${itemMonthKey}) vs ${monthKey}`);
+        if (itemMonthKey === monthKey) {
+          belongsToMonth = true;
         }
-        
-        if (itemMonthKey !== monthKey) return false;
       }
+      
+      // Log para los primeros elementos para debugging
+      if (rows.indexOf(r) < 3) {
+        console.log(`Comparando automatización: ${r.aplicacion} - mesAsignado: ${r.mesAsignado || 'N/A'} - fecha: ${r.fecha} vs ${monthKey} - pertenece: ${belongsToMonth}`);
+      }
+      
+      if (!belongsToMonth) return false;
       
       // Filtrar por búsqueda
       return (r.aplicativo + ' ' + r.aplicacion + ' ' + r.proceso + ' ' + r.detalle + ' ' + r.compania).toLowerCase().includes(query.toLowerCase());
