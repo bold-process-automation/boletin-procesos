@@ -128,6 +128,12 @@
     }
     
     /* Utilidades para tarjetas estilo Bold.co */
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
     .line-clamp-3 {
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -938,6 +944,17 @@
   const pctColor = (p)=> p>=100?'bg-emerald-500':p>=80?'bg-green-500':p>=50?'bg-amber-500':'bg-slate-300';
   const status = (p)=> p>=100?['¡Listo!','bg-emerald-600 text-white']:p>=80?['Casi','bg-green-600 text-white']:['En curso','bg-slate-200 text-slate-800'];
   
+  // Función para obtener el color del aplicativo
+  const getApplicativeColor = (aplicativo) => {
+    const app = (aplicativo || '').toUpperCase();
+    switch(app) {
+      case 'APPIAN': return '#0A53A5';
+      case 'DAPTA': return '#1B8959';
+      case 'N8N': return '#FF2947';
+      default: return '#6B7280'; // gris por defecto
+    }
+  };
+  
   // ======== SISTEMA DE FILTRADO POR MES/AÑO ========
   // Inicializar directamente con septiembre 2025 (se actualizará inmediatamente)
   let currentSelectedMonth = 9; // Septiembre
@@ -1499,12 +1516,14 @@
       
       const detalleText = (r.detalle && !isNaN(r.detalle) === false) ? r.detalle : (r.detalle || 'Sin detalles específicos');
       
+      const applicativeColor = getApplicativeColor(r.aplicativo);
+      
       card.innerHTML = `
         <div class="h-full flex flex-col">
-          <div class="bg-gradient-to-br from-slate-50 to-gray-100 p-6 rounded-t-3xl">
-            <h3 class="font-bold text-lg text-gray-900 mb-2 leading-tight">${r.aplicacion || ''}</h3>
-            <div class="flex items-center gap-2">
-              <span class="text-xs px-2 py-1 bg-white rounded-md text-gray-600 border border-gray-200">${r.aplicativo || ''}</span>
+          <div class="bg-gradient-to-br from-slate-50 to-gray-100 p-6 rounded-t-3xl h-32 flex flex-col justify-between">
+            <h3 class="font-bold text-lg text-gray-900 leading-tight line-clamp-2 flex-1">${r.aplicacion || ''}</h3>
+            <div class="flex items-center gap-2 mt-2">
+              <span class="text-xs px-2 py-1 bg-white rounded-md border border-gray-200 font-bold" style="color: ${applicativeColor}">${r.aplicativo || ''}</span>
               <span class="text-xs px-2 py-1 bg-gray-900 text-white rounded-md">${r.compania || ''}</span>
             </div>
           </div>
