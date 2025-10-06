@@ -690,7 +690,7 @@
         </div>
         
         <!-- Grid de tarjetas expandido -->
-        <div class="max-w-7xl mx-auto px-6 md:px-12">
+        <div id="valueAddedCards" class="max-w-7xl mx-auto px-6 md:px-12">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <!-- Tarjeta SAS -->
             <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[450px]">
@@ -733,6 +733,17 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        
+        <!-- Mensaje de no resultados para Valor Agregado -->
+        <div id="noResultsValueAdded" class="hidden max-w-7xl mx-auto px-6 md:px-12">
+          <div class="bg-gray-50 rounded-2xl p-8 text-center">
+            <div class="flex items-center justify-center mb-4">
+              <img src="unfound-icon.png" alt="No encontrado" class="w-12 h-12 opacity-60">
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">No hay datos disponibles</h3>
+            <p id="noResultsTextValueAdded" class="text-gray-600">No hay imágenes de valor agregado disponibles para este período.</p>
           </div>
         </div>
       </div>
@@ -1365,22 +1376,32 @@
     const monthKey = `${currentSelectedYear}-${String(currentSelectedMonth).padStart(2, '0')}`;
     const images = valueAddedImages[monthKey]; // sin fallback - solo si hay datos específicos
     
+    const cardsContainer = document.getElementById('valueAddedCards');
+    const noResultsContainer = document.getElementById('noResultsValueAdded');
+    const noResultsText = document.getElementById('noResultsTextValueAdded');
+    
+    // Si no hay imágenes para este mes, mostrar mensaje de "No hay datos"
+    if (!images) {
+      cardsContainer.classList.add('hidden');
+      noResultsContainer.classList.remove('hidden');
+      noResultsText.textContent = `No hay imágenes de valor agregado disponibles para ${monthNames[currentSelectedMonth - 1]} ${currentSelectedYear}.`;
+      return;
+    }
+    
+    // Si hay imágenes, mostrar las tarjetas y ocultar el mensaje
+    cardsContainer.classList.remove('hidden');
+    noResultsContainer.classList.add('hidden');
+    
     const img1 = document.getElementById('img1');
     const img2 = document.getElementById('img2');
     
-    // Solo mostrar imágenes si hay datos específicos para este mes
-    if (images && img1 && images.sas) {
+    // Cargar las imágenes específicas
+    if (img1 && images.sas) {
       setDriveImage(img1, images.sas);
-    } else if (img1) {
-      img1.src = ''; // limpiar imagen si no hay datos
-      img1.alt = `No hay imágenes disponibles para ${monthNames[currentSelectedMonth - 1]} ${currentSelectedYear}`;
     }
     
-    if (images && img2 && images.cf) {
+    if (img2 && images.cf) {
       setDriveImage(img2, images.cf);
-    } else if (img2) {
-      img2.src = ''; // limpiar imagen si no hay datos  
-      img2.alt = `No hay imágenes disponibles para ${monthNames[currentSelectedMonth - 1]} ${currentSelectedYear}`;
     }
   }
   
@@ -2073,13 +2094,7 @@ function setDriveImage(imgEl, shareLink){
   }
   tryNext();
 }
-// Pega tus links de "Obtener vínculo" (los que terminan en /view)
-setDriveImage(img1, "https://drive.google.com/file/d/1ZbS5WyojhMcdcZz5TINSL2yGTxwQbskb/view"); // SAS
-setDriveImage(img2, "https://drive.google.com/file/d/1fUxaxuNvT5EdzAai_NvUL773Qq_mjk2O/view"); // CF
-
-// (temporal) para depurar, ver la URL final en consola
-console.log('img1 URL =>', img1.src);
-console.log('img2 URL =>', img2.src);
+// Las imágenes se cargan automáticamente según el mes seleccionado
 
   // Lightbox (zoom)
   const lightbox = document.getElementById('lightbox');
