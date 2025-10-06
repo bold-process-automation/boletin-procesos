@@ -1008,66 +1008,32 @@
   // Función hasDataForMonth eliminada - ya no es necesaria
   // SIEMPRE mostraremos el mes anterior, tengan datos o no
   
-  // Función para obtener años disponibles
+  // Función para obtener años disponibles - solo 2025
   function getAvailableYears() {
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const years = [];
-    
-    // Desde 2025 hasta el año actual + 1
-    for (let year = 2025; year <= currentYear + 1; year++) {
-      years.push(year);
-    }
-    return years;
+    // Solo 2025 ya que solo tenemos datos para agosto y septiembre
+    return [2025];
   }
   
-  // Función para obtener meses disponibles para un año específico
+  // Función para obtener meses disponibles - solo agosto y septiembre 2025
   function getAvailableMonthsForYear(year) {
-    const now = new Date();
-    const currentYear = now.getFullYear();
-    const currentMonth = now.getMonth() + 1; // 1-based
-    
-    let months = [];
-    
+    // Solo devolver agosto y septiembre para 2025
     if (year === 2025) {
-      // Para 2025, solo desde agosto
-      for (let month = 8; month <= 12; month++) {
-        months.push({
-          number: month,
-          name: monthNames[month - 1],
-          short: monthNames[month - 1].substring(0, 3)
-        });
-      }
-    } else if (year === currentYear) {
-      // Para el año actual, hasta el mes actual
-      for (let month = 1; month <= currentMonth; month++) {
-        months.push({
-          number: month,
-          name: monthNames[month - 1],
-          short: monthNames[month - 1].substring(0, 3)
-        });
-      }
-    } else if (year < currentYear) {
-      // Para años pasados, todos los meses
-      for (let month = 1; month <= 12; month++) {
-        months.push({
-          number: month,
-          name: monthNames[month - 1],
-          short: monthNames[month - 1].substring(0, 3)
-        });
-      }
-    } else {
-      // Para años futuros, solo algunos meses como preview
-      for (let month = 1; month <= 3; month++) {
-        months.push({
-          number: month,
-          name: monthNames[month - 1],
-          short: monthNames[month - 1].substring(0, 3)
-        });
-      }
+      return [
+        {
+          number: 8,
+          name: 'Agosto',
+          short: 'Ago'
+        },
+        {
+          number: 9,
+          name: 'Septiembre',
+          short: 'Sep'
+        }
+      ];
     }
     
-    return months;
+    // Para cualquier otro año, devolver array vacío
+    return [];
   }
   
   // Función para encontrar el último mes con datos disponibles
@@ -1515,6 +1481,8 @@
       }
       
       const detalleText = (r.detalle && !isNaN(r.detalle) === false) ? r.detalle : (r.detalle || 'Sin detalles específicos');
+      const cardId = `card-${Math.random().toString(36).substr(2, 9)}`; // ID único para cada card
+      const isLongDescription = detalleText.length > 150; // Considerar largo si tiene más de 150 caracteres
       
       const applicativeColor = getApplicativeColor(r.aplicativo);
       
@@ -1532,7 +1500,14 @@
               <div>${procesosHtml}</div>
               <div class="bg-gray-50 p-4 rounded-xl">
                 <div class="text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wide">Descripción</div>
-                <p class="text-sm text-gray-700 line-clamp-3">${detalleText}</p>
+                <div class="description-container">
+                  <p id="desc-${cardId}" class="text-sm text-gray-700 ${isLongDescription ? 'line-clamp-3' : ''}">${detalleText}</p>
+                  ${isLongDescription ? `
+                    <button onclick="toggleDescription('${cardId}')" class="mt-2 text-xs text-blue-600 hover:text-blue-800 font-medium focus:outline-none" style="color: #121E6C;">
+                      <span id="btn-${cardId}">Ver más</span>
+                    </button>
+                  ` : ''}
+                </div>
               </div>
             </div>
             <div class="bg-gray-50 p-4 rounded-xl mt-auto">
@@ -1565,6 +1540,22 @@
     
     console.log(`✅ ${list.length} automatizaciones agregadas al contenedor`);
   }
+  
+  // Función para toggle de descripciones largas
+  window.toggleDescription = function(cardId) {
+    const descElement = document.getElementById(`desc-${cardId}`);
+    const btnElement = document.getElementById(`btn-${cardId}`);
+    
+    if (descElement.classList.contains('line-clamp-3')) {
+      // Expandir
+      descElement.classList.remove('line-clamp-3');
+      btnElement.textContent = 'Ver menos';
+    } else {
+      // Colapsar
+      descElement.classList.add('line-clamp-3');
+      btnElement.textContent = 'Ver más';
+    }
+  };
   
   // Reemplazar la función renderAuto original
   function renderAuto() {
@@ -1742,12 +1733,32 @@
     hideFilterDropdown();
   }
   
+  // Función para obtener el color de VA según el valor
+  function getVAColor(valorAgregado) {
+    if (!valorAgregado || String(valorAgregado).trim() === '' || String(valorAgregado).toUpperCase() === 'N/A') {
+      return '#606060'; // Gris para "No aplica"
+    }
+    
+    const numValue = parseFloat(String(valorAgregado).replace('%', '')) || 0;
+    
+    if (numValue >= 60) {
+      return '#6CDCAB'; // Verde para 60% o más
+    } else if (numValue >= 31) {
+      return '#FFC217'; // Amarillo para 31-59%
+    } else {
+      return '#C31A2F'; // Rojo para 0-30%
+    }
+  }
+
  function rowCambios(r){
     // Nuevo estilo para las etiquetas: sin negrita, fondo gris claro, centradas
     const tipoStyle = 'background-color: #f1f2f6; color: #6b7280;';
     const va = (!r.valor_agregado || String(r.valor_agregado).trim() === '' || String(r.valor_agregado).toUpperCase() === 'N/A')
       ? 'No aplica'
       : r.valor_agregado;
+    
+    // Obtener color para VA
+    const vaColor = getVAColor(r.valor_agregado);
     
     // Verificar si existe un enlace para el documento
     const documentoNombre = r.documento || '';
@@ -1767,7 +1778,9 @@
           <span class="inline-flex items-center justify-center text-xs px-3 py-2 rounded-full min-w-[90px] h-6" style="${tipoStyle}">${r.tipo}</span>
         </td>
         <td class="px-3 py-2 w-28 text-center">${formatDate(r.fecha)}</td>
-        <td class="px-3 py-2 w-20 text-center">${va}</td>
+        <td class="px-3 py-2 w-20 text-center">
+          <span class="font-bold" style="color: ${vaColor};">${va}</span>
+        </td>
       </tr>
     `;
   }
