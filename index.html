@@ -437,74 +437,11 @@
     <section id="cambios" class="mt-24 scroll-mt-8">
       <!-- Header estilo consistente con las otras secciones -->
       <div class="mb-16 px-6 md:px-12">
-          <div class="flex justify-between items-start mb-8">
-            <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none text-left">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8 text-left">
               <span style="color: #121E6C;">
                 Gestión de Procesos
               </span>
             </h2>
-            
-            <!-- Selector de período - más grande y prominente -->
-            <div class="relative ml-8">
-              <button id="monthSelector" class="bg-white hover:bg-gray-50 rounded-full px-8 py-4 font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-4 border border-gray-200 min-w-[200px] justify-center">
-                <img src="calendar-icon.png" alt="Calendario" class="w-6 h-6 opacity-80">
-                <span id="selectedMonth" class="text-[#121E6C]">Septiembre 2025</span>
-                <svg id="monthDropdownIcon" class="w-5 h-5 transition-transform duration-200" fill="#121E6C" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-              </button>
-              
-              <!-- Dropdowns debajo del botón -->
-              <div id="monthDropdown" class="hidden absolute top-full right-0 mt-3 bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 p-6 min-w-[400px]">
-                <div class="text-center mb-4">
-                  <h3 class="text-lg font-bold" style="color: #121E6C;">Seleccionar período</h3>
-                </div>
-                
-                <div class="grid grid-cols-2 gap-6">
-                  <!-- Selector de Año personalizado -->
-                  <div>
-                    <label class="block text-sm font-semibold mb-3" style="color: #121E6C;">Año</label>
-                    <div class="relative">
-                      <button id="yearSelectBtn" class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-gray-700 font-bold text-left transition-all duration-200 hover:border-blue-400 hover:shadow-md focus:border-blue-500 focus:outline-none cursor-pointer flex items-center justify-between">
-                        <span id="yearSelectedText">2025</span>
-                        <svg class="w-4 h-4 text-gray-500 transition-transform duration-200" id="yearDropIcon" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                      </button>
-                      
-                      <!-- Dropdown personalizado de años -->
-                      <div id="yearDropdown" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden">
-                        <div id="yearOptions" class="py-2">
-                          <!-- Opciones generadas dinámicamente -->
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Selector de Mes personalizado -->
-                  <div>
-                    <label class="block text-sm font-semibold mb-3" style="color: #121E6C;">Mes</label>
-                    <div class="relative">
-                      <button id="monthSelectBtn" class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-gray-700 font-bold text-left transition-all duration-200 hover:border-blue-400 hover:shadow-md focus:border-blue-500 focus:outline-none cursor-pointer flex items-center justify-between">
-                        <span id="monthSelectedText">Septiembre</span>
-                        <svg class="w-4 h-4 text-gray-500 transition-transform duration-200" id="monthDropIcon" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                      </button>
-                      
-                      <!-- Dropdown personalizado de meses -->
-                      <div id="monthDropdownCustom" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden">
-                        <div id="monthOptions" class="py-2">
-                          <!-- Opciones generadas dinámicamente -->
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-            </div>
-          </div>
           
           <p class="text-lg md:text-xl max-w-3xl leading-relaxed mb-8 text-left" style="color: #606060;">
             A continuación podrás consultar el registro y seguimiento detallado de creaciones, actualizaciones y modificaciones en los procesos organizacionales de Bold CF y Bold.co SAS.
@@ -817,6 +754,74 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
       </div>
     </footer>
 
+  </div>
+  
+  <!-- ========== COMPONENTE FLOTANTE SELECTOR MES/AÑO ========== -->
+  <div id="floatMonthSelector" class="fixed top-20 right-8 z-40 opacity-0 pointer-events-none transform translate-x-full transition-all duration-500 ease-in-out">
+    <!-- Botón principal del selector flotante -->
+    <button id="floatMonthSelectorBtn" class="bg-white hover:bg-gray-50 rounded-full px-6 py-3 font-bold text-base shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-3 border border-gray-200 min-w-[180px] justify-center group">
+      <img src="calendar-icon.png" alt="Calendario" class="w-5 h-5 opacity-80">
+      <span id="floatSelectedMonth" class="text-[#121E6C]">Septiembre 2025</span>
+      <svg id="floatMonthDropdownIcon" class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="#121E6C" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+      </svg>
+    </button>
+    
+    <!-- Dropdown flotante -->
+    <div id="floatMonthDropdown" class="hidden absolute top-full right-0 mt-3 bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 p-6 min-w-[400px]">
+      <div class="text-center mb-4">
+        <h3 class="text-lg font-bold" style="color: #121E6C;">Seleccionar período</h3>
+      </div>
+      
+      <div class="grid grid-cols-2 gap-6">
+        <!-- Selector de Año personalizado -->
+        <div>
+          <label class="block text-sm font-semibold mb-3" style="color: #121E6C;">Año</label>
+          <div class="relative">
+            <button id="floatYearSelectBtn" class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-gray-700 font-bold text-left transition-all duration-200 hover:border-blue-400 hover:shadow-md focus:border-blue-500 focus:outline-none cursor-pointer flex items-center justify-between">
+              <span id="floatYearSelectedText">2025</span>
+              <svg class="w-4 h-4 text-gray-500 transition-transform duration-200" id="floatYearDropIcon" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            
+            <!-- Dropdown personalizado de años -->
+            <div id="floatYearDropdown" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden">
+              <div id="floatYearOptions" class="py-2">
+                <!-- Opciones generadas dinámicamente -->
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Selector de Mes personalizado -->
+        <div>
+          <label class="block text-sm font-semibold mb-3" style="color: #121E6C;">Mes</label>
+          <div class="relative">
+            <button id="floatMonthSelectBtn" class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-gray-700 font-bold text-left transition-all duration-200 hover:border-blue-400 hover:shadow-md focus:border-blue-500 focus:outline-none cursor-pointer flex items-center justify-between">
+              <span id="floatMonthSelectedText">Septiembre</span>
+              <svg class="w-4 h-4 text-gray-500 transition-transform duration-200" id="floatMonthDropIcon" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+            
+            <!-- Dropdown personalizado de meses -->
+            <div id="floatMonthDropdownCustom" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden">
+              <div id="floatMonthOptions" class="py-2">
+                <!-- Opciones generadas dinámicamente -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Botón de aplicar obligatorio -->
+      <div class="mt-6 text-center">
+        <button id="confirmSelectionBtn" class="bg-gradient-to-r from-[#121E6C] to-[#1E23A2] text-white font-bold px-8 py-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105">
+          ✓ Aplicar Selección
+        </button>
+      </div>
+    </div>
   </div>
   
   <!-- Botón flotante volver arriba (visible solo en scroll) con efecto hover -->
@@ -1966,15 +1971,30 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
   const heroNavBtns = document.querySelectorAll('.hero-nav-btn');
   const sideNavBtns = document.querySelectorAll('#sideNav .side-nav-item');
   
-  // Función para mostrar/ocultar navegación lateral
+  // Función para mostrar/ocultar navegación lateral Y selector flotante de fecha
   function toggleSideNav() {
+    const floatMonthSelector = document.getElementById('floatMonthSelector');
     const heroRect = heroNavButtons.getBoundingClientRect();
     const shouldShowSideNav = heroRect.bottom < -50;
     
     if (shouldShowSideNav) {
+      // Mostrar navegación lateral
       sideNav.classList.add('show');
+      
+      // Mostrar selector flotante de fecha
+      if (floatMonthSelector) {
+        floatMonthSelector.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-full');
+        floatMonthSelector.classList.add('opacity-100', 'pointer-events-auto', 'translate-x-0');
+      }
     } else {
+      // Ocultar navegación lateral
       sideNav.classList.remove('show');
+      
+      // Ocultar selector flotante de fecha
+      if (floatMonthSelector) {
+        floatMonthSelector.classList.add('opacity-0', 'pointer-events-none', 'translate-x-full');
+        floatMonthSelector.classList.remove('opacity-100', 'pointer-events-auto', 'translate-x-0');
+      }
     }
   }
   
@@ -2068,6 +2088,381 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
     }
   });
   
+  // ======== LÓGICA DEL SELECTOR FLOTANTE DE FECHA ========
+  
+  // Variables temporales para el selector flotante (unificadas)
+  let floatTempSelectedYear = currentSelectedYear;
+  let floatTempSelectedMonth = currentSelectedMonth;
+  
+  // Elementos del selector flotante
+  const floatMonthSelectorBtn = document.getElementById('floatMonthSelectorBtn');
+  const floatMonthDropdown = document.getElementById('floatMonthDropdown');
+  const floatSelectedMonth = document.getElementById('floatSelectedMonth');
+  const floatYearSelectBtn = document.getElementById('floatYearSelectBtn');
+  const floatMonthSelectBtn = document.getElementById('floatMonthSelectBtn');
+  const floatYearDropdown = document.getElementById('floatYearDropdown');
+  const floatMonthDropdownCustom = document.getElementById('floatMonthDropdownCustom');
+  const confirmSelectionBtnFloat = document.getElementById('confirmSelectionBtn');
+  
+  // Función para actualizar la UI del selector flotante
+  function updateFloatSelectorUI() {
+    console.log('updateFloatSelectorUI() - Actualizando UI del selector flotante');
+    console.log('Variables actuales:', { currentSelectedMonth, currentSelectedYear });
+    
+    if (!currentSelectedMonth || !currentSelectedYear || !monthNames) {
+      console.error('Variables requeridas no definidas:', { currentSelectedMonth, currentSelectedYear, monthNames: !!monthNames });
+      return;
+    }
+    
+    const monthName = monthNames[currentSelectedMonth - 1];
+    const display = `${monthName} ${currentSelectedYear}`;
+    
+    console.log('Display calculado:', display);
+    console.log('floatSelectedMonth encontrado:', !!floatSelectedMonth);
+    
+    if (floatSelectedMonth) {
+      floatSelectedMonth.textContent = display;
+      console.log('✓ UI del selector flotante actualizada:', display);
+    } else {
+      console.error('✗ floatSelectedMonth no encontrado');
+    }
+  }
+  
+  // Función para mostrar/ocultar el dropdown del selector flotante
+  function toggleFloatMonthDropdown() {
+    if (!floatMonthDropdown) return;
+    
+    if (floatMonthDropdown.classList.contains('hidden')) {
+      showFloatMonthDropdown();
+    } else {
+      hideFloatMonthDropdown();
+    }
+  }
+  
+  function showFloatMonthDropdown() {
+    if (!floatMonthDropdown) return;
+    
+    console.log('showFloatMonthDropdown() - Abriendo dropdown flotante');
+    console.log('Variables globales actuales:', { currentSelectedMonth, currentSelectedYear });
+    
+    // Inicializar variables temporales con valores actuales
+    floatTempSelectedYear = currentSelectedYear;
+    floatTempSelectedMonth = currentSelectedMonth;
+    
+    console.log('Variables temporales inicializadas:', { floatTempSelectedYear, floatTempSelectedMonth });
+    
+    // Poblar dropdowns
+    populateFloatDropdowns();
+    
+    // Mostrar dropdown
+    floatMonthDropdown.classList.remove('hidden');
+    
+    console.log('Dropdown flotante mostrado');
+    
+    // Agregar event listener para clics fuera del dropdown
+    setTimeout(() => {
+      document.addEventListener('click', handleFloatClickOutside);
+    }, 100);
+  }
+  
+  function hideFloatMonthDropdown() {
+    if (!floatMonthDropdown) return;
+    
+    console.log('hideFloatMonthDropdown() - Ocultando dropdown flotante');
+    
+    // Ocultar dropdown principal
+    floatMonthDropdown.classList.add('hidden');
+    
+    // Ocultar sub-dropdowns
+    if (floatYearDropdown) floatYearDropdown.classList.add('hidden');
+    if (floatMonthDropdownCustom) floatMonthDropdownCustom.classList.add('hidden');
+    
+    // Resetear todos los íconos a su estado inicial
+    const floatYearDropIcon = document.getElementById('floatYearDropIcon');
+    const floatMonthDropIcon = document.getElementById('floatMonthDropIcon');
+    const floatMainDropIcon = document.getElementById('floatMonthDropdownIcon');
+    
+    if (floatYearDropIcon) floatYearDropIcon.style.transform = 'rotate(0deg)';
+    if (floatMonthDropIcon) floatMonthDropIcon.style.transform = 'rotate(0deg)';
+    if (floatMainDropIcon) floatMainDropIcon.style.transform = 'rotate(0deg)';
+    
+    // Remover event listener
+    document.removeEventListener('click', handleFloatClickOutside);
+  }
+  
+  // Función para manejar clics fuera del dropdown flotante
+  function handleFloatClickOutside(event) {
+    const floatMonthSelector = document.getElementById('floatMonthSelector');
+    if (!floatMonthSelector?.contains(event.target)) {
+      hideFloatMonthDropdown();
+    }
+  }
+  
+  // Función para poblar los dropdowns del selector flotante
+  function populateFloatDropdowns() {
+    populateFloatYearDropdown();
+    populateFloatMonthDropdown();
+  }
+  
+  function populateFloatYearDropdown() {
+    console.log('populateFloatYearDropdown() - Poblando dropdown de años');
+    const yearOptions = document.getElementById('floatYearOptions');
+    const yearSelectedText = document.getElementById('floatYearSelectedText');
+    const availableYears = getAvailableYears();
+    
+    console.log('Elementos encontrados:', { yearOptions: !!yearOptions, yearSelectedText: !!yearSelectedText });
+    console.log('Años disponibles:', availableYears);
+    console.log('Año temporal actual:', floatTempSelectedYear);
+    
+    if (!yearOptions || !yearSelectedText) {
+      console.error('Elementos de año no encontrados');
+      return;
+    }
+    
+    yearOptions.innerHTML = '';
+    yearSelectedText.textContent = floatTempSelectedYear;
+    
+    availableYears.forEach(year => {
+      const option = document.createElement('div');
+      option.className = `px-4 py-3 cursor-pointer transition-colors hover:bg-blue-50 ${
+        year === floatTempSelectedYear ? 'font-bold' : 'font-medium'
+      }`;
+      option.style.color = year === floatTempSelectedYear ? '#121E6C' : '#374151';
+      option.textContent = year;
+      
+      // Agregar event listener con debugging
+      option.addEventListener('click', (e) => {
+        console.log('CLICK en año:', year);
+        e.preventDefault();
+        e.stopPropagation();
+        selectFloatYear(year);
+      });
+      
+      yearOptions.appendChild(option);
+    });
+    
+    console.log('Dropdown de años poblado con', availableYears.length, 'opciones');
+  }
+  
+  function populateFloatMonthDropdown() {
+    console.log('populateFloatMonthDropdown() - Poblando dropdown de meses');
+    const monthOptions = document.getElementById('floatMonthOptions');
+    const monthSelectedText = document.getElementById('floatMonthSelectedText');
+    const availableMonths = getAvailableMonthsForYear(floatTempSelectedYear);
+    
+    console.log('Elementos encontrados:', { monthOptions: !!monthOptions, monthSelectedText: !!monthSelectedText });
+    console.log('Meses disponibles para', floatTempSelectedYear, ':', availableMonths);
+    console.log('Mes temporal actual:', floatTempSelectedMonth);
+    
+    if (!monthOptions || !monthSelectedText) {
+      console.error('Elementos de mes no encontrados');
+      return;
+    }
+    
+    monthOptions.innerHTML = '';
+    
+    // Encontrar nombre del mes seleccionado
+    const selectedMonthObj = availableMonths.find(m => m.number === floatTempSelectedMonth);
+    const displayText = selectedMonthObj ? selectedMonthObj.name : 'Seleccionar...';
+    monthSelectedText.textContent = displayText;
+    
+    console.log('Texto del botón mes actualizado a:', displayText);
+    
+    availableMonths.forEach(month => {
+      const option = document.createElement('div');
+      option.className = `px-4 py-3 cursor-pointer transition-colors hover:bg-blue-50 ${
+        month.number === floatTempSelectedMonth ? 'font-bold' : 'font-medium'
+      }`;
+      option.style.color = month.number === floatTempSelectedMonth ? '#121E6C' : '#374151';
+      option.textContent = month.name;
+      
+      // Agregar event listener con debugging
+      option.addEventListener('click', (e) => {
+        console.log('CLICK en mes:', month.name, '(', month.number, ')');
+        e.preventDefault();
+        e.stopPropagation();
+        selectFloatMonth(month.number);
+      });
+      
+      monthOptions.appendChild(option);
+    });
+    
+    console.log('Dropdown de meses poblado con', availableMonths.length, 'opciones');
+  }
+  
+  // Funciones de toggle para sub-dropdowns del selector flotante
+  function toggleFloatYearDropdown() {
+    if (!floatYearDropdown || !floatMonthDropdownCustom) return;
+    
+    const floatYearDropIcon = document.getElementById('floatYearDropIcon');
+    const floatMonthDropIcon = document.getElementById('floatMonthDropIcon');
+    
+    // Cerrar dropdown de mes si está abierto
+    floatMonthDropdownCustom.classList.add('hidden');
+    if (floatMonthDropIcon) floatMonthDropIcon.style.transform = 'rotate(0deg)';
+    
+    if (floatYearDropdown.classList.contains('hidden')) {
+      floatYearDropdown.classList.remove('hidden');
+      if (floatYearDropIcon) floatYearDropIcon.style.transform = 'rotate(180deg)';
+    } else {
+      floatYearDropdown.classList.add('hidden');
+      if (floatYearDropIcon) floatYearDropIcon.style.transform = 'rotate(0deg)';
+    }
+  }
+  
+  function toggleFloatMonthDropdownInternal() {
+    if (!floatYearDropdown || !floatMonthDropdownCustom) return;
+    
+    const floatYearDropIcon = document.getElementById('floatYearDropIcon');
+    const floatMonthDropIcon = document.getElementById('floatMonthDropIcon');
+    
+    // Cerrar dropdown de año si está abierto
+    floatYearDropdown.classList.add('hidden');
+    if (floatYearDropIcon) floatYearDropIcon.style.transform = 'rotate(0deg)';
+    
+    if (floatMonthDropdownCustom.classList.contains('hidden')) {
+      floatMonthDropdownCustom.classList.remove('hidden');
+      if (floatMonthDropIcon) floatMonthDropIcon.style.transform = 'rotate(180deg)';
+    } else {
+      floatMonthDropdownCustom.classList.add('hidden');
+      if (floatMonthDropIcon) floatMonthDropIcon.style.transform = 'rotate(0deg)';
+    }
+  }
+  
+  // Funciones de selección temporal (no aplican cambios inmediatamente)
+  function selectFloatYear(year) {
+    console.log('selectFloatYear() - Seleccionando año:', year);
+    floatTempSelectedYear = year;
+    
+    // Verificar si el mes actual está disponible en el nuevo año
+    const availableMonths = getAvailableMonthsForYear(year);
+    const monthNumbers = availableMonths.map(m => m.number);
+    if (!monthNumbers.includes(floatTempSelectedMonth)) {
+      floatTempSelectedMonth = monthNumbers[monthNumbers.length - 1]; // Seleccionar el último mes disponible
+      console.log('Mes ajustado a:', floatTempSelectedMonth);
+    }
+    
+    // Actualizar UI temporal - refrescar ambos dropdowns
+    populateFloatDropdowns();
+    
+    // Cerrar SOLO el sub-dropdown de año (NO el dropdown principal)
+    if (floatYearDropdown) {
+      floatYearDropdown.classList.add('hidden');
+      const floatYearDropIcon = document.getElementById('floatYearDropIcon');
+      if (floatYearDropIcon) floatYearDropIcon.style.transform = 'rotate(0deg)';
+    }
+    
+    // IMPORTANTE: NO llamar hideFloatMonthDropdown() aquí
+    console.log('Variables temporales:', { floatTempSelectedYear, floatTempSelectedMonth });
+    console.log('Dropdown principal mantiene abierto para confirmación');
+  }
+  
+  function selectFloatMonth(monthNumber) {
+    console.log('selectFloatMonth() - Seleccionando mes:', monthNumber);
+    floatTempSelectedMonth = monthNumber;
+    
+    // Actualizar solo UI temporal del mes
+    populateFloatMonthDropdown();
+    
+    // Cerrar SOLO el sub-dropdown de mes (NO el dropdown principal)
+    if (floatMonthDropdownCustom) {
+      floatMonthDropdownCustom.classList.add('hidden');
+      const floatMonthDropIcon = document.getElementById('floatMonthDropIcon');
+      if (floatMonthDropIcon) floatMonthDropIcon.style.transform = 'rotate(0deg)';
+    }
+    
+    // IMPORTANTE: NO llamar hideFloatMonthDropdown() aquí
+    console.log('Variables temporales:', { floatTempSelectedYear, floatTempSelectedMonth });
+    console.log('Dropdown principal mantiene abierto para confirmación');
+  }
+  
+  // FUNCIÓN PRINCIPAL: confirmSelection - Único punto de entrada para aplicar cambios
+  function confirmSelection() {
+    console.log('=== CONFIRMACIÓN DE SELECCIÓN FLOTANTE ===');
+    console.log('Estado anterior:', { currentSelectedMonth, currentSelectedYear });
+    console.log('Nuevo estado:', { floatTempSelectedMonth, floatTempSelectedYear });
+    
+    // Validar que tenemos valores temporales válidos
+    if (!floatTempSelectedYear || !floatTempSelectedMonth) {
+      console.error('Error: Variables temporales no definidas');
+      return;
+    }
+    
+    // Aplicar cambios a las variables globales
+    currentSelectedMonth = floatTempSelectedMonth;
+    currentSelectedYear = floatTempSelectedYear;
+    
+    console.log('Variables globales actualizadas:', { currentSelectedMonth, currentSelectedYear });
+    
+    // Actualizar UI del selector flotante
+    updateFloatSelectorUI();
+    
+    // Ocultar dropdown
+    hideFloatMonthDropdown();
+    
+    // Verificar que updateAllSections esté definida antes de llamarla
+    if (typeof updateAllSections === 'function') {
+      console.log('Ejecutando updateAllSections()...');
+      updateAllSections();
+      console.log('updateAllSections() completado');
+    } else {
+      console.error('Error: updateAllSections() no está definida');
+      return;
+    }
+    
+    console.log('✓ Selección aplicada exitosamente');
+    
+    // Verificación final
+    setTimeout(() => {
+      console.log('Verificación post-aplicación:');
+      console.log('- Cards automatización:', document.getElementById('cards')?.children.length || 0);
+      console.log('- Filas tabla cambios:', document.getElementById('tbodyCambios')?.children.length || 0);
+      console.log('- Selector flotante muestra:', floatSelectedMonth?.textContent || 'N/A');
+    }, 100);
+  }
+  
+  // Event listeners para el selector flotante
+  console.log('=== ENLAZANDO EVENT LISTENERS DEL SELECTOR FLOTANTE ===');
+  
+  if (floatMonthSelectorBtn) {
+    floatMonthSelectorBtn.addEventListener('click', toggleFloatMonthDropdown);
+    console.log('✓ Botón principal flotante enlazado');
+  } else {
+    console.error('✗ floatMonthSelectorBtn no encontrado');
+  }
+  
+  if (floatYearSelectBtn) {
+    floatYearSelectBtn.addEventListener('click', toggleFloatYearDropdown);
+    console.log('✓ Botón selección año flotante enlazado');
+  } else {
+    console.error('✗ floatYearSelectBtn no encontrado');
+  }
+  
+  if (floatMonthSelectBtn) {
+    floatMonthSelectBtn.addEventListener('click', toggleFloatMonthDropdownInternal);
+    console.log('✓ Botón selección mes flotante enlazado');
+  } else {
+    console.error('✗ floatMonthSelectBtn no encontrado');
+  }
+  
+  if (confirmSelectionBtnFloat) {
+    confirmSelectionBtnFloat.addEventListener('click', (e) => {
+      console.log('=== CLICK EN APLICAR SELECCIÓN ===');
+      e.preventDefault();
+      e.stopPropagation();
+      confirmSelection();
+    });
+    console.log('✓ Botón \'Aplicar Selección\' enlazado');
+    
+    // Test adicional: verificar que el botón sea clicable
+    console.log('Botón \'Aplicar Selección\' es clicable:', !confirmSelectionBtnFloat.disabled);
+    console.log('Botón \'Aplicar Selección\' está visible:', confirmSelectionBtnFloat.offsetParent !== null);
+  } else {
+    console.error('✗ confirmSelectionBtnFloat no encontrado - ¡CAUSA RAÍZ DEL PROBLEMA!');
+  }
+  
+  console.log('=== EVENT LISTENERS FLOTANTES CONFIGURADOS ===');
+  
   // ======== INICIALIZACIÓN DEL SISTEMA DE MES/AÑO ========
   // Event listener para el selector de mes principal
   const monthSelector = document.getElementById('monthSelector');
@@ -2092,17 +2487,151 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
   tempSelectedYear = currentSelectedYear;
   tempSelectedMonth = currentSelectedMonth;
   
+  // Inicializar selector flotante
+  console.log('=== INICIALIZANDO SELECTOR FLOTANTE ===');
+  console.log('Variables globales disponibles:', { currentSelectedMonth, currentSelectedYear });
+  
+  floatTempSelectedYear = currentSelectedYear;
+  floatTempSelectedMonth = currentSelectedMonth;
+  
+  console.log('Variables temporales inicializadas:', { floatTempSelectedYear, floatTempSelectedMonth });
+  
+  // Actualizar UI inicial
+  updateFloatSelectorUI();
+  
+  console.log('=== SELECTOR FLOTANTE INICIALIZADO ===');
+  
+  // Función de diagnóstico para el selector flotante
+  function debugFloatSelector() {
+    console.log('=== DIAGNÓSTICO DEL SELECTOR FLOTANTE ===');
+    console.log('Elementos encontrados:');
+    console.log('- floatMonthSelector:', !!document.getElementById('floatMonthSelector'));
+    console.log('- floatMonthSelectorBtn:', !!floatMonthSelectorBtn);
+    console.log('- floatMonthDropdown:', !!floatMonthDropdown);
+    console.log('- floatSelectedMonth:', !!floatSelectedMonth);
+    console.log('- floatYearSelectBtn:', !!floatYearSelectBtn);
+    console.log('- floatMonthSelectBtn:', !!floatMonthSelectBtn);
+    console.log('- confirmSelectionBtnFloat:', !!confirmSelectionBtnFloat);
+    console.log('- floatYearDropdown:', !!floatYearDropdown);
+    console.log('- floatMonthDropdownCustom:', !!floatMonthDropdownCustom);
+    console.log('Variables:');
+    console.log('- currentSelected:', { currentSelectedMonth, currentSelectedYear });
+    console.log('- floatTemp:', { floatTempSelectedMonth, floatTempSelectedYear });
+    
+    // TEST: Verificar que floatSelectedMonth muestre el texto correcto
+    console.log('\n=== TEST DE UI ===');
+    if (floatSelectedMonth) {
+      console.log('Contenido actual del botón flotante:', floatSelectedMonth.textContent);
+      
+      // Ejecutar updateFloatSelectorUI() manualmente para test
+      console.log('Ejecutando updateFloatSelectorUI() manualmente...');
+      updateFloatSelectorUI();
+      
+      console.log('Contenido después de update:', floatSelectedMonth.textContent);
+    }
+    
+    // Hacer disponible confirmSelection() para test manual desde consola
+    console.log('\n=== PRUEBAS MANUALES DISPONIBLES ===');
+    console.log('Para probar manualmente:');
+    console.log('• testConfirmSelection() - Aplica selección actual');
+    console.log('• testChangeMonth(8) o testChangeMonth(9) - Cambia mes directamente');
+    console.log('• debugCurrentState() - Muestra estado actual');
+    console.log('• simulateUserInteraction() - Simula interacción completa');
+    console.log('• testDataChange() - Prueba cambios de datos paso a paso');
+    
+    // Funciones de prueba globales
+    window.testConfirmSelection = confirmSelection;
+    
+    window.testChangeMonth = function(month) {
+      console.log(`=== TEST: Cambiando a mes ${month} ===`);
+      floatTempSelectedMonth = month;
+      floatTempSelectedYear = 2025;
+      console.log('Variables temporales:', { floatTempSelectedMonth, floatTempSelectedYear });
+      console.log('Ejecutando confirmSelection()...');
+      confirmSelection();
+    };
+    
+    window.debugCurrentState = function() {
+      console.log('=== ESTADO ACTUAL ===');
+      console.log('Variables globales:', { currentSelectedMonth, currentSelectedYear });
+      console.log('Variables temporales:', { floatTempSelectedMonth, floatTempSelectedYear });
+      console.log('Texto del botón flotante:', document.getElementById('floatSelectedMonth')?.textContent);
+      console.log('Total automatizaciones visibles:', document.getElementById('cards')?.children.length);
+      console.log('Total filas tabla:', document.getElementById('tbodyCambios')?.children.length);
+    };
+    
+    // Función para simular la interacción completa del usuario
+    window.simulateUserInteraction = function() {
+      console.log('=== SIMULANDO INTERACCIÓN COMPLETA DEL USUARIO ===');
+      
+      // 1. Abrir el dropdown (simular clic en botón principal)
+      console.log('1. Abriendo dropdown...');
+      showFloatMonthDropdown();
+      
+      // 2. Cambiar a agosto (simular clic en opción)
+      console.log('2. Seleccionando agosto...');
+      selectFloatMonth(8);
+      
+      // 3. Aplicar selección (simular clic en botón aplicar)
+      console.log('3. Aplicando selección...');
+      setTimeout(() => {
+        confirmSelection();
+      }, 500);
+      
+      console.log('Simulación iniciada. Revisa los logs en 1 segundo.');
+    };
+    
+    // Función para verificar si los datos cambian correctamente
+    window.testDataChange = function() {
+      console.log('=== VERIFICANDO CAMBIOS DE DATOS ===');
+      
+      console.log('Estado inicial (debería ser septiembre):');
+      debugCurrentState();
+      
+      setTimeout(() => {
+        console.log('\nCambiando a agosto...');
+        testChangeMonth(8);
+        
+        setTimeout(() => {
+          console.log('\nEstado después de cambio (debería ser agosto):');
+          debugCurrentState();
+        }, 500);
+      }, 1000);
+    };
+    
+    console.log('===================================================');
+  }
+  
   console.log('=== INICIALIZACIÓN PRINCIPAL COMPLETADA ===');
   console.log('Variables finales:', { currentSelectedMonth, currentSelectedYear, tempSelectedMonth, tempSelectedYear });
+  console.log('Selector flotante inicializado:', { floatTempSelectedMonth, floatTempSelectedYear });
+  
+  // Ejecutar diagnóstico
+  setTimeout(debugFloatSelector, 300);
   
   // ======== FIN DEL SCRIPT PRINCIPAL ========
   toggleSideNav();
   updateActiveNavButton();
   
-  // Verificación final del estado
+  // Verificación final del estado y corrección del selector flotante
   setTimeout(() => {
     console.log('✅ INICIALIZACIÓN EXITOSA - Proyecto listo!');
     console.log('Datos cargados automáticamente para:', document.getElementById('selectedMonth')?.textContent);
+    
+    // CORRECCIÓN FINAL: Forzar actualización del selector flotante
+    console.log('=== CORRECCIÓN FINAL DEL SELECTOR FLOTANTE ===');
+    const floatSelectedMonthCheck = document.getElementById('floatSelectedMonth');
+    console.log('floatSelectedMonth encontrado en verificación final:', !!floatSelectedMonthCheck);
+    console.log('Contenido actual:', floatSelectedMonthCheck?.textContent);
+    
+    if (floatSelectedMonthCheck && currentSelectedMonth && currentSelectedYear) {
+      const monthName = monthNames[currentSelectedMonth - 1];
+      const display = `${monthName} ${currentSelectedYear}`;
+      floatSelectedMonthCheck.textContent = display;
+      console.log('✓ CORRECCIÓN APLICADA - Selector flotante actualizado a:', display);
+    } else {
+      console.error('✗ No se pudo corregir el selector flotante');
+    }
   }, 200);
 
   // ======== VA por Unidad de Negocio: imágenes fijas + lightbox ========
