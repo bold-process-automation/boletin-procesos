@@ -366,10 +366,49 @@
     
   </style>
   
+  <!-- Google Sign-In Library -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  
   <!-- Google Sheets Connector -->
   <script src="sheets-connector.js"></script>
+  
+  <!-- Authentication Module -->
+  <script src="auth.js"></script>
 </head>
 <body class="min-h-screen">
+  
+  <!-- Login Screen (shown before authentication) -->
+  <div id="loginScreen" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background: var(--bold-gradient-primary);">
+    <div style="text-align: center; max-width: 500px; padding: 40px; background: white; border-radius: 20px; box-shadow: 0 20px 60px rgba(18, 31, 108, 0.3);">
+      <!-- Logo Bold -->
+      <div style="margin-bottom: 32px;">
+        <img src="bold-logo-cf.png" alt="Bold Logo" style="height: 60px; margin: 0 auto;" onerror="this.style.display='none'" />
+      </div>
+      
+      <!-- Título -->
+      <h1 style="font-size: 32px; font-weight: 800; color: var(--bold-primary); margin-bottom: 16px; letter-spacing: -0.03em;">
+        Boletín de Procesos
+      </h1>
+      
+      <p style="font-size: 16px; color: var(--bold-text-light); margin-bottom: 40px; line-height: 1.6;">
+        Ingresa con tu cuenta corporativa de Bold para acceder al boletín de procesos y automatizaciones.
+      </p>
+      
+      <!-- Google Sign-In Button Container -->
+      <div id="googleSignInButton" style="display: flex; justify-content: center; margin-bottom: 20px;"></div>
+      
+      <!-- Access Denied Message (hidden by default) -->
+      <div id="accessDenied" style="display: none; margin-top: 20px;"></div>
+      
+      <!-- Footer info -->
+      <p style="font-size: 12px; color: var(--bold-text-light); margin-top: 32px;">
+        🔒 Solo usuarios con correo @bold.co o @boldcf.co pueden acceder
+      </p>
+    </div>
+  </div>
+  
+  <!-- Main Content (hidden until authenticated) -->
+  <div id="mainContent" style="display: none;">
   <!-- Hero Section estilo Bold.co -->
   <div class="relative min-h-screen overflow-hidden">
     <!-- Fondo con imagen corporativa -->
@@ -2839,5 +2878,11 @@ function setDriveImage(imgEl, shareLink){
   }
 
 </script>
+
+  </div><!-- End Main Content -->
+  
+  <!-- User Info Display (shown after login in header) -->
+  <div id="userInfo" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
+  
 </body>
 </html>
