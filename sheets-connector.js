@@ -25,17 +25,23 @@ const SHEET_CONFIG = {
  */
 async function fetchAllData() {
   try {
+    console.log('🔄 Intentando conectar con:', SHEET_CONFIG.SCRIPT_URL);
+    
     const response = await fetch(SHEET_CONFIG.SCRIPT_URL, {
       credentials: 'include' // Importante: incluye cookies de sesión de Google
     });
+    
+    console.log('📡 Respuesta recibida - Status:', response.status, response.statusText);
     
     if (!response.ok) {
       throw new Error(`Error HTTP ${response.status}: ${response.statusText}`);
     }
     
     const data = await response.json();
+    console.log('📦 Datos recibidos:', data);
     
     if (data.error) {
+      console.error('⚠️ Backend devolvió error:', data.error);
       throw new Error(data.error);
     }
     
@@ -46,6 +52,7 @@ async function fetchAllData() {
     
   } catch (error) {
     console.error('❌ Error obteniendo datos:', error.message);
+    console.error('Stack completo:', error);
     throw error;
   }
 }
