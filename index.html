@@ -2812,9 +2812,13 @@ function setDriveImage(imgEl, shareLink){
         // Inicializar la interfaz con los nuevos datos
         initializeDefaultMonth();
         
-        // IMPORTANTE: Actualizar dropdowns del selector flotante con los datos reales
-        console.log('🔄 Actualizando dropdowns del selector flotante con datos reales...');
+        // IMPORTANTE: Actualizar variables temporales y UI del selector flotante con el mes real
+        console.log('🔄 Actualizando selector flotante con mes real seleccionado...');
+        floatTempSelectedYear = currentSelectedYear;
+        floatTempSelectedMonth = currentSelectedMonth;
+        updateFloatSelectorUI();
         populateFloatDropdowns();
+        console.log('✅ Selector flotante actualizado:', { floatTempSelectedMonth, floatTempSelectedYear });
         
       } else {
         console.error('❌ Error cargando datos:', data.error);
