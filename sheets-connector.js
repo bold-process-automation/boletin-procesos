@@ -27,9 +27,7 @@ async function fetchAllData() {
   try {
     console.log('🔄 Intentando conectar con:', SHEET_CONFIG.SCRIPT_URL);
     
-    const response = await fetch(SHEET_CONFIG.SCRIPT_URL, {
-      credentials: 'include' // Importante: incluye cookies de sesión de Google
-    });
+    const response = await fetch(SHEET_CONFIG.SCRIPT_URL);
     
     console.log('📡 Respuesta recibida - Status:', response.status, response.statusText);
     
