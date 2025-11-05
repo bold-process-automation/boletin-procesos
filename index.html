@@ -1022,19 +1022,20 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
   function getAvailableYears() {
     const years = new Set();
     
-    // Obtener años de automatizaciones (mesAsignado y fecha)
+    // Obtener años de automatizaciones - SOLO mesAsignado (no fecha)
     rows.forEach(r => {
       if (r.mesAsignado) {
         const date = parseLocalDate(r.mesAsignado);
         years.add(date.getFullYear());
       }
-      if (r.fecha) {
+      // Si no tiene mesAsignado, usar fecha como fallback
+      else if (r.fecha) {
         const date = parseLocalDate(r.fecha);
         years.add(date.getFullYear());
       }
     });
     
-    // Obtener años de procesos (fecha)
+    // Obtener años de procesos (solo tienen fecha)
     cambios.forEach(c => {
       if (c.fecha) {
         const date = parseLocalDate(c.fecha);
@@ -1050,7 +1051,7 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
   function getAvailableMonthsForYear(year) {
     const months = new Set();
     
-    // Obtener meses de automatizaciones
+    // Obtener meses de automatizaciones - SOLO mesAsignado (no fecha)
     rows.forEach(r => {
       if (r.mesAsignado) {
         const date = parseLocalDate(r.mesAsignado);
@@ -1058,7 +1059,8 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
           months.add(date.getMonth() + 1); // 1-based
         }
       }
-      if (r.fecha) {
+      // Si no tiene mesAsignado, usar fecha como fallback
+      else if (r.fecha) {
         const date = parseLocalDate(r.fecha);
         if (date.getFullYear() === year) {
           months.add(date.getMonth() + 1);
@@ -1066,7 +1068,7 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
       }
     });
     
-    // Obtener meses de procesos
+    // Obtener meses de procesos (solo tienen fecha)
     cambios.forEach(c => {
       if (c.fecha) {
         const date = parseLocalDate(c.fecha);
@@ -1111,25 +1113,77 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
     return getPreviousMonth();
   }
   
-  // Función para inicializar el mes por defecto - SIEMPRE mes anterior
+  // Función para inicializar el mes por defecto - mes anterior con datos o último disponible
   function initializeDefaultMonth() {
-    console.log('=== INICIALIZACIÓN SIMPLE ===');
+    console.log('=== INICIALIZACIÓN CON VERIFICACIÓN DE DATOS ===');
     
-    // SIEMPRE usar el mes anterior al actual, sin verificaciones complicadas
+    // Verificar si hay datos disponibles
+    if (rows.length === 0 && cambios.length === 0) {
+      console.warn('No hay datos disponibles en las hojas');
+      // Usar mes anterior como fallback
+      const fallbackMonth = getPreviousMonth();
+      currentSelectedMonth = fallbackMonth.month;
+      currentSelectedYear = fallbackMonth.year;
+      const selectedMonthElement = document.getElementById('selectedMonth');
+      if (selectedMonthElement) {
+        selectedMonthElement.textContent = fallbackMonth.display;
+      }
+      updateAllSections();
+      return fallbackMonth;
+    }
+    
+    // Obtener mes anterior
     const previousMonth = getPreviousMonth();
-    console.log('Mes anterior (será el seleccionado):', previousMonth.display);
+    console.log('Mes anterior:', previousMonth.display);
     
-    // Establecer directamente las variables globales
-    currentSelectedMonth = previousMonth.month;
-    currentSelectedYear = previousMonth.year;
+    // Verificar si el mes anterior tiene datos
+    const previousMonthKey = `${previousMonth.year}-${String(previousMonth.month).padStart(2, '0')}`;
+    
+    const hasDataInPreviousMonth = 
+      rows.some(r => {
+        if (r.mesAsignado) {
+          const date = parseLocalDate(r.mesAsignado);
+          const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+          return key === previousMonthKey;
+        }
+        if (r.fecha) {
+          const date = parseLocalDate(r.fecha);
+          const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+          return key === previousMonthKey;
+        }
+        return false;
+      }) ||
+      cambios.some(c => {
+        if (c.fecha) {
+          const date = parseLocalDate(c.fecha);
+          const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+          return key === previousMonthKey;
+        }
+        return false;
+      });
+    
+    let selectedMonth;
+    
+    if (hasDataInPreviousMonth) {
+      console.log('✅ Mes anterior tiene datos, usándolo');
+      selectedMonth = previousMonth;
+    } else {
+      console.log('⚠️ Mes anterior NO tiene datos, buscando último mes con datos...');
+      selectedMonth = getLastAvailableMonth();
+      console.log('✅ Último mes con datos:', selectedMonth.display);
+    }
+    
+    // Establecer variables globales
+    currentSelectedMonth = selectedMonth.month;
+    currentSelectedYear = selectedMonth.year;
     
     console.log('Variables establecidas:', { currentSelectedMonth, currentSelectedYear });
     
     // Actualizar UI inmediatamente
     const selectedMonthElement = document.getElementById('selectedMonth');
     if (selectedMonthElement) {
-      selectedMonthElement.textContent = previousMonth.display;
-      console.log('UI actualizada con:', previousMonth.display);
+      selectedMonthElement.textContent = selectedMonth.display;
+      console.log('UI actualizada con:', selectedMonth.display);
     }
     
     console.log('Actualizando todas las secciones...');
@@ -1145,7 +1199,7 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
     }, 100);
     
     console.log('=== INICIALIZACIÓN COMPLETADA ===');
-    return previousMonth;
+    return selectedMonth;
   }
   
   // Variables temporales para el selector (se inicializarán después)
@@ -2757,6 +2811,10 @@ function setDriveImage(imgEl, shareLink){
         
         // Inicializar la interfaz con los nuevos datos
         initializeDefaultMonth();
+        
+        // IMPORTANTE: Actualizar dropdowns del selector flotante con los datos reales
+        console.log('🔄 Actualizando dropdowns del selector flotante con datos reales...');
+        populateFloatDropdowns();
         
       } else {
         console.error('❌ Error cargando datos:', data.error);
