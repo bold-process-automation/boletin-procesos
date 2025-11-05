@@ -1,6 +1,10 @@
 // Google Sign-In Authentication Module
 // Validates users by email domain
 
+// ⚠️ AUTENTICACIÓN TEMPORALMENTE DESACTIVADA
+// Para reactivar: cambia AUTH_DISABLED a false
+const AUTH_DISABLED = true;
+
 const ALLOWED_DOMAINS = ['bold.co', 'boldcf.co'];
 const GOOGLE_CLIENT_ID = '470634824045-g3big92p2sndrk0nf97omjg3otn8oc2s.apps.googleusercontent.com';
 
@@ -176,6 +180,16 @@ function signOut() {
 
 // Initialize on page load
 window.addEventListener('load', () => {
+  // ⚠️ Si la autenticación está desactivada, dar acceso directo
+  if (AUTH_DISABLED) {
+    console.log('⚠️ AUTENTICACIÓN DESACTIVADA - Acceso abierto para todos');
+    // Ocultar pantalla de login
+    document.getElementById('loginScreen').style.display = 'none';
+    // Mostrar contenido principal
+    document.getElementById('mainContent').style.display = 'block';
+    return;
+  }
+  
   // Wait for Google API to load
   if (typeof google !== 'undefined') {
     initGoogleAuth();
