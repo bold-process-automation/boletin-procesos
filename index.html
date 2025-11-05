@@ -365,6 +365,9 @@
     }
     
   </style>
+  
+  <!-- Google Sheets Connector -->
+  <script src="sheets-connector.js"></script>
 </head>
 <body class="min-h-screen">
   <!-- Hero Section estilo Bold.co -->
@@ -628,10 +631,8 @@
               </span>
             </h2>
             <p class="text-lg md:text-xl leading-relaxed max-w-4xl text-left" style="color: #606060;">
-              Visualiza el impacto y rendimiento detallado de cada unidad de negocio con datos actualizados y métricas clave.<br><br>
-              Recuerda que las actividades que agregan valor son aquellas que están automatizadas completamente o que las realiza una persona, y que sí o sí necesitan del intelecto de un ser humano, es decir, que no es posible automatizarlas. El resto de actividades no agregan valor y deben ser automatizadas. <br><br>El porcentaje indica qué procesos necesitan aumentar su valor agregado y para eso se compara: el total de actividades del proceso vs. el total de actividades que sí agregan valor.
-            
-              </p>
+              Visualiza el impacto y rendimiento detallado de cada unidad de negocio con datos actualizados y métricas clave.
+            </p>
         </div>
         
         <!-- Grid de tarjetas expandido -->
@@ -710,8 +711,9 @@
           </h2>
           
           <p class="text-lg md:text-xl max-w-3xl leading-relaxed mb-8 text-left" style="color: #606060;">
-            En esta sección, podrás consultar las aplicaciones implementadas por el equipo de automatización de procesos en Appian, Dapta y N8N. <br><br>
-            Cada tarjeta incluye una descripción de la automatización, el valor agregado que aporta al proceso y cómo su implementación contribuye al aumento de la eficiencia operativa.
+            En esta sección, podrás consultar las aplicaciones de automatización en producción por el equipo de automatización de procesos.
+
+Cada tarjeta incluye una descripción detallada de la automatización, el valor agregado que aporta al proceso y cómo su implementación contribuye a la eficiencia.
           </p>
       </div>
       
@@ -876,7 +878,29 @@
   
 
 <script>
-  function parseLocalDate(ymd){ const p=String(ymd||'').split('-').map(Number); return new Date(p[0]||1970,(p[1]||1)-1,p[2]||1); }
+  // Función mejorada para parsear fechas en múltiples formatos
+  function parseLocalDate(dateStr) {
+    if (!dateStr) return new Date(1970, 0, 1);
+    
+    const str = String(dateStr).trim();
+    
+    // Formato YYYY-MM-DD o YYYY/MM/DD
+    if (str.match(/^\d{4}[-\/]\d{1,2}[-\/]\d{1,2}$/)) {
+      const parts = str.split(/[-\/]/).map(Number);
+      return new Date(parts[0], parts[1] - 1, parts[2]);
+    }
+    
+    // Formato DD/MM/YYYY o DD-MM-YYYY
+    if (str.match(/^\d{1,2}[-\/]\d{1,2}[-\/]\d{4}$/)) {
+      const parts = str.split(/[-\/]/).map(Number);
+      return new Date(parts[2], parts[1] - 1, parts[0]);
+    }
+    
+    // Intentar parsear como timestamp o fecha válida
+    const date = new Date(dateStr);
+    return isNaN(date.getTime()) ? new Date(1970, 0, 1) : date;
+  }
+  
   function formatDate(ymd){ const d=parseLocalDate(ymd); return d.toLocaleDateString('es-CO',{day:'2-digit',month:'2-digit',year:'2-digit'}); }
 
   // Mapeo de enlaces de Coda por nombre de documento
@@ -902,7 +926,6 @@
     "Manual Metodológico Matriz de Riesgos SARLAFT": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/LC-MA-007-Manual-Metodologico-Matriz-de-Riesgos-SARLAFT_suzr4F8x?docIds%5B0%5D=PZrHIIUQg-&search=Manual%20Metodol%C3%B3gico%20Matriz%20de%20Riesgos%20SARLAFT",
     "Manual Metodología Segmentación de Riesgo Clientes": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/LC-MA-009-Manual-Metodologia-Segmentacion-de-Riesgo-Clientes_suWtffT_?docIds%5B0%5D=PZrHIIUQg-&search=Manual%20Metodolog%C3%ADa%20Segmentaci%C3%B3n%20de%20Riesgo%20Clientes",
     "Política activos fijos y elementos de trabajo": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/SI-PO-002-Politica-activos-fijos-y-elementos-de-trabajo_suY6mGAt?docIds%5B0%5D=PZrHIIUQg-&search=Pol%C3%ADtica%20activos%20fijos%20y%20elementos%20de%20trabajo",
-    // ========== NUEVOS ENLACES DE SEPTIEMBRE 2025 ==========
     "Solicitud QR Bold (Entre cuentas)": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/AP-PR-010-Solicitud-QR-Bold-Entre-cuentas_suzb2RZ0?docIds%5B0%5D=PZrHIIUQg-&search=Solicitud%20QR%20Bold%20%28Entre%20cuentas%29",
     "Gestión comercial canal SMB": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/AP-PR-018-Gestion-comercial-canal-SMB_suix9GKp?docIds%5B0%5D=PZrHIIUQg-&search=Gesti%C3%B3n%20comercial%20canal%20SMB#Copy-of-Copy-6-of-ControlCambios-176_tuvOQ1P5/r3&columnId=c-M2SErj7365",
     "Gestión de beneficios": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/TH-PR-007-Gestion-de-beneficios_suN5hBT6?docIds%5B0%5D=PZrHIIUQg-&search=Gesti%C3%B3n%20de%20beneficios",
@@ -926,30 +949,9 @@
     "Manual Metodología Segmentación de Riesgo Clientes SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/LC-MA-109-Manual-Metodologia-Segmentacion-de-Riesgo-Clientes-SAS_suIAroNe?docIds%5B0%5D=ywYtLrlDx7&search=Manual%20Metodolog%C3%ADa%20Segmentaci%C3%B3n%20de%20Riesgo%20Clientes%20SAS"
   };
   
-  let rows = [
-    // ========== AUTOMATIZACIONES PARA MOSTRAR EN AGOSTO 2025 ==========
-    // Estas automatizaciones se muestran cuando el usuario selecciona agosto, independientemente de su fecha de paso a producción
-    {"aplicativo": "APPIAN", "aplicacion": "Gestión de planes de acción a empleados", "proceso": "TH-PR-111 Gestión programa ESOP SAS", "detalle": "Calculo de DRs, asignación de planes, registro de ventas y envío de información para consulta del estado de las acciones de los colaboradores en Bamboo.", "compania": "SAS Y CF", "vaInicial": 70.0, "vaFinal": 93.0, "incrementoVA": 23.0, "fecha": "2025-05-21", "mesAsignado": "2025-08"},
-    {"aplicativo": "APPIAN", "aplicacion": "RPA Facturación POS", "proceso": "VP-PR-122 Facturación de datáfonos y merchandising canales Hubs y Bold store SAS", "detalle": "Creación de la facturación de venta de datafonos en POS, a partir de la recepción de oportunidades de EPIC.", "compania": "SAS", "vaInicial": 0.0, "vaFinal": 70.0, "incrementoVA": 70.0, "fecha": "2025-01-23", "mesAsignado": "2025-08"},
-    {"aplicativo": "APPIAN", "aplicacion": "Automatización alerta monitoreo: Abonos, grafos, modelo y Anomaly", "proceso": "OP-PR-103 Monitoreo Transaccional y Gestión de Alertas SAS", "detalle": "Eliminación del cargue manual de archivos en Excel por parte de los analistas, correspondiente al 55% del alertas analizadas por el equipo de monitoreo.", "compania": "SAS", "vaInicial": 65.0, "vaFinal": 76.0, "incrementoVA": 11.0, "fecha": "2025-04-23", "mesAsignado": "2025-08"},
-    {"aplicativo": "APPIAN", "aplicacion": "Chelist de casos monitoreo - Score", "proceso": "OP-PR-103 Monitoreo Transaccional y Gestión de Alertas SAS", "detalle": "Cálculo de score para identificar si un comercio que ha sido detenido por una sospecha de fraude probablemente terminará siendo bloqueado.", "compania": "SAS", "vaInicial": 65.0, "vaFinal": 76.0, "incrementoVA": 11.0, "fecha": "2025-04-23", "mesAsignado": "2025-08"},
-    {"aplicativo": "APPIAN", "aplicacion": "RPA Activación facturación electrónica", "proceso": "VP-PR-115 Activación facturación electrónica ante la DIAN SAS", "detalle": "Habilitación de la facturación electrónica del comercio en el portal de la DIAN y envío del Test Set ID al backend.", "compania": "SAS", "vaInicial": 0.0, "vaFinal": 100.0, "incrementoVA": 100.0, "fecha": "2025-05-07", "mesAsignado": "2025-08"},
-    {"aplicativo": "APPIAN", "aplicacion": "Gestión de embargos V2", "proceso": "LC-PR-009 Gestión de embargos y congelación de recursos", "detalle": "Consulta de productos del embargado, generación y envio de respuesta a la entidad correspondiente.", "compania": "CF", "vaInicial": 60.0, "vaFinal": 82.0, "incrementoVA": 22.0, "fecha": "2025-06-10", "mesAsignado": "2025-08"},
-    {"aplicativo": "APPIAN", "aplicacion": "RPA Ciclo operativo ACH", "proceso": "OP-PR-022 Gestión de transferencias ACH", "detalle": "Cargue y descarga de transacciones en integra ACH y neurona para posterior conciliación.", "compania": "CF", "vaInicial": 32.0, "vaFinal": 70.0, "incrementoVA": 38.0, "fecha": "2025-08-06", "mesAsignado": "2025-08"},
-    
-    // ========== AUTOMATIZACIONES DE SEPTIEMBRE 2025 ==========
-    {"aplicativo": "APPIAN", "aplicacion": "Gestión de planes de acción de RO", "proceso": "GR-PR-005/GR-PR-105 Elaboración y Seguimiento a Planes de Acción de RO", "detalle": "Creación, aprobación y seguimiento a los planes de acción de riesgo operacional.", "compania": "CF/SAS", "vaFinal": 100.0, "incrementoVA": 33.0, "fecha": "2025-09-11"},
-    {"aplicativo": "APPIAN", "aplicacion": "Gestión de eventos RO", "proceso": "GR-PR-006/GR-PR-106 Gestión de eventos de riesgo operacional", "detalle": "Recepción y evaluación de los eventos de riesgo operacional.", "compania": "CF/SAS", "vaFinal": 80.0, "incrementoVA": 5.0, "fecha": "2025-09-11"},
-    {"aplicativo": "APPIAN", "aplicacion": "Simulador Estimación Pagos Cupo Bold", "proceso": "VP-PR-118 Gestión comercial canal SMB SAS\nVP-PR-102 Gestión comercial canal Hubs SAS", "detalle": "Simulación del cupo Bold para brindar a nuestros clientes una estimación de pagos mensual y alternativas de ahorro como abonos a capital o ajustes al plazo de su crédito.", "compania": "CF", "vaFinal": 0.0, "incrementoVA": 0.0, "fecha": "2025-09-15"},
-    {"aplicativo": "APPIAN", "aplicacion": "Gestión de Listas", "proceso": "GR-PR-013 Definición y actualización de reglas antifraude", "detalle": "Interacción en tiempo real con el servicio de listas del equipo de fraude, para la inclusión en listas blancas o negras de Venta presente, venta no presente o abonos inmediatos de diferentes items como: merchant ID, bines, correos, device ID, hashes de tarjeta, teléfonos o números de documento.", "compania": "SAS", "vaFinal": 0.0, "incrementoVA": 0.0, "fecha": "2025-09-18"},
-    {"aplicativo": "APPIAN", "aplicacion": "Ajustes de adquirencia", "proceso": "OP-PR-033 Ajustes de adquirencia", "detalle": "Recepción, asignación, validación y aprobación de los ajustes de transacciones.", "compania": "CF", "vaFinal": 67.0, "incrementoVA": 67.0, "fecha": "2025-09-24"},
-    {"aplicativo": "APPIAN", "aplicacion": "Gestión señales de alertas LAFT SAS /CF", "proceso": "LC-PR-011/LC-PR-011 Gestión de señales de alerta, operaciones inusuales y sospechosas de LAFT", "detalle": "Recepción, asignación, análisis y escalamiento de las diferentes fuentes de alertamiento gestionadas por el equipo de cumplimiento.", "compania": "CF/SAS", "vaFinal": 77.0, "incrementoVA": 38.0, "fecha": "2025-09-25"},
-    {"aplicativo": "DAPTA", "aplicacion": "Novedades en entrega de productos de logistica", "proceso": "OP-PR-038 Gestión de novedades en la entrega de productos", "detalle": "El agente de voz SofIA, se encarga de contactar a los clientes que presenten alguna novedad en la entrega de sus productos. Verifica información de contacto, coordina horarios y gestiona solicitudes de cancelación.", "compania": "CF", "vaFinal": 76.0, "incrementoVA": 4.0, "fecha": "2025-09-15"}
-  ];
-  const cambios = [{"codigo": "OP-PR-022", "documento": "Gestión de transferencias ACH", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Inclusión de RPA Appian en las actividades que realizaba el Analista de Operaciones Financieras (Back) Bold.co SAS\nInclusión como output del proceso, el proceso OP-PR-036 Contabilización y conciliación de Cash In y Cash Out", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "70.45%"}, {"codigo": "OP-IN-030-05", "documento": "Instructivo Actualización Fuente de Adquirencia", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es asegurar la adecuada actualización de la base de datos del área de adquirencia mediante la inclusión de información consolidada, completa y precisa, en relación con el origen de los datos y las fechas establecidas en cada uno de los archivos consolidados. Esto con el fin de reflejar los resultados obtenidos a nivel operativo y mostrarlos al área de FinOps, generando valor a través de la visualización de datos.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-27", "valor_agregado": "N/A"}, {"codigo": "OP-IN-030-06", "documento": "Instructivo Pago y liquidación de Bold CF a Bold CO SAS", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es validar correctamente el pago a BOLD CO SAS de los montos resultantes del cuadre operativo y la conciliación de las franquicias para todos los tipos de procesamiento (doméstico e internacional), asegurando que las transacciones procesadas sean liquidadas por Bold CF a Bold CO SAS, a través de la liquidación de Payouts, el traslado entre cuentas y la generación de un informe al área de tesorería respecto a la operación.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-27", "valor_agregado": "N/A"}, {"codigo": "OP-PR-033", "documento": "Ajustes de adquirencia", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Inclusión de Appian\nAjuste general del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "66.67%"}, {"codigo": "GM-PR-001", "documento": "Comunicaciones a clientes", "dueno": "María Paula Machado Pantoja", "detalle": "Se añade actividad 21. \"Notificar los resultados de la campaña\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-20", "valor_agregado": "77.27%"}, {"codigo": "TH-PR-001", "documento": "Reclutamiento de personal", "dueno": "Lina Meza", "detalle": "Eliminación de actividades correspondientes a convocatoria interna ya que están dentro del proceso TH-PR-024 Cambio interno de rol\nAclaración de actividades de prueba de polígrafo para las distintas áreas\nInclusión de actividades relacionadas al cálculo de acciones con Appian", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "43.33%"}, {"codigo": "TH-PR-008", "documento": "Offboarding de personal", "dueno": "Lina Meza", "detalle": "Se eliminan las actividades correspondientes al rol Inventory Analyst\nAjuste general del flujo", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "42.11%"}, {"codigo": "TH-PR-011", "documento": "Gestión programa ESOP", "dueno": "Lina Meza", "detalle": "Eliminación de Carta como gestor de plan de acciones, ahora todo se visualiza en BambooHR y se gestionan con un módulo de Appian.\nCambio del nombre del proceso.", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "93.10%"}, {"codigo": "TH-PR-012", "documento": "Liquidación y pago de aportes", "dueno": "Lina Meza", "detalle": "Adición de la actividad 6. \"Conciliar planilla vs. Contabilidad\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-024", "documento": "Cambio interno de rol", "dueno": "Lina Meza", "detalle": "Ajuste del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-12", "valor_agregado": "45.16%"}, {"codigo": "GF-IN-005-02", "documento": "Instructivo Generación Informe IRL", "dueno": "Nicoll Albornoz Blanco", "detalle": "Inclusión de actividades de el Analista de Operaciones Financieras Senior Bold.co SAS relacionadas a la validación de la reportería de microcrédito tarjeta\nInclusión de actividades de el Analista de Operaciones Financieras Bold.co SAS relacionadas a la validación de la reportería de emisión\nAjuste de las actividades del responsable del reporte", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-005-03", "documento": "Instructivo Generación Informe CFEN", "dueno": "Nicoll Albornoz Blanco", "detalle": "Ajuste de las actividades del responsable del reporte", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-030-01", "documento": "Instructivo conciliación cobro y recaudo tarjeta de crédito", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es conciliar los pagos realizados por los clientes de microcrédito tarjeta a través de los medios habilitados contra los registros internos y contables.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "GF-IN-030-02", "documento": "Instructivo control y seguimiento de cupos", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Su objetivo es conciliar y validar la consistencia de los cupos de microcrédito tarjeta (aprobado, utilizado y disponible) entre los reportes, identificando y gestionando las diferencias hasta registrar en el ERP.", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-19", "valor_agregado": "N/A"}, {"codigo": "SI-PR-004", "documento": "Gestión de Compras", "dueno": "Erick Verbel Facouseh", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-29", "valor_agregado": "12.50%"}, {"codigo": "SI-PR-006", "documento": "Selección y creación de terceros", "dueno": "Erick Verbel Facouseh", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-29", "valor_agregado": "38.46%"}, {"codigo": "SI-PR-008", "documento": "Recolección de activos fijos e implementos de trabajo en offboarding", "dueno": "Lina Meza", "detalle": "Ajuste general en las actividades del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "33.33%"}, {"codigo": "LC-MA-006", "documento": "Manual Ejecución Debida Diligencia Intensificada (DDI) CF", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-007", "documento": "Manual Metodológico Matriz de Riesgos SARLAFT", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-009", "documento": "Manual Metodología Segmentación de Riesgo Clientes", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "SI-PO-002", "documento": "Política activos fijos y elementos de trabajo", "dueno": "Lina Meza", "detalle": "Se añade política de cobertura para equipos en caso de accidentes de tránsito ocurridos en horario laboral.\nSe especifica el procedimiento a seguir y los soportes a presentar en caso de robo de equipos.", "compania": "CF", "tipo": "Actualización", "fecha": "2025-08-08", "valor_agregado": "N/A"}, 
-  // ========== PROCESOS DE SEPTIEMBRE 2025 ==========
-  {"codigo": "AP-PR-010", "documento": "Solicitud QR Bold (Entre cuentas)", "dueno": "Carlos Andrés Manrique", "detalle": "Se eliminan las actividades relacionadas a la desactivación del QR del cliente con otra entidad", "compania": "CF", "tipo": "Actualización", "fecha": "2025-09-19", "valor_agregado": "100.00%"}, {"codigo": "AP-PR-018", "documento": "Gestión comercial canal SMB", "dueno": "Antonio Plata", "detalle": "Reestructuración completa del proceso.", "compania": "CF", "tipo": "Actualización", "fecha": "2025-09-30", "valor_agregado": "100.00%"}, {"codigo": "TH-PR-007", "documento": "Gestión de beneficios", "dueno": "Lina Meza", "detalle": "Ajuste general en las actividades del proceso", "compania": "CF", "tipo": "Actualización", "fecha": "2025-09-11", "valor_agregado": "64.86%"}, {"codigo": "GF-PR-043", "documento": "Liquidación y legalización de compras tarjetas corporativas", "dueno": "Cesar Miguel Izaguirre Sanchez", "detalle": "Creación del documento", "compania": "CF", "tipo": "Creación", "fecha": "2025-09-17", "valor_agregado": "9.09%"}, {"codigo": "VP-PR-103", "documento": "Validación de cuentas - KYC SAS", "dueno": "Jonathan Alexis Rojas Quintero", "detalle": "Cambio de herramienta en la actividad \"Enviar OTP\" de Experian por Auth0\nLa actividad \"Enviar Link de Jumio\" se realiza automáticamente en los casos que se realice validación de identidad por medio de OTP\nInclusión de actividades relacionadas a validación por creación de cuenta compartiendo datos de cuentas ya existentes o compartiendo dispositivos para crear la cuenta.\nInclusión de actividades relacionadas a validación de comercios cuando van a utilizar los productos de Bold para realizar ventas con una franquicia\nInclusión de actividades para aprobación de los casos de jurisdicción de operación y actividad prohibida.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-09-18", "valor_agregado": "68.00%"}, {"codigo": "VP-PR-118", "documento": "Gestión comercial canal SMB SAS", "dueno": "Katherine Cardona Agudelo", "detalle": "Reestructuración completa del proceso.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-09-30", "valor_agregado": "100.00%"}, {"codigo": "AC-PR-101", "documento": "Validación de identidad de cliente", "dueno": "Daniela Jarrin Villa", "detalle": "Inclusión definición de Jumio\nInclusión de actividades relacionadas a la validación de identidad realizada por BolBot\nInclusión de actividades relacionadas a validación de identidad por Jumio para modificación de datos personales en caso de ser un cliente no verificado", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-09-22", "valor_agregado": "84.21%"}, {"codigo": "TH-PR-107", "documento": "Gestión de beneficios SAS", "dueno": "Carol Mallerly Cabrera Vargas", "detalle": "Ajuste general en las actividades del proceso", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-09-16", "valor_agregado": "64.86%"}, {"codigo": "TH-PR-126", "documento": "Entrenamiento inicial para el área comercial SAS", "dueno": "Sergio Giovanny Delgado Peña", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-09-30", "valor_agregado": "65.00%"}, {"codigo": "TH-PR-127", "documento": "Entrenamiento continuo para el área comercial SAS", "dueno": "Sergio Giovanny Delgado Peña", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-09-30", "valor_agregado": "68.75%"}, {"codigo": "GF-PR-137", "documento": "Conciliación de Saldos de Cuentas Virtuales", "dueno": "Jose Gabriel González Castañeda", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-09-26", "valor_agregado": "0.00%"}, {"codigo": "GF-PR-143", "documento": "Liquidación y legalización de compras tarjetas corporativas SAS", "dueno": "Duvan Camilo Parrado Ramirez", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-09-18", "valor_agregado": "9.09%"}, {"codigo": "GF-PR-144", "documento": "Control de fuentes SAS", "dueno": "Jose Gabriel González Castañeda", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-09-26", "valor_agregado": "0.00%"}, {"codigo": "SI-PR-104", "documento": "Gestión de Compras", "dueno": "Edison Diaz Suarez", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-09-08", "valor_agregado": "62.50%"}, {"codigo": "SI-PR-106", "documento": "Selección y creación de terceros", "dueno": "Edison Diaz Suarez", "detalle": "Se reemplaza el rol \"área encargada\" por \"área solicitante\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-09-08", "valor_agregado": "92.31%"}, 
-  {"codigo": "OP-PR-169", "documento": "Cierre diario de turno para clientes master merchant SAS", "dueno": "Juan Camilo Salgado Marín", "detalle": "Su objetivo es garantizar el envío oportuno y seguro del archivo diario de transacciones a comercios master merchant, consolidando la información correspondiente al cierre del turno, y asegurando que nuevos clientes reciban correctamente las instrucciones para el acceso al archivo.", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-04", "valor_agregado": "16.67%"}, {"codigo": "GM-PR-101", "documento": "Comunicaciones a clientes SAS", "dueno": "Jacob Abadia Garcia", "detalle": "Se añade actividad 21. \"Notificar los resultados de la campaña\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-20", "valor_agregado": "77.27%"}, {"codigo": "TH-PR-108", "documento": "Offboarding de personal", "dueno": "Maria Fernanda Navia Rey", "detalle": "Se eliminan las actividades correspondientes al rol Inventory Analyst\nSe incluye la participación del Sales Ops Analyst\nAjuste general del flujo", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-111", "documento": "Gestión programa ESOP", "dueno": "Maria Fernanda Navia Rey", "detalle": "Eliminación de Carta como gestor de plan de acciones, ahora todo se visualiza en BambooHR y se gestionan con un módulo de Appian.\nCambio del nombre del proceso.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "93.10%"}, {"codigo": "TH-PR-112", "documento": "Liquidación y pago de aportes", "dueno": "Maria Fernanda Navia Rey", "detalle": "Adición de la actividad 6. \"Conciliar planilla vs. Contabilidad\"", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "45.45%"}, {"codigo": "TH-PR-124", "documento": "Cambio interno de rol SAS", "dueno": "Maria Fernanda Navia Rey", "detalle": "Ajuste del proceso", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-11", "valor_agregado": "45.16%"}, {"codigo": "SI-PR-108", "documento": "Recolección de activos fijos e implementos de trabajo en offboarding SAS", "dueno": "Maria Fernanda Navia Rey", "detalle": "Inclusión actividades de recolección de activos fijos de manera presencial, y actividades de recolección de activos fijos a domicilio.", "compania": "SAS", "tipo": "Actualización", "fecha": "2025-08-04", "valor_agregado": "52.17%"}, {"codigo": "LC-MA-106", "documento": "Manual Ejecución Debida Diligencia Intensificada (DDI) SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-107", "documento": "Documento Metodológico Matriz de Riesgos SAGRILAFT SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-108", "documento": "Documento Metodológico Matriz de Riesgos PTEE (C/ST) - Programa de Transparencia y Ética Empresarial SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}, {"codigo": "LC-MA-109", "documento": "Manual Metodología Segmentación de Riesgo Clientes SAS", "dueno": "Vanessa Fajardo", "detalle": "Creación del documento", "compania": "SAS", "tipo": "Creación", "fecha": "2025-08-29", "valor_agregado": "N/A"}];
+  // Variables globales - se cargarán desde Google Sheets
+  let rows = [];
+  let cambios = [];
 
   const cardsEl = document.getElementById('cards');
   let query = '', sortMode='fecha';
@@ -968,9 +970,8 @@
   };
   
   // ======== SISTEMA DE FILTRADO POR MES/AÑO ========
-  // Inicializar directamente con septiembre 2025 (se actualizará inmediatamente)
-  let currentSelectedMonth = 9; // Septiembre
-  let currentSelectedYear = 2025;
+  let currentSelectedMonth;
+  let currentSelectedYear;
   
   // Mapeo de imágenes por mes/año - solo imágenes específicas por mes
   const valueAddedImages = {
@@ -979,10 +980,9 @@
       cf: "https://drive.google.com/file/d/1fUxaxuNvT5EdzAai_NvUL773Qq_mjk2O/view"
     },
     '2025-09': {
-      sas: "https://drive.google.com/file/d/1Xo8SnRENNuTlVOBueh6lGijP00eH8F5R/view",
-      cf: "https://drive.google.com/file/d/1gYnRYRz_gF32uv22xKv-034Mr7HcXHT8/view"
+      sas: "https://drive.google.com/file/d/1Wn9xYfCdwWz7sW20dN4sye2oKVqoqdDz/view",
+      cf: "https://drive.google.com/file/d/1DXerSbjHu3wzriAz5TFZfutwGs83e3N2/view"
     }
-    // Otros meses no tienen imágenes hasta que se agreguen específicamente
   };
   
   // Nombres de meses en español
@@ -1017,35 +1017,73 @@
     };
   }
   
-  // Función hasDataForMonth eliminada - ya no es necesaria
-  // SIEMPRE mostraremos el mes anterior, tengan datos o no
   
-  // Función para obtener años disponibles - solo 2025
+  // Función para obtener años disponibles DINÁMICAMENTE desde los datos
   function getAvailableYears() {
-    // Solo 2025 ya que solo tenemos datos para agosto y septiembre
-    return [2025];
+    const years = new Set();
+    
+    // Obtener años de automatizaciones (mesAsignado y fecha)
+    rows.forEach(r => {
+      if (r.mesAsignado) {
+        const date = parseLocalDate(r.mesAsignado);
+        years.add(date.getFullYear());
+      }
+      if (r.fecha) {
+        const date = parseLocalDate(r.fecha);
+        years.add(date.getFullYear());
+      }
+    });
+    
+    // Obtener años de procesos (fecha)
+    cambios.forEach(c => {
+      if (c.fecha) {
+        const date = parseLocalDate(c.fecha);
+        years.add(date.getFullYear());
+      }
+    });
+    
+    // Convertir a array y ordenar
+    return Array.from(years).sort((a, b) => b - a);
   }
   
-  // Función para obtener meses disponibles - solo agosto y septiembre 2025
+  // Función para obtener meses disponibles DINÁMICAMENTE para un año específico
   function getAvailableMonthsForYear(year) {
-    // Solo devolver agosto y septiembre para 2025
-    if (year === 2025) {
-      return [
-        {
-          number: 8,
-          name: 'Agosto',
-          short: 'Ago'
-        },
-        {
-          number: 9,
-          name: 'Septiembre',
-          short: 'Sep'
-        }
-      ];
-    }
+    const months = new Set();
     
-    // Para cualquier otro año, devolver array vacío
-    return [];
+    // Obtener meses de automatizaciones
+    rows.forEach(r => {
+      if (r.mesAsignado) {
+        const date = parseLocalDate(r.mesAsignado);
+        if (date.getFullYear() === year) {
+          months.add(date.getMonth() + 1); // 1-based
+        }
+      }
+      if (r.fecha) {
+        const date = parseLocalDate(r.fecha);
+        if (date.getFullYear() === year) {
+          months.add(date.getMonth() + 1);
+        }
+      }
+    });
+    
+    // Obtener meses de procesos
+    cambios.forEach(c => {
+      if (c.fecha) {
+        const date = parseLocalDate(c.fecha);
+        if (date.getFullYear() === year) {
+          months.add(date.getMonth() + 1);
+        }
+      }
+    });
+    
+    // Convertir a array, ordenar y formatear
+    return Array.from(months)
+      .sort((a, b) => b - a) // Descendente (más reciente primero)
+      .map(monthNum => ({
+        number: monthNum,
+        name: monthNames[monthNum - 1],
+        short: monthNames[monthNum - 1].substring(0, 3)
+      }));
   }
   
   // Función para encontrar el último mes con datos disponibles
@@ -1069,14 +1107,8 @@
       };
     }
     
-    // Fallback a agosto 2025
-    return {
-      month: 8,
-      year: 2025,
-      name: 'Agosto',
-      key: '2025-08',
-      display: 'Agosto 2025'
-    };
+    // Fallback al mes anterior actual
+    return getPreviousMonth();
   }
   
   // Función para inicializar el mes por defecto - SIEMPRE mes anterior
@@ -1428,8 +1460,18 @@
       let belongsToMonth = false;
       
       // Opción 1: Verificar si tiene mesAsignado que coincida
-      if (r.mesAsignado && r.mesAsignado === monthKey) {
-        belongsToMonth = true;
+      if (r.mesAsignado) {
+        // Si mesAsignado es una fecha (viene de Google Sheets), extraer año-mes
+        let mesAsignadoKey = r.mesAsignado;
+        if (r.mesAsignado.includes('T') || r.mesAsignado.length > 10) {
+          // Es una fecha completa, extraer solo año-mes
+          const date = parseLocalDate(r.mesAsignado);
+          mesAsignadoKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+        }
+        
+        if (mesAsignadoKey === monthKey) {
+          belongsToMonth = true;
+        }
       }
       // Opción 2: Verificar por fecha si no tiene mesAsignado
       else if (!r.mesAsignado && r.fecha) {
@@ -1783,9 +1825,9 @@
     // Obtener color para VA
     const vaColor = getVAColor(r.valor_agregado);
     
-    // Verificar si existe un enlace para el documento
+    // Verificar si existe un enlace para el documento (priorizar url_proceso de Sheets)
     const documentoNombre = r.documento || '';
-    const documentoLink = documentLinks[documentoNombre];
+    const documentoLink = r.url_proceso || documentLinks[documentoNombre]; // Priorizar URL de Sheets
     const documentoHTML = documentoLink 
       ? `<a href="${documentoLink}" target="_blank" rel="noopener noreferrer" class="text-bold-primary underline hover:no-underline font-medium">${documentoNombre}</a>`
       : documentoNombre;
@@ -2695,6 +2737,44 @@ function setDriveImage(imgEl, shareLink){
   img2?.addEventListener('click', ()=> openLightbox(img2.src));
   lightbox?.addEventListener('click', closeLightbox);
   document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeLightbox(); });
+
+  // ========== CARGA DE DATOS DESDE GOOGLE SHEETS ==========
+  async function loadDataFromSheets() {
+    try {
+      if (!window.SheetsConnector) {
+        console.error('❌ SheetsConnector no está cargado');
+        return;
+      }
+      
+      const data = await window.SheetsConnector.initializeData();
+      
+      if (data.success) {
+        // Asignar datos a las variables globales
+        rows = data.automatizaciones;
+        cambios = data.procesos;
+        
+        console.log('✅ Datos cargados:', rows.length, 'automatizaciones,', cambios.length, 'procesos');
+        
+        // Inicializar la interfaz con los nuevos datos
+        initializeDefaultMonth();
+        
+      } else {
+        console.error('❌ Error cargando datos:', data.error);
+        alert('⚠️ Error cargando datos desde Google Sheets.');
+      }
+    } catch (error) {
+      console.error('❌ Error de conexión:', error);
+      alert('⚠️ Error de conexión con Google Sheets.');
+    }
+  }
+
+  // Ejecutar carga de datos cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadDataFromSheets);
+  } else {
+    // DOM ya está listo, ejecutar inmediatamente
+    loadDataFromSheets();
+  }
 
 </script>
 </body>
