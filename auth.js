@@ -3,7 +3,7 @@
 
 // ⚠️ AUTENTICACIÓN TEMPORALMENTE DESACTIVADA
 // Para reactivar: cambia AUTH_DISABLED a false
-const AUTH_DISABLED = true;
+const AUTH_DISABLED = false;
 
 const ALLOWED_DOMAINS = ['bold.co', 'boldcf.co'];
 const GOOGLE_CLIENT_ID = '470634824045-g3big92p2sndrk0nf97omjg3otn8oc2s.apps.googleusercontent.com';
