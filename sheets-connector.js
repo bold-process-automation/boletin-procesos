@@ -214,7 +214,22 @@ async function getValorAgregado() {
     
     data.forEach(row => {
       if (row.mesAsignado && (row.sas || row.cf)) {
-        imagesByMonth[row.mesAsignado] = {
+        // Convertir fecha a formato YYYY-MM
+        let monthKey = row.mesAsignado;
+        
+        // Si es una fecha completa (timestamp), extraer solo año-mes
+        if (typeof monthKey === 'string' && (monthKey.includes('T') || monthKey.length > 10)) {
+          const date = new Date(monthKey);
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0');
+          monthKey = `${year}-${month}`;
+        }
+        // Si es solo año-mes (2025-08), usarlo directamente
+        else if (typeof monthKey === 'string' && monthKey.match(/^\d{4}-\d{2}$/)) {
+          monthKey = monthKey;
+        }
+        
+        imagesByMonth[monthKey] = {
           sas: row.sas || '',
           cf: row.cf || ''
         };
