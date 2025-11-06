@@ -1012,17 +1012,9 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
   let currentSelectedMonth;
   let currentSelectedYear;
   
-  // Mapeo de imágenes por mes/año - solo imágenes específicas por mes
-  const valueAddedImages = {
-    '2025-08': {
-      sas: "https://drive.google.com/file/d/1ZbS5WyojhMcdcZz5TINSL2yGTxwQbskb/view",
-      cf: "https://drive.google.com/file/d/1fUxaxuNvT5EdzAai_NvUL773Qq_mjk2O/view"
-    },
-    '2025-09': {
-      sas: "https://drive.google.com/file/d/1Wn9xYfCdwWz7sW20dN4sye2oKVqoqdDz/view",
-      cf: "https://drive.google.com/file/d/1DXerSbjHu3wzriAz5TFZfutwGs83e3N2/view"
-    }
-  };
+  // Mapeo de imágenes por mes/año - se carga dinámicamente desde Google Sheets
+  // NOTA: Este objeto se reemplazará con los datos del sheet Valor_agregado
+  let valueAddedImages = {}; // Se carga desde Google Sheets
   
   // Nombres de meses en español
   const monthNames = [
@@ -2845,8 +2837,10 @@ function setDriveImage(imgEl, shareLink){
         // Asignar datos a las variables globales
         rows = data.automatizaciones;
         cambios = data.procesos;
+        valueAddedImages = data.valorAgregado || {};
         
         console.log('✅ Datos cargados:', rows.length, 'automatizaciones,', cambios.length, 'procesos');
+        console.log('✅ Imágenes de Valor Agregado:', Object.keys(valueAddedImages).length, 'períodos');
         
         // Inicializar la interfaz con los nuevos datos
         initializeDefaultMonth();
