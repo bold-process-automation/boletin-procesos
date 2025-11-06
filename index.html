@@ -1496,7 +1496,12 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
   // Función para actualizar imágenes de valor agregado
   function updateValueAddedImages() {
     const monthKey = `${currentSelectedYear}-${String(currentSelectedMonth).padStart(2, '0')}`;
+    console.log('🖼️ updateValueAddedImages() - monthKey:', monthKey);
+    console.log('🖼️ valueAddedImages disponibles:', Object.keys(valueAddedImages));
+    console.log('🖼️ valueAddedImages completo:', valueAddedImages);
+    
     const images = valueAddedImages[monthKey]; // sin fallback - solo si hay datos específicos
+    console.log('🖼️ Imágenes para', monthKey, ':', images);
     
     const cardsContainer = document.getElementById('valueAddedCards');
     const noResultsContainer = document.getElementById('noResultsValueAdded');
@@ -1504,11 +1509,14 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
     
     // Si no hay imágenes para este mes, mostrar mensaje de "No hay datos"
     if (!images) {
+      console.log('❌ No hay imágenes para este mes');
       cardsContainer.classList.add('hidden');
       noResultsContainer.classList.remove('hidden');
       noResultsText.textContent = `No hay imágenes de valor agregado disponibles para ${monthNames[currentSelectedMonth - 1]} ${currentSelectedYear}.`;
       return;
     }
+    
+    console.log('✅ Mostrando imágenes:', images);
     
     // Si hay imágenes, mostrar las tarjetas y ocultar el mensaje
     cardsContainer.classList.remove('hidden');
