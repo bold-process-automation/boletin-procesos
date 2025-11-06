@@ -1672,15 +1672,15 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
               <div class="grid grid-cols-3 gap-4 text-center">
                 <div>
                   <div class="text-xs text-gray-500 font-medium mb-1">VA Inicial</div>
-                  <div class="font-bold text-lg text-gray-700">${Math.max(0, Number(r.vaFinal) - Number(r.incrementoVA)).toFixed(2)}%</div>
+                  <div class="font-bold text-lg text-gray-700">${Number(r.vaInicial || 0).toFixed(2)}%</div>
                 </div>
                 <div>
                   <div class="text-xs text-gray-500 font-medium mb-1">Incremento</div>
-                  <div class="font-bold text-lg" style="color: #6CDCAB">+${Number(r.incrementoVA).toFixed(2)}%</div>
+                  <div class="font-bold text-lg" style="color: #6CDCAB">+${Number(r.incrementoVA || 0).toFixed(2)}%</div>
                 </div>
                 <div>
                   <div class="text-xs text-gray-500 font-medium mb-1">VA Final</div>
-                  <div class="font-bold text-xl bold-primary">${Number(r.vaFinal).toFixed(2)}%</div>
+                  <div class="font-bold text-xl bold-primary">${Number(r.vaFinal || 0).toFixed(2)}%</div>
                 </div>
               </div>
             </div>
