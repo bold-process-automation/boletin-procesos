@@ -200,20 +200,53 @@ async function getProcesos() {
 }
 
 /**
+ * Obtiene las imágenes de valor agregado
+ * @returns {Promise<Array>} Array de imágenes de valor agregado
+ */
+async function getValorAgregado() {
+  try {
+    const allData = await fetchAllData();
+    const data = allData.valor_agregado || [];
+    
+    // Transformar datos al formato esperado por el frontend
+    // Formato: { '2025-08': { sas: 'url', cf: 'url' } }
+    const imagesByMonth = {};
+    
+    data.forEach(row => {
+      if (row.mesAsignado && (row.sas || row.cf)) {
+        imagesByMonth[row.mesAsignado] = {
+          sas: row.sas || '',
+          cf: row.cf || ''
+        };
+      }
+    });
+    
+    return imagesByMonth;
+    
+  } catch (error) {
+    console.error('❌ Error obteniendo valor agregado:', error);
+    // Retornar objeto vacío en caso de error
+    return {};
+  }
+}
+
+/**
  * Inicializa y carga todos los datos desde Google Sheets
- * @returns {Promise<Object>} Objeto con automatizaciones y procesos
+ * @returns {Promise<Object>} Objeto con automatizaciones, procesos y valor agregado
  */
 async function initializeData() {
   try {
-    // Cargar ambas hojas en paralelo
-    const [automatizaciones, procesos] = await Promise.all([
+    // Cargar todas las hojas en paralelo
+    const [automatizaciones, procesos, valorAgregado] = await Promise.all([
       getAutomatizaciones(),
-      getProcesos()
+      getProcesos(),
+      getValorAgregado()
     ]);
     
     return {
       automatizaciones,
       procesos,
+      valorAgregado,
       success: true
     };
     
@@ -223,6 +256,7 @@ async function initializeData() {
     return {
       automatizaciones: [],
       procesos: [],
+      valorAgregado: {},
       success: false,
       error: error.message
     };
@@ -235,6 +269,7 @@ window.SheetsConnector = {
   initializeData,
   getAutomatizaciones,
   getProcesos,
+  getValorAgregado,
   setSheetId: (newId) => {
     SHEET_CONFIG.SHEET_ID = newId;
     console.log('✅ Sheet ID actualizado:', newId);
