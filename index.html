@@ -1749,7 +1749,7 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
   const pageInfo=document.getElementById('pageInfo');
   const prevBtn=document.getElementById('prevPage');
   const nextBtn=document.getElementById('nextPage');
-  let q2 = '', sort2 = 'fecha', page = 1, pageSize = 10;
+  let q2 = '', sort2 = 'va', page = 1, pageSize = 10; // Ordenar por VA descendente por defecto
   let columnFilters = {}; // Objeto para guardar filtros por columna
   let currentFilterColumn = '';
   
@@ -2106,7 +2106,7 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
   document.getElementById('resetBtn2').addEventListener('click', () => {
     q2 = '';
     columnFilters = {};
-    sort2 = 'fecha';
+    sort2 = 'va'; // Restaurar orden por VA descendente
     page = 1;
     
     document.getElementById('q2').value = '';
