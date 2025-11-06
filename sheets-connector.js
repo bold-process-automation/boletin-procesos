@@ -251,12 +251,92 @@ async function getValorAgregado() {
  */
 async function initializeData() {
   try {
-    // Cargar todas las hojas en paralelo
-    const [automatizaciones, procesos, valorAgregado] = await Promise.all([
-      getAutomatizaciones(),
-      getProcesos(),
-      getValorAgregado()
-    ]);
+    console.time('⏱️ Tiempo total de carga');
+    
+    // 🚀 OPTIMIZACIÓN: Una sola llamada al backend en vez de 3
+    const allData = await fetchAllData();
+    
+    console.timeEnd('⏱️ Tiempo total de carga');
+    console.time('📦 Procesamiento de datos');
+    
+    // Procesar automatizaciones
+    const automatizaciones = (allData.automatizaciones || []).map(row => {
+      let vaInicial = parseFloat(row.vaInicial) || 0;
+      let vaFinal = parseFloat(row.vaFinal) || 0;
+      let incrementoVA = parseFloat(row.incrementoVA) || 0;
+      
+      if (vaInicial > 0 && vaInicial <= 1) vaInicial *= 100;
+      if (vaFinal > 0 && vaFinal <= 1) vaFinal *= 100;
+      if (incrementoVA > 0 && incrementoVA <= 1) incrementoVA *= 100;
+      
+      return {
+        aplicativo: row.aplicativo || '',
+        aplicacion: row.aplicacion || '',
+        proceso: row.proceso || '',
+        detalle: row.detalle || '',
+        compania: row.compania || '',
+        vaInicial: vaInicial,
+        vaFinal: vaFinal,
+        incrementoVA: incrementoVA,
+        fecha: row.fecha || '',
+        mesAsignado: row.mesAsignado || ''
+      };
+    });
+    
+    // Procesar procesos (cambios)
+    const procesos = (allData.cambios || []).map(row => {
+      let valorAgregado = row.valor_agregado || '';
+      if (typeof valorAgregado === 'number' && valorAgregado >= 0 && valorAgregado <= 1) {
+        valorAgregado = (valorAgregado * 100).toFixed(2) + '%';
+      } else if (typeof valorAgregado === 'string' && !valorAgregado.includes('%')) {
+        const num = parseFloat(valorAgregado);
+        if (!isNaN(num) && num >= 0 && num <= 1) {
+          valorAgregado = (num * 100).toFixed(2) + '%';
+        }
+      }
+      
+      return {
+        codigo: row.codigo || '',
+        documento: row.documento || '',
+        dueno: row.dueno || '',
+        detalle: row.detalle || '',
+        compania: row.compania || '',
+        tipo: row.tipo || '',
+        fecha: row.fecha || '',
+        valor_agregado: valorAgregado,
+        url_proceso: row.url_proceso || ''
+      };
+    });
+    
+    // Procesar valor agregado
+    const valorAgregado = {};
+    (allData.valor_agregado || []).forEach(row => {
+      if (row.mesAsignado && (row.sas || row.cf)) {
+        let monthKey = row.mesAsignado;
+        
+        if (typeof monthKey === 'string' && (monthKey.includes('T') || monthKey.length > 10)) {
+          const date = new Date(monthKey);
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, '0');
+          monthKey = `${year}-${month}`;
+        }
+        else if (typeof monthKey === 'string' && monthKey.match(/^\d{4}-\d{2}$/)) {
+          monthKey = monthKey;
+        }
+        
+        valorAgregado[monthKey] = {
+          sas: row.sas || '',
+          cf: row.cf || ''
+        };
+      }
+    });
+    
+    console.timeEnd('📦 Procesamiento de datos');
+    console.log('✅ Datos procesados:', {
+      automatizaciones: automatizaciones.length,
+      procesos: procesos.length,
+      valorAgregado: Object.keys(valorAgregado).length
+    });
     
     return {
       automatizaciones,
