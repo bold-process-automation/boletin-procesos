@@ -1964,13 +1964,28 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
     const documentoHTML = documentoLink 
       ? `<a href="${documentoLink}" target="_blank" rel="noopener noreferrer" class="text-bold-primary underline hover:no-underline font-medium">${documentoNombre}</a>`
       : documentoNombre;
+    
+    // Procesar detalle: truncar si es muy largo y agregar tooltip
+    const detalleTexto = r.detalle || '';
+    const MAX_LENGTH = 150;
+    const detalleTruncado = detalleTexto.length > MAX_LENGTH 
+      ? detalleTexto.substring(0, MAX_LENGTH) + '...' 
+      : detalleTexto;
+    const detalleHTML = detalleTexto.length > MAX_LENGTH
+      ? `<div class="relative detalle-cell" style="max-width: 400px;">
+           <span class="detalle-preview">${detalleTruncado}</span>
+           <div class="detalle-tooltip hidden absolute z-50 bg-white border-2 border-blue-500 rounded-lg shadow-2xl p-4 text-sm" style="left: 0; top: 100%; margin-top: 4px; min-width: 300px; max-width: 500px; color: #334155; line-height: 1.6;">
+             ${detalleTexto}
+           </div>
+         </div>`
+      : `<span>${detalleTexto}</span>`;
 
     return `
       <tr class="border-b border-slate-100 hover:bg-slate-50">
         <td class="px-3 py-2 font-medium text-slate-800 w-32">${r.codigo}</td>
         <td class="px-3 py-2">${documentoHTML}</td>
         <td class="px-3 py-2 w-48 text-sm" title="${r.dueno || ''}">${r.dueno || ''}</td>
-        <td class="px-3 py-2 text-slate-700">${r.detalle || ''}</td>
+        <td class="px-3 py-2 text-slate-700 relative">${detalleHTML}</td>
         <td class="px-3 py-2 w-20 text-center">${r.compania || ''}</td>
         <td class="px-3 py-2 w-32 text-center">
           <span class="inline-flex items-center justify-center text-xs px-3 py-2 rounded-full min-w-[90px] h-6" style="${tipoStyle}">${r.tipo}</span>
@@ -2130,6 +2145,24 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
       
       prevBtn.disabled = page <= 1; 
       nextBtn.disabled = page >= totalPages;
+      
+      // Agregar event listeners para tooltips de detalle
+      setTimeout(() => {
+        document.querySelectorAll('.detalle-cell').forEach(cell => {
+          const preview = cell.querySelector('.detalle-preview');
+          const tooltip = cell.querySelector('.detalle-tooltip');
+          
+          if (preview && tooltip) {
+            cell.addEventListener('mouseenter', () => {
+              tooltip.classList.remove('hidden');
+            });
+            
+            cell.addEventListener('mouseleave', () => {
+              tooltip.classList.add('hidden');
+            });
+          }
+        });
+      }, 50);
     }
     
     updateFilterIndicators();
