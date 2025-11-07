@@ -488,7 +488,7 @@
   <nav id="stickyNav" class="hidden">
   </nav>
   
-  <div class="mx-auto p-6 md:p-12" style="max-width: 95%;">
+  <div class="mx-auto max-w-7xl p-6 md:p-12">
 
 
     <!-- ========== CAMBIOS (LISTADO) ========== -->
@@ -1972,7 +1972,7 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
       ? detalleTexto.substring(0, MAX_LENGTH) + '...' 
       : detalleTexto;
     const detalleHTML = detalleTexto.length > MAX_LENGTH
-      ? `<div class="relative detalle-cell" style="max-width: 600px;">
+      ? `<div class="relative detalle-cell" style="max-width: 400px;">
            <span class="detalle-preview cursor-pointer">${detalleTruncado}</span>
            <div class="detalle-tooltip hidden fixed z-[9999] bg-white rounded-xl p-4 text-sm" style="min-width: 300px; max-width: 500px; color: #334155; line-height: 1.6; box-shadow: 0 10px 40px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);">
              ${detalleTexto}
