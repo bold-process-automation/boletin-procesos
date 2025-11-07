@@ -520,7 +520,7 @@
         <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100">
           <table class="w-full text-xs sm:text-sm">
             <thead>
-              <tr style="background: linear-gradient(to right, #121E6C, #1E23A2); color: white;">
+              <tr style="background-color: #121E6C; color: white;">
                 <th class="px-3 sm:px-4 py-3 text-left font-bold">Tipo de Documento</th>
                 <th class="px-3 sm:px-4 py-3 text-center font-bold">Creación</th>
                 <th class="px-3 sm:px-4 py-3 text-center font-bold">Actualización</th>
@@ -2269,29 +2269,54 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
       }
     });
     
-    // Renderizar tabla
+    // Renderizar tabla con 3 filas: Procesos, Instructivos, Políticas+Manuales+Códigos
     const tbody = document.getElementById('summaryTableBody');
     tbody.innerHTML = '';
     
-    for (const [docType, counts] of Object.entries(documentTypes)) {
-      const total = counts.creacion + counts.actualizacion + counts.derogacion;
-      const row = document.createElement('tr');
-      row.className = 'hover:bg-gray-50 transition-colors';
-      
-      // Asignar color alternado
-      if (Object.keys(documentTypes).indexOf(docType) % 2 === 0) {
-        row.style.backgroundColor = '#f9fafb';
-      }
-      
-      row.innerHTML = `
-        <td class="px-3 sm:px-4 py-3 font-medium" style="color: #121E6C;">${docType}</td>
-        <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #22c55e;">${counts.creacion}</td>
-        <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #f59e0b;">${counts.actualizacion}</td>
-        <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #ef4444;">${counts.derogacion}</td>
-        <td class="px-3 sm:px-4 py-3 text-center font-bold" style="color: #121E6C;">${total}</td>
-      `;
-      tbody.appendChild(row);
-    }
+    // Fila 1: Procesos
+    const procesoRow = document.createElement('tr');
+    procesoRow.style.backgroundColor = '#f9fafb';
+    const procesoTotal = documentTypes.Procesos.creacion + documentTypes.Procesos.actualizacion + documentTypes.Procesos.derogacion;
+    procesoRow.innerHTML = `
+      <td class="px-3 sm:px-4 py-3 font-medium" style="color: #121E6C;">Procesos</td>
+      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${documentTypes.Procesos.creacion}</td>
+      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${documentTypes.Procesos.actualizacion}</td>
+      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${documentTypes.Procesos.derogacion}</td>
+      <td class="px-3 sm:px-4 py-3 text-center font-bold" style="color: #121E6C;">${procesoTotal}</td>
+    `;
+    tbody.appendChild(procesoRow);
+    
+    // Fila 2: Instructivos
+    const instructivoRow = document.createElement('tr');
+    const instructivoTotal = documentTypes.Instructivos.creacion + documentTypes.Instructivos.actualizacion + documentTypes.Instructivos.derogacion;
+    instructivoRow.innerHTML = `
+      <td class="px-3 sm:px-4 py-3 font-medium" style="color: #121E6C;">Instructivos</td>
+      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${documentTypes.Instructivos.creacion}</td>
+      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${documentTypes.Instructivos.actualizacion}</td>
+      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${documentTypes.Instructivos.derogacion}</td>
+      <td class="px-3 sm:px-4 py-3 text-center font-bold" style="color: #121E6C;">${instructivoTotal}</td>
+    `;
+    tbody.appendChild(instructivoRow);
+    
+    // Fila 3: Políticas + Manuales + Códigos
+    const otrosRow = document.createElement('tr');
+    otrosRow.style.backgroundColor = '#f9fafb';
+    const polTotal = documentTypes.Políticas.creacion + documentTypes.Políticas.actualizacion + documentTypes.Políticas.derogacion;
+    const manualTotal = documentTypes.Manuales.creacion + documentTypes.Manuales.actualizacion + documentTypes.Manuales.derogacion;
+    const codigoTotal = documentTypes.Códigos.creacion + documentTypes.Códigos.actualizacion + documentTypes.Códigos.derogacion;
+    const combinedCreacion = documentTypes.Políticas.creacion + documentTypes.Manuales.creacion + documentTypes.Códigos.creacion;
+    const combinedActualizacion = documentTypes.Políticas.actualizacion + documentTypes.Manuales.actualizacion + documentTypes.Códigos.actualizacion;
+    const combinedDerogacion = documentTypes.Políticas.derogacion + documentTypes.Manuales.derogacion + documentTypes.Códigos.derogacion;
+    const combinedTotal = polTotal + manualTotal + codigoTotal;
+    
+    otrosRow.innerHTML = `
+      <td class="px-3 sm:px-4 py-3 font-medium" style="color: #121E6C;">Políticas, Manuales y Códigos</td>
+      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${combinedCreacion}</td>
+      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${combinedActualizacion}</td>
+      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${combinedDerogacion}</td>
+      <td class="px-3 sm:px-4 py-3 text-center font-bold" style="color: #121E6C;">${combinedTotal}</td>
+    `;
+    tbody.appendChild(otrosRow);
   }
   
   // Función para actualizar indicadores visuales de filtros activos
