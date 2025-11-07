@@ -16,6 +16,12 @@ let currentUser = null;
 
 // Initialize Google Sign-In
 function initGoogleAuth() {
+  // Hide loading skeleton and show login screen
+  const loadingSkeleton = document.getElementById('loadingSkeleton');
+  const loginScreen = document.getElementById('loginScreen');
+  if (loadingSkeleton) loadingSkeleton.style.display = 'none';
+  if (loginScreen) loginScreen.style.display = 'flex';
+  
   google.accounts.id.initialize({
     client_id: GOOGLE_CLIENT_ID,
     callback: handleCredentialResponse,
@@ -39,9 +45,6 @@ function initGoogleAuth() {
       width: 300
     }
   );
-
-  // Si ya hay sesión persistida, conceder acceso
-  if (checkExistingSession()) return;
 }
 
 // Handle Google Sign-In response
@@ -123,11 +126,14 @@ function checkExistingSession() {
 function grantAccess() {
   console.log('Acceso concedido a:', currentUser.email);
   
-  // Hide login screen
-  document.getElementById('loginScreen').style.display = 'none';
+  // Hide login screen and loading skeleton
+  const loginScreen = document.getElementById('loginScreen');
+  const loadingSkeleton = document.getElementById('loadingSkeleton');
+  const mainContent = document.getElementById('mainContent');
   
-  // Show main content
-  document.getElementById('mainContent').style.display = 'block';
+  if (loginScreen) loginScreen.style.display = 'none';
+  if (loadingSkeleton) loadingSkeleton.style.display = 'none';
+  if (mainContent) mainContent.style.display = 'block';
   
   // Show user info in header
   displayUserInfo();
@@ -185,17 +191,37 @@ function displayUserInfo() {
   const userInfoDiv = document.getElementById('userInfo');
   if (userInfoDiv) {
     userInfoDiv.innerHTML = `
-      <div style="display: flex; align-items: center; gap: 12px; padding: 12px 24px; background-color: rgba(255, 255, 255, 0.1); border-radius: 8px;">
-        <img src="${currentUser.picture}" alt="${currentUser.name}" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid white;" />
-        <div style="text-align: left;">
-          <div style="font-weight: 600; font-size: 14px;">${currentUser.name}</div>
-          <div style="font-size: 12px; opacity: 0.9;">${currentUser.email}</div>
-        </div>
-        <button onclick="signOut()" style="margin-left: 12px; background-color: rgba(255, 255, 255, 0.2); color: white; padding: 6px 12px; border: 1px solid white; border-radius: 6px; cursor: pointer; font-size: 12px;">
-          Cerrar sesión
+      <div class="relative">
+        <button id="userMenuBtn" class="flex items-center" style="background: none; border: none; cursor: pointer; padding: 0;" title="${currentUser.name}">
+          <img src="${currentUser.picture}" alt="${currentUser.name}" 
+               style="width: 44px; height: 44px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: transform 0.2s;"
+               onmouseover="this.style.transform='scale(1.05)'" 
+               onmouseout="this.style.transform='scale(1)'" />
         </button>
+        <div id="userDropdown" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-gray-200 z-50" style="top: 100%;">
+          <div class="p-4 border-b border-gray-100">
+            <div class="font-semibold text-gray-800 text-sm">${currentUser.name}</div>
+            <div class="text-xs text-gray-500 mt-1">${currentUser.email}</div>
+          </div>
+          <button onclick="signOut()" class="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 rounded-b-xl transition-colors font-medium">
+            🚪 Cerrar sesión
+          </button>
+        </div>
       </div>
     `;
+    
+    // Toggle dropdown
+    setTimeout(() => {
+      const btn = document.getElementById('userMenuBtn');
+      const dropdown = document.getElementById('userDropdown');
+      if (btn && dropdown) {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          dropdown.classList.toggle('hidden');
+        });
+        document.addEventListener('click', () => dropdown.classList.add('hidden'));
+      }
+    }, 100);
   }
 }
 
