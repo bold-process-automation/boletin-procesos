@@ -203,8 +203,8 @@ function displayUserInfo() {
             <div class="font-semibold text-gray-800 text-sm">${currentUser.name}</div>
             <div class="text-xs text-gray-500 mt-1">${currentUser.email}</div>
           </div>
-          <button onclick="signOut()" class="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 rounded-b-xl transition-colors font-medium">
-            🚪 Cerrar sesión
+          <button onclick="signOut()" class="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 rounded-b-xl transition-colors font-medium flex items-center justify-start gap-2">
+            <span>Cerrar sesión</span>
           </button>
         </div>
       </div>
