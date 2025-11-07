@@ -435,30 +435,30 @@
     
     <!-- Contenido principal -->
     <div class="relative flex items-end min-h-screen">
-      <div class="w-full px-8 md:px-16 py-20">
-        <div class="flex items-end justify-between w-full">
+      <div class="w-full px-4 sm:px-8 md:px-16 py-12 md:py-20">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between w-full gap-8">
           <!-- Columna izquierda: Contenido (esquina inferior izquierda) -->
-          <div class="w-1/2 pl-4 lg:pl-8 space-y-8 text-left">
+          <div class="w-full md:w-1/2 pl-0 md:pl-4 lg:pl-8 space-y-4 md:space-y-8 text-left">
             <!-- Etiqueta superior -->
             <div class="mb-8">
-              <span class="text-white text-xl font-semibold tracking-wide uppercase">Arquitectura de Negocio y Automatización</span>
+              <span class="text-white text-sm sm:text-base md:text-lg lg:text-xl font-semibold tracking-wide uppercase">Arquitectura de Negocio y Automatización</span>
             </div>
             
             <!-- Título principal -->
-            <div class="space-y-8">
-              <h1 class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight text-white">
+            <div class="space-y-4 md:space-y-8">
+              <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black leading-tight text-white">
                 Boletín de Procesos
               </h1>
               
-              <p class="text-xl md:text-2xl leading-relaxed text-white/90 max-w-xl">
+              <p class="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white/90 max-w-xl">
                 Información actualizada sobre cambios, automatizaciones y mejoras continuas en Bold CF y Bold.co SAS
               </p>
             </div>
           </div>
           
           <!-- Columna derecha: Botones (esquina inferior derecha) -->
-          <div class="w-1/2 flex justify-end items-end pr-4 lg:pr-8">
-            <div id="heroNavButtons" class="flex flex-col gap-4 w-full max-w-sm">
+          <div class="w-full md:w-1/2 flex justify-center md:justify-end items-end pr-0 md:pr-4 lg:pr-8">
+            <div id="heroNavButtons" class="flex flex-col gap-3 w-full max-w-sm">
               <a href="#cambios" class="hero-nav-btn group bg-white hover:bg-gray-50 rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
                 <div class="flex items-center justify-center">
                   <span class="text-[#121E6C]">Procesos</span>
@@ -488,7 +488,16 @@
   <nav id="stickyNav" class="hidden">
   </nav>
   
-  <div class="mx-auto p-6 md:p-12" style="max-width: 70%;">
+  <div class="mx-auto px-4 sm:px-6 lg:px-12" style="max-width: 100%; width: 100%;">
+    <style>
+      @media (min-width: 768px) {
+        .responsive-container { max-width: 85%; }
+      }
+      @media (min-width: 1280px) {
+        .responsive-container { max-width: 70%; }
+      }
+    </style>
+    <div class="responsive-container mx-auto py-6 md:py-12">
 
 
     <!-- ========== CAMBIOS (LISTADO) ========== -->
@@ -531,8 +540,8 @@
         </div>
       </div>
       
-      <div class="overflow-x-auto rounded-2xl mx-6 md:mx-12">
-        <table class="w-full text-sm">
+      <div class="overflow-x-auto rounded-2xl mx-3 sm:mx-6 md:mx-12">
+        <table class="w-full text-xs sm:text-sm">
           <thead>
             <tr class="bg-white" style="background-color: white !important;">
               <th class="sticky px-3 py-2 text-left w-32" style="background-color: white !important;">
@@ -697,10 +706,10 @@
       </div>
       
       <!-- Grid de tarjetas expandido -->
-      <div id="valueAddedCards" class="px-6 md:px-12">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div id="valueAddedCards" class="px-3 sm:px-6 md:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
           <!-- Tarjeta SAS -->
-          <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[650px]">
+          <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[500px] sm:h-[600px] lg:h-[650px]">
             <!-- Header estilo Bold.co -->
             <div class="p-6" style="background: linear-gradient(to right, #121E6C, #EE424E);">
               <div class="flex items-center gap-4">
@@ -721,7 +730,7 @@
           </div>
           
           <!-- Tarjeta CF -->
-          <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[650px]">
+          <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[500px] sm:h-[600px] lg:h-[650px]">
             <!-- Header estilo Bold.co -->
             <div class="p-6" style="background: linear-gradient(to right, #121E6C, #1E23A2);">
               <div class="flex items-center gap-4">
@@ -792,7 +801,7 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
       </div>
       
       <!-- Grid de tarjetas -->
-      <div id="cards" class="grid gap-6 px-6 md:px-12" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); max-width: calc(100% - 3rem);"></div>
+      <div id="cards" class="grid gap-4 sm:gap-6 px-3 sm:px-6 md:px-12" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));"></div>
       
       <!-- Mensaje de no resultados para Automatización -->
       <div id="noResultsAuto" class="hidden bg-gray-50 rounded-2xl p-8 text-center mx-6 md:mx-12">
@@ -813,7 +822,7 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
         </p>
       </div>
     </footer>
-
+    </div>
   </div>
   
   <!-- ========== COMPONENTE FLOTANTE SELECTOR MES/AÑO ========== -->
