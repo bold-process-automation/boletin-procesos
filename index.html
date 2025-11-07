@@ -678,83 +678,78 @@
 
     <!-- ========== VALOR AGREGADO POR UNIDAD DE NEGOCIO ========== -->
     <section id="valor-agregado" class="mt-24 scroll-mt-32">
-      <!-- Sección expandida a ancho completo -->
-      <div class="w-full">
-        <!-- Título alineado a la izquierda -->
-        <div class="mb-16 mx-auto px-6 md:px-12" style="max-width: 70%;">
-            <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8 text-left">
-              <span style="color: #121E6C;">
-                Valor Agregado
-              </span>
-            </h2>
-            <p class="text-lg md:text-xl leading-relaxed mb-6" style="color: #606060; text-align: justify;">
-              Las actividades que agregan valor son aquellas completamente automatizadas o que no pueden automatizarse debido a que requieren intervención del intelecto humano para su ejecución. Las demás actividades no agregan valor y requieren iniciativas de automatización.
-            </p>
-            <p class="text-lg md:text-xl leading-relaxed mb-6" style="color: #606060; text-align: justify;">
-              El porcentaje indica cuánto valor agregado tiene cada proceso comparando el total de actividades contra las que sí agregan valor. Un porcentaje menor significa mayor oportunidad de automatización.
-            </p>
-            <p class="text-lg md:text-xl leading-relaxed" style="color: #606060; text-align: justify;">
-              Aunque no todos los procesos pueden llegar al 100%, se recomienda implementar estrategias para alcanzar al menos el 80% de valor agregado.
-            </p>
-        </div>
-        
-        <!-- Grid de tarjetas expandido -->
-        <div id="valueAddedCards" class="mx-auto px-6 md:px-12" style="max-width: 70%;">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Tarjeta SAS -->
-            <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[450px]">
-              <!-- Header estilo Bold.co -->
-              <div class="p-6" style="background: linear-gradient(to right, #121E6C, #EE424E);">
-                <div class="flex items-center gap-4">
-                  <img src="datafono-bold.png" alt="Datáfono Bold" class="w-12 h-12 object-contain">
-                <div>
-                  <h3 class="text-lg font-bold text-white">Bold.co SAS</h3>
-                  <p class="text-white/90 text-sm">Valor agregado por unidad de negocio</p>
-                </div>
-                </div>
+      <!-- Título alineado a la izquierda -->
+      <div class="mb-16 px-6 md:px-12">
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8 text-left">
+            <span style="color: #121E6C;">
+              Valor Agregado
+            </span>
+          </h2>
+          <p class="text-lg md:text-xl leading-relaxed mb-6" style="color: #606060; text-align: justify;">
+            Las actividades que agregan valor son aquellas completamente automatizadas o que no pueden automatizarse debido a que requieren intervención del intelecto humano para su ejecución. Las demás actividades no agregan valor y requieren iniciativas de automatización.
+          </p>
+          <p class="text-lg md:text-xl leading-relaxed mb-6" style="color: #606060; text-align: justify;">
+            El porcentaje indica cuánto valor agregado tiene cada proceso comparando el total de actividades contra las que sí agregan valor. Un porcentaje menor significa mayor oportunidad de automatización.
+          </p>
+          <p class="text-lg md:text-xl leading-relaxed" style="color: #606060; text-align: justify;">
+            Aunque no todos los procesos pueden llegar al 100%, se recomienda implementar estrategias para alcanzar al menos el 80% de valor agregado.
+          </p>
+      </div>
+      
+      <!-- Grid de tarjetas expandido -->
+      <div id="valueAddedCards" class="px-6 md:px-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- Tarjeta SAS -->
+          <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[450px]">
+            <!-- Header estilo Bold.co -->
+            <div class="p-6" style="background: linear-gradient(to right, #121E6C, #EE424E);">
+              <div class="flex items-center gap-4">
+                <img src="datafono-bold.png" alt="Datáfono Bold" class="w-12 h-12 object-contain">
+              <div>
+                <h3 class="text-lg font-bold text-white">Bold.co SAS</h3>
+                <p class="text-white/90 text-sm">Valor agregado por unidad de negocio</p>
               </div>
-              
-              <!-- Contenido del gráfico -->
-              <div class="p-6 flex-1">
-                <div class="bg-gradient-to-br from-gray-50 to-white p-4 rounded-2xl border border-gray-100 h-full shadow-inner">
-                  <img id="img1" alt="Valor agregado SAS" class="w-full h-full object-contain rounded-xl cursor-zoom-in hover:scale-[1.02] transition-transform duration-300">
-                </div>
               </div>
             </div>
             
-            <!-- Tarjeta CF -->
-            <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[450px]">
-              <!-- Header estilo Bold.co -->
-              <div class="p-6" style="background: linear-gradient(to right, #121E6C, #1E23A2);">
-                <div class="flex items-center gap-4">
-                  <img src="banco-bold.png" alt="Banco Bold" class="w-12 h-12 object-contain">
-                <div>
-                  <h3 class="text-lg font-bold text-white">Bold CF</h3>
-                  <p class="text-white/90 text-sm">Valor agregado por unidad de negocio</p>
-                </div>
-                </div>
+            <!-- Contenido del gráfico -->
+            <div class="p-6 flex-1">
+              <div class="bg-gradient-to-br from-gray-50 to-white p-4 rounded-2xl border border-gray-100 h-full shadow-inner">
+                <img id="img1" alt="Valor agregado SAS" class="w-full h-full object-contain rounded-xl cursor-zoom-in hover:scale-[1.02] transition-transform duration-300">
               </div>
-              
-              <!-- Contenido del gráfico -->
-              <div class="p-6 flex-1">
-                <div class="bg-gradient-to-br from-gray-50 to-white p-4 rounded-2xl border border-gray-100 h-full shadow-inner">
-                  <img id="img2" alt="Valor agregado CF" class="w-full h-full object-contain rounded-xl cursor-zoom-in hover:scale-[1.02] transition-transform duration-300">
-                </div>
+            </div>
+          </div>
+          
+          <!-- Tarjeta CF -->
+          <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[450px]">
+            <!-- Header estilo Bold.co -->
+            <div class="p-6" style="background: linear-gradient(to right, #121E6C, #1E23A2);">
+              <div class="flex items-center gap-4">
+                <img src="banco-bold.png" alt="Banco Bold" class="w-12 h-12 object-contain">
+              <div>
+                <h3 class="text-lg font-bold text-white">Bold CF</h3>
+                <p class="text-white/90 text-sm">Valor agregado por unidad de negocio</p>
+              </div>
+              </div>
+            </div>
+            
+            <!-- Contenido del gráfico -->
+            <div class="p-6 flex-1">
+              <div class="bg-gradient-to-br from-gray-50 to-white p-4 rounded-2xl border border-gray-100 h-full shadow-inner">
+                <img id="img2" alt="Valor agregado CF" class="w-full h-full object-contain rounded-xl cursor-zoom-in hover:scale-[1.02] transition-transform duration-300">
               </div>
             </div>
           </div>
         </div>
-        
-        <!-- Mensaje de no resultados para Valor Agregado -->
-        <div id="noResultsValueAdded" class="hidden mx-auto px-6 md:px-12" style="max-width: 70%;">
-          <div class="bg-gray-50 rounded-2xl p-8 text-center">
-            <div class="flex items-center justify-center mb-4">
-              <img src="unfound-icon.png" alt="No encontrado" class="w-12 h-12 opacity-60">
-            </div>
-            <h3 class="text-lg font-medium text-gray-900 mb-2">No hay datos disponibles</h3>
-            <p id="noResultsTextValueAdded" class="text-gray-600">No hay imágenes de valor agregado disponibles para este período.</p>
-          </div>
+      </div>
+      
+      <!-- Mensaje de no resultados para Valor Agregado -->
+      <div id="noResultsValueAdded" class="hidden bg-gray-50 rounded-2xl p-8 text-center mx-6 md:mx-12">
+        <div class="flex items-center justify-center mb-4">
+          <img src="unfound-icon.png" alt="No encontrado" class="w-12 h-12 opacity-60">
         </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No hay datos disponibles</h3>
+        <p id="noResultsTextValueAdded" class="text-gray-600">No hay imágenes de valor agregado disponibles para este período.</p>
       </div>
 
       <!-- Modal/lightbox para ampliar -->
@@ -766,22 +761,22 @@
     <!-- ========== AUTOMATIZACIONES (TARJETAS) ========== -->
     <section id="automatizaciones" class="mt-24 scroll-mt-32">
       <!-- Header estilo de las imágenes con tipografía moderna -->
-      <div class="mb-16 mx-auto px-6 md:px-12" style="max-width: 70%;">
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8 text-left">
-            <span style="color: #121E6C;">
-              Automatización
-            </span>
-          </h2>
-          
-          <p class="text-lg md:text-xl leading-relaxed mb-8" style="color: #606060; text-align: justify; max-width: 100%;">
-            En esta sección, podrás consultar las aplicaciones de automatización en producción por el equipo de automatización de procesos.
+      <div class="mb-16 px-6 md:px-12">
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8 text-left">
+          <span style="color: #121E6C;">
+            Automatización
+          </span>
+        </h2>
+        
+        <p class="text-lg md:text-xl leading-relaxed mb-8" style="color: #606060; text-align: justify; max-width: 100%;">
+          En esta sección, podrás consultar las aplicaciones de automatización en producción por el equipo de automatización de procesos.
 
 Cada tarjeta incluye una descripción detallada de la automatización, el valor agregado que aporta al proceso y cómo su implementación contribuye a la eficiencia.
-          </p>
+        </p>
       </div>
       
       <!-- Controles sin contenedor, en el aire -->
-      <div class="mb-8 mx-auto px-6 md:px-12" style="max-width: 70%;">
+      <div class="mb-8 px-6 md:px-12">
         <!-- Búsqueda principal con botón de limpiar -->
         <div class="mb-6">
           <div class="flex items-center gap-4">
@@ -794,14 +789,13 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
             </button>
           </div>
         </div>
-        
       </div>
       
       <!-- Grid de tarjetas -->
-      <div id="cards" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mx-auto px-6 md:px-12" style="max-width: 70%;"></div>
+      <div id="cards" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 px-6 md:px-12"></div>
       
       <!-- Mensaje de no resultados para Automatización -->
-      <div id="noResultsAuto" class="hidden bg-gray-50 rounded-2xl p-8 text-center mx-auto px-6 md:px-12" style="max-width: 70%;">
+      <div id="noResultsAuto" class="hidden bg-gray-50 rounded-2xl p-8 text-center mx-6 md:mx-12">
         <div class="flex items-center justify-center mb-4">
           <img src="unfound-icon.png" alt="No encontrado" class="w-12 h-12 opacity-60">
         </div>
