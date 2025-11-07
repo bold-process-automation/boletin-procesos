@@ -1973,8 +1973,8 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
       : detalleTexto;
     const detalleHTML = detalleTexto.length > MAX_LENGTH
       ? `<div class="relative detalle-cell" style="max-width: 400px;">
-           <span class="detalle-preview">${detalleTruncado}</span>
-           <div class="detalle-tooltip hidden absolute z-50 bg-white border-2 border-blue-500 rounded-lg shadow-2xl p-4 text-sm" style="left: 0; top: 100%; margin-top: 4px; min-width: 300px; max-width: 500px; color: #334155; line-height: 1.6;">
+           <span class="detalle-preview cursor-pointer">${detalleTruncado}</span>
+           <div class="detalle-tooltip hidden fixed z-[9999] bg-white rounded-xl p-4 text-sm" style="min-width: 300px; max-width: 500px; color: #334155; line-height: 1.6; box-shadow: 0 10px 40px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05);">
              ${detalleTexto}
            </div>
          </div>`
@@ -2146,20 +2146,59 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
       prevBtn.disabled = page <= 1; 
       nextBtn.disabled = page >= totalPages;
       
-      // Agregar event listeners para tooltips de detalle
+      // Agregar event listeners para tooltips de detalle con posicionamiento inteligente
       setTimeout(() => {
         document.querySelectorAll('.detalle-cell').forEach(cell => {
           const preview = cell.querySelector('.detalle-preview');
           const tooltip = cell.querySelector('.detalle-tooltip');
           
           if (preview && tooltip) {
-            cell.addEventListener('mouseenter', () => {
+            let isHovering = false;
+            
+            const showTooltip = (e) => {
+              isHovering = true;
+              
+              // Obtener posición del preview
+              const rect = preview.getBoundingClientRect();
+              const viewportHeight = window.innerHeight;
+              const tooltipHeight = 200; // Estimado
+              
+              // Decidir si mostrar arriba o abajo
+              const spaceBelow = viewportHeight - rect.bottom;
+              const spaceAbove = rect.top;
+              
               tooltip.classList.remove('hidden');
+              
+              // Posicionar el tooltip
+              if (spaceBelow < tooltipHeight && spaceAbove > spaceBelow) {
+                // Mostrar arriba si no hay espacio abajo
+                tooltip.style.left = rect.left + 'px';
+                tooltip.style.top = (rect.top - tooltip.offsetHeight - 8) + 'px';
+              } else {
+                // Mostrar abajo (default)
+                tooltip.style.left = rect.left + 'px';
+                tooltip.style.top = (rect.bottom + 8) + 'px';
+              }
+            };
+            
+            const hideTooltip = () => {
+              isHovering = false;
+              setTimeout(() => {
+                if (!isHovering) {
+                  tooltip.classList.add('hidden');
+                }
+              }, 100);
+            };
+            
+            preview.addEventListener('mouseenter', showTooltip);
+            preview.addEventListener('mouseleave', hideTooltip);
+            
+            // Mantener tooltip visible mientras el cursor está sobre él
+            tooltip.addEventListener('mouseenter', () => {
+              isHovering = true;
             });
             
-            cell.addEventListener('mouseleave', () => {
-              tooltip.classList.add('hidden');
-            });
+            tooltip.addEventListener('mouseleave', hideTooltip);
           }
         });
       }, 50);
