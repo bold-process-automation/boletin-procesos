@@ -501,7 +501,7 @@
               </span>
             </h2>
           
-          <p class="text-lg md:text-xl max-w-3xl leading-relaxed mb-8 text-left" style="color: #606060;">
+          <p class="text-lg md:text-xl max-w-3xl leading-relaxed mb-8" style="color: #606060; text-align: justify;">
             A continuación podrás consultar el registro y seguimiento detallado de creaciones, actualizaciones y modificaciones en los procesos organizacionales de Bold CF y Bold.co SAS.
           </p>
       </div>
@@ -520,12 +520,14 @@
       </div>
       
       <!-- Paginación y contador arriba de la tabla -->
-      <div class="flex items-center justify-between mt-4 mb-2 text-xs text-slate-600 px-6 md:px-12">
-        <div id="countCambios">0 resultados</div>
-        <div class="flex gap-2">
-          <button id="prevPage" class="rounded-md border px-2 py-1 bg-white border-slate-300 hover:bg-slate-50">«</button>
-          <span id="pageInfo" class="px-1">1 / 1</span>
-          <button id="nextPage" class="rounded-md border px-2 py-1 bg-white border-slate-300 hover:bg-slate-50">»</button>
+      <div class="flex items-center justify-between mt-4 mb-2 text-sm text-slate-600 px-6 md:px-12">
+        <div id="countCambios" class="font-medium">0 resultados</div>
+        <div class="flex items-center gap-2">
+          <button id="prevPage" class="rounded-lg border px-3 py-2 bg-white border-slate-300 hover:bg-slate-50 font-medium transition-colors" style="color: #121E6C;">«</button>
+          <div id="pageInfo" class="flex items-center gap-1">
+            <!-- Páginas generadas dinámicamente -->
+          </div>
+          <button id="nextPage" class="rounded-lg border px-3 py-2 bg-white border-slate-300 hover:bg-slate-50 font-medium transition-colors" style="color: #121E6C;">»</button>
         </div>
       </div>
       
@@ -685,13 +687,13 @@
                 Valor Agregado
               </span>
             </h2>
-            <p class="text-lg md:text-xl leading-relaxed max-w-4xl text-left mb-6" style="color: #606060;">
-              Las actividades que agregan valor son aquellas completamente automatizadas o que requieren intervención humana para realizarse. Las demás actividades no agregan valor y deberían automatizarse.
+            <p class="text-lg md:text-xl leading-relaxed max-w-4xl mb-6" style="color: #606060; text-align: justify;">
+              Las actividades que agregan valor son aquellas completamente automatizadas o que no pueden automatizarse debido a que requieren intervención del intelecto humano para su ejecución. Las demás actividades no agregan valor y requieren iniciativas de automatización.
             </p>
-            <p class="text-lg md:text-xl leading-relaxed max-w-4xl text-left mb-6" style="color: #606060;">
+            <p class="text-lg md:text-xl leading-relaxed max-w-4xl mb-6" style="color: #606060; text-align: justify;">
               El porcentaje indica cuánto valor agregado tiene cada proceso comparando el total de actividades contra las que sí agregan valor. Un porcentaje menor significa mayor oportunidad de automatización.
             </p>
-            <p class="text-lg md:text-xl leading-relaxed max-w-4xl text-left" style="color: #606060;">
+            <p class="text-lg md:text-xl leading-relaxed max-w-4xl" style="color: #606060; text-align: justify;">
               Aunque no todos los procesos pueden llegar al 100%, se recomienda implementar estrategias para alcanzar al menos el 80% de valor agregado.
             </p>
         </div>
@@ -771,7 +773,7 @@
             </span>
           </h2>
           
-          <p class="text-lg md:text-xl max-w-3xl leading-relaxed mb-8 text-left" style="color: #606060;">
+          <p class="text-lg md:text-xl max-w-3xl leading-relaxed mb-8" style="color: #606060; text-align: justify;">
             En esta sección, podrás consultar las aplicaciones de automatización en producción por el equipo de automatización de procesos.
 
 Cada tarjeta incluye una descripción detallada de la automatización, el valor agregado que aporta al proceso y cómo su implementación contribuye a la eficiencia.
@@ -2090,7 +2092,7 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
       
       // Actualizar contador
       countCambios.textContent = '0 resultados';
-      pageInfo.textContent = '0 / 0';
+      pageInfo.innerHTML = '';
       prevBtn.disabled = true;
       nextBtn.disabled = true;
     } else {
@@ -2100,7 +2102,32 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
       
       tbodyCambios.innerHTML = list.map(rowCambios).join(''); 
       countCambios.textContent = all.length + ' resultado' + (all.length !== 1 ? 's' : ''); 
-      pageInfo.textContent = page + ' / ' + totalPages; 
+      
+      // Generar botones de página individuales
+      pageInfo.innerHTML = '';
+      for (let i = 1; i <= totalPages; i++) {
+        const pageBtn = document.createElement('button');
+        pageBtn.textContent = i;
+        pageBtn.className = 'px-3 py-2 rounded-lg font-bold transition-all duration-200';
+        
+        if (i === page) {
+          // Página actual - resaltada
+          pageBtn.style.cssText = 'background-color: #121E6C; color: white; border: 2px solid #121E6C;';
+        } else {
+          // Páginas inactivas
+          pageBtn.style.cssText = 'background-color: white; color: #121E6C; border: 2px solid #e2e8f0;';
+          pageBtn.onmouseover = function() { this.style.backgroundColor = '#f1f5f9'; };
+          pageBtn.onmouseout = function() { this.style.backgroundColor = 'white'; };
+        }
+        
+        pageBtn.onclick = () => {
+          page = i;
+          renderCambios();
+        };
+        
+        pageInfo.appendChild(pageBtn);
+      }
+      
       prevBtn.disabled = page <= 1; 
       nextBtn.disabled = page >= totalPages;
     }
