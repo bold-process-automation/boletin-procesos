@@ -5,6 +5,10 @@
 // Para reactivar: cambia AUTH_DISABLED a false
 const AUTH_DISABLED = false;
 
+// Duración de la sesión persistente (horas)
+const SESSION_DURATION_HOURS = 24;
+const LOCAL_SESSION_KEY = 'boldUserSession';
+
 const ALLOWED_DOMAINS = ['bold.co', 'boldcf.co'];
 const GOOGLE_CLIENT_ID = '470634824045-g3big92p2sndrk0nf97omjg3otn8oc2s.apps.googleusercontent.com';
 
@@ -15,11 +19,16 @@ function initGoogleAuth() {
   google.accounts.id.initialize({
     client_id: GOOGLE_CLIENT_ID,
     callback: handleCredentialResponse,
-    auto_select: false,
+    auto_select: true, // habilita One Tap para reingreso sin fricción
     cancel_on_tap_outside: true
   });
 
-  // Render the sign-in button
+  // Prompt One Tap si no hay sesión activa
+  if (!getPersistedSession()) {
+    try { google.accounts.id.prompt(); } catch (e) {}
+  }
+
+  // Render the sign-in button (fallback manual)
   google.accounts.id.renderButton(
     document.getElementById('googleSignInButton'),
     { 
@@ -31,8 +40,8 @@ function initGoogleAuth() {
     }
   );
 
-  // Check if user was previously authenticated
-  checkExistingSession();
+  // Si ya hay sesión persistida, conceder acceso
+  if (checkExistingSession()) return;
 }
 
 // Handle Google Sign-In response
@@ -53,8 +62,8 @@ function handleCredentialResponse(response) {
         picture: userInfo.picture
       };
       
-      // Store session
-      sessionStorage.setItem('boldUser', JSON.stringify(currentUser));
+      // Store session (persistente)
+      persistSession(currentUser);
       
       // Grant access
       grantAccess();
@@ -78,17 +87,36 @@ function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
+// Persist session in localStorage with expiration
+function persistSession(user){
+  const expAt = Date.now() + SESSION_DURATION_HOURS * 60 * 60 * 1000;
+  const data = { user, expAt };
+  try { localStorage.setItem(LOCAL_SESSION_KEY, JSON.stringify(data)); } catch (_) {}
+}
+
+function getPersistedSession(){
+  try {
+    const dataStr = localStorage.getItem(LOCAL_SESSION_KEY);
+    if (!dataStr) return null;
+    const data = JSON.parse(dataStr);
+    if (!data || !data.expAt || !data.user) return null;
+    if (Date.now() > data.expAt) {
+      localStorage.removeItem(LOCAL_SESSION_KEY);
+      return null;
+    }
+    return data.user;
+  } catch (_) { return null; }
+}
+
 // Check if user has existing valid session
 function checkExistingSession() {
-  const storedUser = sessionStorage.getItem('boldUser');
-  if (storedUser) {
-    try {
-      currentUser = JSON.parse(storedUser);
-      grantAccess();
-    } catch (error) {
-      sessionStorage.removeItem('boldUser');
-    }
+  const persisted = getPersistedSession();
+  if (persisted) {
+    currentUser = persisted;
+    grantAccess();
+    return true;
   }
+  return false;
 }
 
 // Grant access to dashboard
@@ -173,7 +201,9 @@ function displayUserInfo() {
 
 // Sign out
 function signOut() {
-  sessionStorage.removeItem('boldUser');
+  try { sessionStorage.removeItem('boldUser'); } catch(_){}
+  try { localStorage.removeItem(LOCAL_SESSION_KEY); } catch(_){}
+  try { if (google?.accounts?.id?.disableAutoSelect) google.accounts.id.disableAutoSelect(); } catch(_){}
   currentUser = null;
   location.reload();
 }
@@ -183,17 +213,33 @@ window.addEventListener('load', () => {
   // ⚠️ Si la autenticación está desactivada, dar acceso directo
   if (AUTH_DISABLED) {
     console.log('⚠️ AUTENTICACIÓN DESACTIVADA - Acceso abierto para todos');
-    // Ocultar pantalla de login
     document.getElementById('loginScreen').style.display = 'none';
-    // Mostrar contenido principal
     document.getElementById('mainContent').style.display = 'block';
     return;
   }
+
+  // Primero: intentar usar sesión persistida sin depender de Google
+  if (checkExistingSession()) return;
   
-  // Wait for Google API to load
-  if (typeof google !== 'undefined') {
-    initGoogleAuth();
-  } else {
-    console.error('Google API no cargada');
-  }
+  // Luego: esperar la API de Google para permitir One Tap / botón
+  const bootstrap = () => {
+    if (typeof google !== 'undefined' && google?.accounts?.id) {
+      initGoogleAuth();
+    } else {
+      // Reintentar por un corto período (hasta 2s)
+      let retries = 0;
+      const t = setInterval(() => {
+        retries++;
+        if (typeof google !== 'undefined' && google?.accounts?.id) {
+          clearInterval(t);
+          initGoogleAuth();
+        } else if (retries > 20) {
+          clearInterval(t);
+          console.error('Google API no cargada');
+        }
+      }, 100);
+    }
+  };
+
+  bootstrap();
 });
