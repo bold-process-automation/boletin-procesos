@@ -514,6 +514,27 @@
             A continuación podrás consultar el registro y seguimiento detallado de creaciones, actualizaciones y modificaciones en los procesos organizacionales de Bold CF y Bold.co SAS.
           </p>
       </div>
+      
+      <!-- Tabla resumen de conteos -->
+      <div class="mb-8 px-3 sm:px-6 md:px-12">
+        <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100">
+          <table class="w-full text-xs sm:text-sm">
+            <thead>
+              <tr style="background: linear-gradient(to right, #121E6C, #1E23A2); color: white;">
+                <th class="px-3 sm:px-4 py-3 text-left font-bold">Tipo de Documento</th>
+                <th class="px-3 sm:px-4 py-3 text-center font-bold">Creación</th>
+                <th class="px-3 sm:px-4 py-3 text-center font-bold">Actualización</th>
+                <th class="px-3 sm:px-4 py-3 text-center font-bold">Derogación</th>
+                <th class="px-3 sm:px-4 py-3 text-center font-bold">Total</th>
+              </tr>
+            </thead>
+            <tbody id="summaryTableBody" class="divide-y divide-gray-100">
+              <!-- Se genera dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
       <!-- Barra de búsqueda sencilla -->
       <div class="mb-8 px-6 md:px-12">
         <div class="flex items-center gap-4">
@@ -2208,6 +2229,69 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
     }
     
     updateFilterIndicators();
+    updateSummaryTable(); // Actualizar tabla resumen después de renderizar cambios
+  }
+  
+  // Función para actualizar tabla resumen de conteos
+  function updateSummaryTable() {
+    // Contar por tipo de documento basado en el código
+    // PR = Procesos, IN = Instructivos, PO = Políticas, MA = Manuales, CO = Códigos
+    const documentTypes = {
+      'Procesos': { pattern: /-PR-/i, creacion: 0, actualizacion: 0, derogacion: 0 },
+      'Instructivos': { pattern: /-IN-/i, creacion: 0, actualizacion: 0, derogacion: 0 },
+      'Políticas': { pattern: /-PO-/i, creacion: 0, actualizacion: 0, derogacion: 0 },
+      'Manuales': { pattern: /-MA-/i, creacion: 0, actualizacion: 0, derogacion: 0 },
+      'Códigos': { pattern: /-CO-/i, creacion: 0, actualizacion: 0, derogacion: 0 }
+    };
+    
+    // Contar cambios del mes seleccionado
+    cambios.forEach(r => {
+      // Verificar si es del mes actual
+      if (r.fecha && currentSelectedMonth && currentSelectedYear) {
+        const itemDate = parseLocalDate(r.fecha);
+        const itemMonth = itemDate.getMonth() + 1;
+        const itemYear = itemDate.getFullYear();
+        
+        if (itemMonth === currentSelectedMonth && itemYear === currentSelectedYear) {
+          // Verificar tipo de documento por patrón de código
+          const codigo = r.codigo || '';
+          const tipo = r.tipo || '';
+          
+          for (const [docType, doc] of Object.entries(documentTypes)) {
+            if (doc.pattern.test(codigo)) {
+              if (tipo.toLowerCase().includes('creaci')) doc.creacion++;
+              else if (tipo.toLowerCase().includes('actualiz')) doc.actualizacion++;
+              else if (tipo.toLowerCase().includes('derog')) doc.derogacion++;
+              break;
+            }
+          }
+        }
+      }
+    });
+    
+    // Renderizar tabla
+    const tbody = document.getElementById('summaryTableBody');
+    tbody.innerHTML = '';
+    
+    for (const [docType, counts] of Object.entries(documentTypes)) {
+      const total = counts.creacion + counts.actualizacion + counts.derogacion;
+      const row = document.createElement('tr');
+      row.className = 'hover:bg-gray-50 transition-colors';
+      
+      // Asignar color alternado
+      if (Object.keys(documentTypes).indexOf(docType) % 2 === 0) {
+        row.style.backgroundColor = '#f9fafb';
+      }
+      
+      row.innerHTML = `
+        <td class="px-3 sm:px-4 py-3 font-medium" style="color: #121E6C;">${docType}</td>
+        <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #22c55e;">${counts.creacion}</td>
+        <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #f59e0b;">${counts.actualizacion}</td>
+        <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #ef4444;">${counts.derogacion}</td>
+        <td class="px-3 sm:px-4 py-3 text-center font-bold" style="color: #121E6C;">${total}</td>
+      `;
+      tbody.appendChild(row);
+    }
   }
   
   // Función para actualizar indicadores visuales de filtros activos
