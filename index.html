@@ -515,23 +515,10 @@
           </p>
       </div>
       
-      <!-- Tabla resumen de conteos -->
-      <div class="mb-8 px-3 sm:px-6 md:px-12">
-        <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 inline-block">
-          <table class="text-xs sm:text-sm whitespace-nowrap">
-            <thead>
-              <tr style="background-color: #121E6C; color: white;">
-                <th class="px-3 sm:px-4 py-3 text-left font-bold">Tipo de Documento</th>
-                <th class="px-3 sm:px-4 py-3 text-center font-bold">Creación</th>
-                <th class="px-3 sm:px-4 py-3 text-center font-bold">Actualización</th>
-                <th class="px-3 sm:px-4 py-3 text-center font-bold">Derogación</th>
-                <th class="px-3 sm:px-4 py-3 text-center font-bold">Total</th>
-              </tr>
-            </thead>
-            <tbody id="summaryTableBody" class="divide-y divide-gray-100">
-              <!-- Se genera dinámicamente -->
-            </tbody>
-          </table>
+      <!-- Resumen de conteos con cards -->
+      <div class="mb-12 px-3 sm:px-6 md:px-12">
+        <div id="summaryCards" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Se genera dinámicamente -->
         </div>
       </div>
       
@@ -2232,91 +2219,80 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
     updateSummaryTable(); // Actualizar tabla resumen después de renderizar cambios
   }
   
-  // Función para actualizar tabla resumen de conteos
+  // Función para actualizar cards de resumen
   function updateSummaryTable() {
     // Contar por tipo de documento basado en el código
-    // PR = Procesos, IN = Instructivos, PO = Políticas, MA = Manuales, CO = Códigos
     const documentTypes = {
       'Procesos': { pattern: /-PR-/i, creacion: 0, actualizacion: 0, derogacion: 0 },
       'Instructivos': { pattern: /-IN-/i, creacion: 0, actualizacion: 0, derogacion: 0 },
-      'Políticas': { pattern: /-PO-/i, creacion: 0, actualizacion: 0, derogacion: 0 },
-      'Manuales': { pattern: /-MA-/i, creacion: 0, actualizacion: 0, derogacion: 0 },
-      'Códigos': { pattern: /-CO-/i, creacion: 0, actualizacion: 0, derogacion: 0 }
+      'Políticas, Manuales y Códigos': { patterns: [/-PO-/i, /-MA-/i, /-CO-/i], creacion: 0, actualizacion: 0, derogacion: 0 }
     };
     
     // Contar cambios del mes seleccionado
     cambios.forEach(r => {
-      // Verificar si es del mes actual
       if (r.fecha && currentSelectedMonth && currentSelectedYear) {
         const itemDate = parseLocalDate(r.fecha);
         const itemMonth = itemDate.getMonth() + 1;
         const itemYear = itemDate.getFullYear();
         
         if (itemMonth === currentSelectedMonth && itemYear === currentSelectedYear) {
-          // Verificar tipo de documento por patrón de código
           const codigo = r.codigo || '';
           const tipo = r.tipo || '';
           
-          for (const [docType, doc] of Object.entries(documentTypes)) {
-            if (doc.pattern.test(codigo)) {
-              if (tipo.toLowerCase().includes('creaci')) doc.creacion++;
-              else if (tipo.toLowerCase().includes('actualiz')) doc.actualizacion++;
-              else if (tipo.toLowerCase().includes('derog')) doc.derogacion++;
-              break;
-            }
+          // Procesos
+          if (documentTypes.Procesos.pattern.test(codigo)) {
+            if (tipo.toLowerCase().includes('creaci')) documentTypes.Procesos.creacion++;
+            else if (tipo.toLowerCase().includes('actualiz')) documentTypes.Procesos.actualizacion++;
+            else if (tipo.toLowerCase().includes('derog')) documentTypes.Procesos.derogacion++;
+          }
+          // Instructivos
+          else if (documentTypes.Instructivos.pattern.test(codigo)) {
+            if (tipo.toLowerCase().includes('creaci')) documentTypes.Instructivos.creacion++;
+            else if (tipo.toLowerCase().includes('actualiz')) documentTypes.Instructivos.actualizacion++;
+            else if (tipo.toLowerCase().includes('derog')) documentTypes.Instructivos.derogacion++;
+          }
+          // Otros (Políticas, Manuales, Códigos)
+          else if (documentTypes['Políticas, Manuales y Códigos'].patterns.some(p => p.test(codigo))) {
+            if (tipo.toLowerCase().includes('creaci')) documentTypes['Políticas, Manuales y Códigos'].creacion++;
+            else if (tipo.toLowerCase().includes('actualiz')) documentTypes['Políticas, Manuales y Códigos'].actualizacion++;
+            else if (tipo.toLowerCase().includes('derog')) documentTypes['Políticas, Manuales y Códigos'].derogacion++;
           }
         }
       }
     });
     
-    // Renderizar tabla con 3 filas: Procesos, Instructivos, Políticas+Manuales+Códigos
-    const tbody = document.getElementById('summaryTableBody');
-    tbody.innerHTML = '';
+    // Renderizar cards
+    const container = document.getElementById('summaryCards');
+    container.innerHTML = '';
     
-    // Fila 1: Procesos
-    const procesoRow = document.createElement('tr');
-    procesoRow.style.backgroundColor = '#f9fafb';
-    const procesoTotal = documentTypes.Procesos.creacion + documentTypes.Procesos.actualizacion + documentTypes.Procesos.derogacion;
-    procesoRow.innerHTML = `
-      <td class="px-3 sm:px-4 py-3 font-medium" style="color: #121E6C;">Procesos</td>
-      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${documentTypes.Procesos.creacion}</td>
-      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${documentTypes.Procesos.actualizacion}</td>
-      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${documentTypes.Procesos.derogacion}</td>
-      <td class="px-3 sm:px-4 py-3 text-center font-bold" style="color: #121E6C;">${procesoTotal}</td>
-    `;
-    tbody.appendChild(procesoRow);
-    
-    // Fila 2: Instructivos
-    const instructivoRow = document.createElement('tr');
-    const instructivoTotal = documentTypes.Instructivos.creacion + documentTypes.Instructivos.actualizacion + documentTypes.Instructivos.derogacion;
-    instructivoRow.innerHTML = `
-      <td class="px-3 sm:px-4 py-3 font-medium" style="color: #121E6C;">Instructivos</td>
-      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${documentTypes.Instructivos.creacion}</td>
-      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${documentTypes.Instructivos.actualizacion}</td>
-      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${documentTypes.Instructivos.derogacion}</td>
-      <td class="px-3 sm:px-4 py-3 text-center font-bold" style="color: #121E6C;">${instructivoTotal}</td>
-    `;
-    tbody.appendChild(instructivoRow);
-    
-    // Fila 3: Políticas + Manuales + Códigos
-    const otrosRow = document.createElement('tr');
-    otrosRow.style.backgroundColor = '#f9fafb';
-    const polTotal = documentTypes.Políticas.creacion + documentTypes.Políticas.actualizacion + documentTypes.Políticas.derogacion;
-    const manualTotal = documentTypes.Manuales.creacion + documentTypes.Manuales.actualizacion + documentTypes.Manuales.derogacion;
-    const codigoTotal = documentTypes.Códigos.creacion + documentTypes.Códigos.actualizacion + documentTypes.Códigos.derogacion;
-    const combinedCreacion = documentTypes.Políticas.creacion + documentTypes.Manuales.creacion + documentTypes.Códigos.creacion;
-    const combinedActualizacion = documentTypes.Políticas.actualizacion + documentTypes.Manuales.actualizacion + documentTypes.Códigos.actualizacion;
-    const combinedDerogacion = documentTypes.Políticas.derogacion + documentTypes.Manuales.derogacion + documentTypes.Códigos.derogacion;
-    const combinedTotal = polTotal + manualTotal + codigoTotal;
-    
-    otrosRow.innerHTML = `
-      <td class="px-3 sm:px-4 py-3 font-medium" style="color: #121E6C;">Políticas, Manuales y Códigos</td>
-      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${combinedCreacion}</td>
-      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${combinedActualizacion}</td>
-      <td class="px-3 sm:px-4 py-3 text-center font-semibold" style="color: #121E6C;">${combinedDerogacion}</td>
-      <td class="px-3 sm:px-4 py-3 text-center font-bold" style="color: #121E6C;">${combinedTotal}</td>
-    `;
-    tbody.appendChild(otrosRow);
+    Object.entries(documentTypes).forEach(([title, counts]) => {
+      const total = counts.creacion + counts.actualizacion + counts.derogacion;
+      
+      const card = document.createElement('div');
+      card.className = 'bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-shadow';
+      card.innerHTML = `
+        <h3 class="text-sm font-semibold mb-4" style="color: #121E6C;">${title}</h3>
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-gray-600">Creación</span>
+            <span class="text-2xl font-bold" style="color: #121E6C;">${counts.creacion}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-gray-600">Actualización</span>
+            <span class="text-2xl font-bold" style="color: #121E6C;">${counts.actualizacion}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-gray-600">Derogación</span>
+            <span class="text-2xl font-bold" style="color: #121E6C;">${counts.derogacion}</span>
+          </div>
+          <div class="border-t border-gray-200 pt-3 mt-3 flex justify-between items-center">
+            <span class="text-sm font-semibold text-gray-700">Total</span>
+            <span class="text-3xl font-bold" style="color: #121E6C;">${total}</span>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
   }
   
   // Función para actualizar indicadores visuales de filtros activos
