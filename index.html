@@ -1943,9 +1943,15 @@ Cada tarjeta incluye una descripción detallada de la automatización, el valor 
  function rowCambios(r){
     // Nuevo estilo para las etiquetas: sin negrita, fondo gris claro, centradas
     const tipoStyle = 'background-color: #f1f2f6; color: #6b7280;';
-    const va = (!r.valor_agregado || String(r.valor_agregado).trim() === '' || String(r.valor_agregado).toUpperCase() === 'N/A')
-      ? 'No aplica'
-      : r.valor_agregado;
+    
+    // Formatear VA redondeado sin decimales
+    let va;
+    if (!r.valor_agregado || String(r.valor_agregado).trim() === '' || String(r.valor_agregado).toUpperCase() === 'N/A') {
+      va = 'No aplica';
+    } else {
+      const numValue = parseFloat(String(r.valor_agregado).replace('%', ''));
+      va = isNaN(numValue) ? r.valor_agregado : `${Math.round(numValue)}%`;
+    }
     
     // Obtener color para VA
     const vaColor = getVAColor(r.valor_agregado);
