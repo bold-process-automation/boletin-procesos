@@ -301,7 +301,7 @@ html {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background-image: url('../uncheckbox-icon.png');
+  background-image: url('../assets/icons/uncheckbox-icon.png');
   background-size: 16px 16px;
   background-position: center;
   background-repeat: no-repeat;
@@ -309,7 +309,7 @@ html {
 
 /* Checkbox seleccionado - usar imagen checkbox-icon */
 #filterDropdown input[type="checkbox"]:checked {
-  background-image: url('../checkbox-icon.png');
+  background-image: url('../assets/icons/checkbox-icon.png');
   background-size: 16px 16px;
   background-position: center;
   background-repeat: no-repeat;
