@@ -2,7 +2,6 @@
 // LÓGICA PRINCIPAL (Datos, Filtros, Tablas)
 // ==========================================
 
-// Mapeo de enlaces de Coda
 const documentLinks = {
   "Gestión de transferencias ACH": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/OP-PR-022-Gestion-de-transferencias-ACH_suemVnbM?search=Gesti%C3%B3n%20de%20transferencias%20ACH#Copy-of-Copy-of-Cabezote-122-44_tutlTec9",
   "Instructivo Actualización Fuente de Adquirencia": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/OP-IN-030-05-Instructivo-Actualizacion-Fuente-de-Adquirencia_sue8-tzy?docIds%5B0%5D=PZrHIIUQg-&search=Instructivo%20Actualizaci%C3%B3n%20Fuente%20de%20Adquirencia",
@@ -26,7 +25,7 @@ const documentLinks = {
   "Manual Metodología Segmentación de Riesgo Clientes": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/LC-MA-009-Manual-Metodologia-Segmentacion-de-Riesgo-Clientes_suWtffT_?docIds%5B0%5D=PZrHIIUQg-&search=Manual%20Metodolog%C3%ADa%20Segmentaci%C3%B3n%20de%20Riesgo%20Clientes",
   "Política activos fijos y elementos de trabajo": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/SI-PO-002-Politica-activos-fijos-y-elementos-de-trabajo_suY6mGAt?docIds%5B0%5D=PZrHIIUQg-&search=Pol%C3%ADtica%20activos%20fijos%20y%20elementos%20de%20trabajo",
   "Solicitud QR Bold (Entre cuentas)": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/AP-PR-010-Solicitud-QR-Bold-Entre-cuentas_suzb2RZ0?docIds%5B0%5D=PZrHIIUQg-&search=Solicitud%20QR%20Bold%20%28Entre%20cuentas%29",
-  "Gestión comercial canal SMB": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/AP-PR-018-Gestion-comercial-canal-SMB_suix9GKp?docIds%5B0%5D=PZrHIIUQg-&search=Gesti%C3%B3n%20comercial%20canal%20SMB#Copy-of-Copy-6-of-ControlCambios-176_tuvOQ1P5/r3&columnId=c-M2SErj7365",
+  "Gestión comercial canal SMB": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/AP-PR-018-Gestion-comercial-canal-SMB_suix9GKp?docIds%5B0%5D=PZrHIIUQg-&search=Gesti%C3%B3n%20comercial%20canal%20SMB",
   "Gestión de beneficios": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/TH-PR-007-Gestion-de-beneficios_suN5hBT6?docIds%5B0%5D=PZrHIIUQg-&search=Gesti%C3%B3n%20de%20beneficios",
   "Liquidación y legalización de compras tarjetas corporativas": "https://coda.io/d/Arquitectura-de-Procesos_dPZrHIIUQg-/GF-PR-043-Liquidacion-y-legalizacion-de-compras-tarjetas-corpora_su4fFe1t?docIds%5B0%5D=PZrHIIUQg-&search=Liquidaci%C3%B3n%20y%20legalizaci%C3%B3n%20de%20compras%20tarjetas%20corporativas",
   "Validación de cuentas - KYC SAS": "https://coda.io/d/Arquitectura-de-Procesos-Bold-co-SAS_dywYtLrlDx7/VP-PR-103-Validacion-manual-de-cuentas-KYC-SAS_suZFDP1S?docIds%5B0%5D=ywYtLrlDx7&search=Validaci%C3%B3n%20de%20cuentas%20-%20KYC%20SAS",
@@ -57,8 +56,6 @@ const cardsEl = document.getElementById('cards');
 
 let currentSelectedMonth;
 let currentSelectedYear;
-let tempSelectedYear;
-let tempSelectedMonth;
 let floatTempSelectedYear;
 let floatTempSelectedMonth;
 
@@ -73,7 +70,7 @@ let valueAddedImages = {
   }
 }; 
 
-// Lógica de Fechas Relativas
+// --- FUNCIONES DE FECHA Y FILTRADO ---
 function getPreviousMonth() {
   const now = new Date();
   let year = now.getFullYear();
@@ -81,6 +78,7 @@ function getPreviousMonth() {
   if (month === 0) { month = 11; year = year - 1; } 
   else { month = month - 1; }
   const monthNumber = month + 1;
+  // monthNames viene de utils.js
   return { month: monthNumber, year: year, name: monthNames[month], key: `${year}-${String(monthNumber).padStart(2, '0')}`, display: `${monthNames[month]} ${year}` };
 }
 
@@ -146,7 +144,7 @@ function initializeDefaultMonth() {
   return selected;
 }
 
-// Selector de Fechas Flotante
+// --- SELECTOR FLOTANTE ---
 function updateFloatSelectorUI() {
   if (!currentSelectedMonth || !currentSelectedYear) return;
   const display = `${monthNames[currentSelectedMonth - 1]} ${currentSelectedYear}`;
@@ -154,7 +152,7 @@ function updateFloatSelectorUI() {
   if (floatSelectedMonth) floatSelectedMonth.textContent = display;
 }
 
-function toggleFloatMonthDropdown() {
+window.toggleFloatMonthDropdown = function() {
   const fmd = document.getElementById('floatMonthDropdown');
   if (!fmd) return;
   if (fmd.classList.contains('hidden')) {
@@ -164,11 +162,11 @@ function toggleFloatMonthDropdown() {
     fmd.classList.remove('hidden');
     setTimeout(() => { document.addEventListener('click', handleFloatClickOutside); }, 100);
   } else {
-    hideFloatMonthDropdown();
+    window.hideFloatMonthDropdown();
   }
 }
 
-function hideFloatMonthDropdown() {
+window.hideFloatMonthDropdown = function() {
   const fmd = document.getElementById('floatMonthDropdown');
   if (!fmd) return;
   fmd.classList.add('hidden');
@@ -179,7 +177,7 @@ function hideFloatMonthDropdown() {
 
 function handleFloatClickOutside(event) {
   const fms = document.getElementById('floatMonthSelector');
-  if (!fms?.contains(event.target)) hideFloatMonthDropdown();
+  if (!fms?.contains(event.target)) window.hideFloatMonthDropdown();
 }
 
 function populateFloatDropdowns() {
@@ -217,18 +215,67 @@ function populateFloatDropdowns() {
   });
 }
 
+// ESTAS ERAN LAS FUNCIONES FALTANTES QUE DAÑARON LOS BOTONES
+window.toggleFloatYearDropdown = function() {
+  const floatYearDropdown = document.getElementById('floatYearDropdown');
+  const floatMonthDropdownCustom = document.getElementById('floatMonthDropdownCustom');
+  if (!floatYearDropdown || !floatMonthDropdownCustom) return;
+  
+  const floatYearDropIcon = document.getElementById('floatYearDropIcon');
+  const floatMonthDropIcon = document.getElementById('floatMonthDropIcon');
+  
+  floatMonthDropdownCustom.classList.add('hidden');
+  if (floatMonthDropIcon) floatMonthDropIcon.style.transform = 'rotate(0deg)';
+  
+  if (floatYearDropdown.classList.contains('hidden')) {
+    floatYearDropdown.classList.remove('hidden');
+    if (floatYearDropIcon) floatYearDropIcon.style.transform = 'rotate(180deg)';
+  } else {
+    floatYearDropdown.classList.add('hidden');
+    if (floatYearDropIcon) floatYearDropIcon.style.transform = 'rotate(0deg)';
+  }
+}
+
+window.toggleFloatMonthDropdownInternal = function() {
+  const floatYearDropdown = document.getElementById('floatYearDropdown');
+  const floatMonthDropdownCustom = document.getElementById('floatMonthDropdownCustom');
+  if (!floatYearDropdown || !floatMonthDropdownCustom) return;
+  
+  const floatYearDropIcon = document.getElementById('floatYearDropIcon');
+  const floatMonthDropIcon = document.getElementById('floatMonthDropIcon');
+  
+  floatYearDropdown.classList.add('hidden');
+  if (floatYearDropIcon) floatYearDropIcon.style.transform = 'rotate(0deg)';
+  
+  if (floatMonthDropdownCustom.classList.contains('hidden')) {
+    floatMonthDropdownCustom.classList.remove('hidden');
+    if (floatMonthDropIcon) floatMonthDropIcon.style.transform = 'rotate(180deg)';
+  } else {
+    floatMonthDropdownCustom.classList.add('hidden');
+    if (floatMonthDropIcon) floatMonthDropIcon.style.transform = 'rotate(0deg)';
+  }
+}
+
 function selectFloatYear(year) {
   floatTempSelectedYear = year;
   const availMonths = getAvailableMonthsForYear(year).map(m => m.number);
   if (!availMonths.includes(floatTempSelectedMonth)) floatTempSelectedMonth = availMonths[availMonths.length - 1]; 
   populateFloatDropdowns();
-  if (document.getElementById('floatYearDropdown')) document.getElementById('floatYearDropdown').classList.add('hidden');
+  if (document.getElementById('floatYearDropdown')) {
+    document.getElementById('floatYearDropdown').classList.add('hidden');
+    const icon = document.getElementById('floatYearDropIcon');
+    if(icon) icon.style.transform = 'rotate(0deg)';
+  }
 }
 
 function selectFloatMonth(monthNumber) {
   floatTempSelectedMonth = monthNumber;
   populateFloatDropdowns();
-  if (document.getElementById('floatMonthDropdownCustom')) document.getElementById('floatMonthDropdownCustom').classList.add('hidden');
+  if (document.getElementById('floatMonthDropdownCustom')) {
+    document.getElementById('floatMonthDropdownCustom').classList.add('hidden');
+    const icon = document.getElementById('floatMonthDropIcon');
+    if(icon) icon.style.transform = 'rotate(0deg)';
+  }
 }
 
 window.confirmSelectionFloat = function() {
@@ -236,11 +283,11 @@ window.confirmSelectionFloat = function() {
   currentSelectedMonth = floatTempSelectedMonth;
   currentSelectedYear = floatTempSelectedYear;
   updateFloatSelectorUI();
-  hideFloatMonthDropdown();
+  window.hideFloatMonthDropdown();
   updateAllSections();
 }
 
-// Renderizado General
+// --- RENDERIZADO ---
 function updateAllSections() {
   updateValueAddedImages();
   renderAutoFiltered();
@@ -525,7 +572,6 @@ function getFilteredCambios(){
     if (sort2 === 'fecha-asc') return parseLocalDate(a.fecha) - parseLocalDate(b.fecha);
     if (sort2 === 'va') return (parseFloat(String(b.valor_agregado).replace('%', '')) || 0) - (parseFloat(String(a.valor_agregado).replace('%', '')) || 0);
     if (sort2 === 'va-asc') return (parseFloat(String(a.valor_agregado).replace('%', '')) || 0) - (parseFloat(String(b.valor_agregado).replace('%', '')) || 0);
-    // Otros ordenamientos...
     return 0;
   });
 }
@@ -604,9 +650,9 @@ function updateSummaryTable() {
   }
 }
 
-// Event Listeners y Carga Inicial
+// --- EVENT LISTENERS GLOBALES ---
 document.addEventListener('DOMContentLoaded', () => {
-  // Listeners de búsqueda Auto
+  // Listeners de búsqueda Automatizaciones
   const qInput = document.getElementById('q');
   if(qInput) qInput.addEventListener('input',(e)=>{query=e.target.value;renderAutoFiltered();});
   const resetBtn = document.getElementById('resetBtn');
@@ -623,12 +669,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const nextBtn = document.getElementById('nextPage');
   if(nextBtn) nextBtn.addEventListener('click',()=>{page++;renderCambios();});
   
-  // Listeners de fechas
+  // ¡AQUÍ ESTÁ LA CORRECCIÓN DE LOS BOTONES FALTANTES!
   const floatBtn = document.getElementById('floatMonthSelectorBtn');
-  if(floatBtn) floatBtn.addEventListener('click', toggleFloatMonthDropdown);
+  if(floatBtn) floatBtn.addEventListener('click', window.toggleFloatMonthDropdown);
+  
+  const floatYearSelectBtn = document.getElementById('floatYearSelectBtn');
+  if (floatYearSelectBtn) floatYearSelectBtn.addEventListener('click', window.toggleFloatYearDropdown);
+  
+  const floatMonthSelectBtn = document.getElementById('floatMonthSelectBtn');
+  if (floatMonthSelectBtn) floatMonthSelectBtn.addEventListener('click', window.toggleFloatMonthDropdownInternal);
+  
   const confirmFloat = document.getElementById('confirmSelectionBtn');
   if(confirmFloat) confirmFloat.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); window.confirmSelectionFloat(); });
   
+  // Iniciar Carga de Datos
   loadDataFromSheets();
 });
 
