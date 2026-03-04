@@ -15,7 +15,7 @@
   
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   
-<script src="./js/sheets-connector.js"></script>
+  <script src="./js/sheets-connector.js"></script>
   <script src="./js/auth.js"></script>
 </head>
 <body class="min-h-screen">
@@ -54,9 +54,6 @@
       <p style="color: #121E6C; font-weight: 600; font-size: 16px;">Cargando boletín...</p>
     </div>
   </div>
-  <style>
-    @keyframes spin { to { transform: rotate(360deg); } }
-  </style>
   
   <div id="mainContent" style="display: none;">
   
@@ -68,15 +65,11 @@
       <div class="w-full px-4 sm:px-8 md:px-16 py-12 md:py-20">
         <div class="flex flex-col md:flex-row md:items-end md:justify-between w-full gap-8">
           <div class="w-full md:w-1/2 pl-0 md:pl-4 lg:pl-8 space-y-4 md:space-y-8 text-left">
-            <div class="mb-8">
-              <span class="text-white text-sm sm:text-base md:text-lg lg:text-xl font-semibold tracking-wide uppercase"></span>
-            </div>
-            
+            <div class="mb-8"><span class="text-white text-sm sm:text-base md:text-lg lg:text-xl font-semibold tracking-wide uppercase"></span></div>
             <div class="space-y-4 md:space-y-8">
               <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl font-black leading-tight text-white">
                 Boletín de Arquitectura de Negocio y Automatización
               </h1>
-              
               <p class="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white/90 max-w-xl">
                 Información actualizada sobre cambios, automatizaciones y mejoras continuas en Bold CF y Bold.co SAS
               </p>
@@ -86,21 +79,13 @@
           <div class="w-full md:w-1/2 flex justify-center md:justify-end items-end pr-0 md:pr-4 lg:pr-8">
             <div id="heroNavButtons" class="flex flex-col gap-3 w-full max-w-sm">
               <a href="#cambios" class="hero-nav-btn group bg-white hover:bg-gray-50 rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
-                <div class="flex items-center justify-center">
-                  <span class="text-[#121E6C]">Procesos</span>
-                </div>
+                <div class="flex items-center justify-center"><span class="text-[#121E6C]">Procesos</span></div>
               </a>
-              
               <a href="#valor-agregado" class="hero-nav-btn group bg-white hover:bg-gray-50 rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
-                <div class="flex items-center justify-center">
-                  <span class="text-[#121E6C]">Valor Agregado</span>
-                </div>
+                <div class="flex items-center justify-center"><span class="text-[#121E6C]">Valor Agregado</span></div>
               </a>
-              
               <a href="#automatizaciones" class="hero-nav-btn group bg-white hover:bg-gray-50 rounded-full px-8 py-4 font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 w-full">
-                <div class="flex items-center justify-center">
-                  <span class="text-[#121E6C]">Automatización</span>
-                </div>
+                <div class="flex items-center justify-center"><span class="text-[#121E6C]">Automatización</span></div>
               </a>
             </div>
           </div>
@@ -112,10 +97,6 @@
   <nav id="stickyNav" class="hidden"></nav>
   
   <div class="mx-auto px-4 sm:px-6 lg:px-12" style="max-width: 100%; width: 100%;">
-    <style>
-      @media (min-width: 768px) { .responsive-container { max-width: 85%; } }
-      @media (min-width: 1280px) { .responsive-container { max-width: 70%; } }
-    </style>
     <div class="responsive-container mx-auto py-6 md:py-12">
 
     <section id="cambios" class="mt-24 scroll-mt-8">
@@ -163,65 +144,49 @@
               <th class="sticky px-3 py-2 text-left w-32" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
                   <span class="text-sm font-bold" style="color: #121E6C;">Código</span>
-                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="codigo" onclick="showFilterDropdown('codigo', event)">
-                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg>
-                  </button>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="codigo" onclick="showFilterDropdown('codigo', event)"><svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg></button>
                 </div>
               </th>
               <th class="sticky px-3 py-2 text-left" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
                   <span class="text-sm font-bold" style="color: #121E6C;">Documento</span>
-                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="documento" onclick="showFilterDropdown('documento', event)">
-                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg>
-                  </button>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="documento" onclick="showFilterDropdown('documento', event)"><svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg></button>
                 </div>
               </th>
               <th class="sticky px-3 py-2 text-left w-48" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
                   <span class="text-sm font-bold" style="color: #121E6C;">Dueño</span>
-                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="dueno" onclick="showFilterDropdown('dueno', event)">
-                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg>
-                  </button>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="dueno" onclick="showFilterDropdown('dueno', event)"><svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg></button>
                 </div>
               </th>
               <th class="sticky px-3 py-2 text-left" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
                   <span class="text-sm font-bold" style="color: #121E6C;">Detalle</span>
-                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="detalle" onclick="showFilterDropdown('detalle', event)">
-                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg>
-                  </button>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="detalle" onclick="showFilterDropdown('detalle', event)"><svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg></button>
                 </div>
               </th>
               <th class="sticky px-3 py-2 text-left w-20" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
                   <span class="text-sm font-bold" style="color: #121E6C;">Compañía</span>
-                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="compania" onclick="showFilterDropdown('compania', event)">
-                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg>
-                  </button>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="compania" onclick="showFilterDropdown('compania', event)"><svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg></button>
                 </div>
               </th>
               <th class="sticky px-3 py-2 text-left w-32" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
                   <span class="text-sm font-bold" style="color: #121E6C;">Tipo</span>
-                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="tipo" onclick="showFilterDropdown('tipo', event)">
-                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg>
-                  </button>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="tipo" onclick="showFilterDropdown('tipo', event)"><svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg></button>
                 </div>
               </th>
               <th class="sticky px-3 py-2 text-left w-28" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
                   <span class="text-sm font-bold" style="color: #121E6C;">Fecha</span>
-                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="fecha" onclick="showFilterDropdown('fecha', event)">
-                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg>
-                  </button>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="fecha" onclick="showFilterDropdown('fecha', event)"><svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg></button>
                 </div>
               </th>
               <th class="sticky px-3 py-2 text-left w-20" style="background-color: white !important;">
                 <div class="flex items-center justify-between">
                   <span class="text-sm font-bold" style="color: #121E6C;">VA</span>
-                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="va" onclick="showFilterDropdown('va', event)">
-                    <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg>
-                  </button>
+                  <button class="filter-btn hover:opacity-80" style="color: #121E6C;" data-column="va" onclick="showFilterDropdown('va', event)"><svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M0 0h12l-5 6v4l-2 2v-6l-5-6z"/></svg></button>
                 </div>
               </th>
             </tr>
@@ -231,9 +196,7 @@
       </div>
       
       <div id="noResultsCambios" class="hidden bg-gray-50 rounded-2xl p-8 text-center mx-6 md:mx-12">
-        <div class="flex items-center justify-center mb-4">
-          <img src="./assets/icons/unfound-icon.png" alt="No encontrado" class="w-12 h-12 opacity-60">
-        </div>
+        <div class="flex items-center justify-center mb-4"><img src="./assets/icons/unfound-icon.png" alt="No encontrado" class="w-12 h-12 opacity-60"></div>
         <h3 class="text-lg font-medium text-gray-900 mb-2">No hay resultados</h3>
         <p id="noResultsTextCambios" class="text-gray-600">No se encontraron procesos que coincidan con tu búsqueda.</p>
       </div>
@@ -241,36 +204,20 @@
       <div id="filterDropdown" class="hidden fixed bg-white border border-gray-300 rounded-lg shadow-lg z-50 w-64">
         <div class="p-3">
           <div class="border-b pb-2 mb-2">
-            <button onclick="applySortFilter('asc')" class="w-full text-left px-2 py-1 hover:bg-gray-100 rounded text-sm flex items-center gap-2">
-              <span>↑</span> Ordenar A → Z
-            </button>
-            <button onclick="applySortFilter('desc')" class="w-full text-left px-2 py-1 hover:bg-gray-100 rounded text-sm flex items-center gap-2">
-              <span>↓</span> Ordenar Z → A
-            </button>
+            <button onclick="applySortFilter('asc')" class="w-full text-left px-2 py-1 hover:bg-gray-100 rounded text-sm flex items-center gap-2"><span>↑</span> Ordenar A → Z</button>
+            <button onclick="applySortFilter('desc')" class="w-full text-left px-2 py-1 hover:bg-gray-100 rounded text-sm flex items-center gap-2"><span>↓</span> Ordenar Z → A</button>
           </div>
-          
           <div class="mb-2">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-sm font-medium">Filtrar por:</span>
-              <button onclick="clearColumnFilter()" class="text-xs hover:opacity-80" style="color: #FF2947;">Limpiar</button>
-            </div>
-            
-            <div class="mb-2">
-              <input id="columnSearch" type="text" placeholder="Buscar..." class="w-full text-xs border border-gray-300 rounded px-2 py-1">
-            </div>
-            
+            <div class="flex items-center justify-between mb-2"><span class="text-sm font-medium">Filtrar por:</span><button onclick="clearColumnFilter()" class="text-xs hover:opacity-80" style="color: #FF2947;">Limpiar</button></div>
+            <div class="mb-2"><input id="columnSearch" type="text" placeholder="Buscar..." class="w-full text-xs border border-gray-300 rounded px-2 py-1"></div>
             <div class="max-h-48 overflow-y-auto">
-              <label class="flex items-center gap-2 px-2 py-1 hover:bg-gray-50 text-sm">
-                <input type="checkbox" id="selectAll" onchange="toggleAllFilters()" checked>
-                <span class="font-medium">(Seleccionar todo)</span>
-              </label>
+              <label class="flex items-center gap-2 px-2 py-1 hover:bg-gray-50 text-sm"><input type="checkbox" id="selectAll" onchange="toggleAllFilters()" checked><span class="font-medium">(Seleccionar todo)</span></label>
               <div id="filterOptions" class="border-t pt-1 mt-1"></div>
             </div>
           </div>
-          
           <div class="flex gap-2 pt-2 border-t">
             <button onclick="applyColumnFilter()" class="flex-1 text-white px-3 py-1 rounded text-sm hover:opacity-90" style="background-color: #121E6C;">OK</button>
-            <button onclick="hideFilterDropdown()" class="flex-1 bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm hover:bg-gray-300">Cancelar</button>
+            <button onclick="window.hideFilterDropdown()" class="flex-1 bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm hover:bg-gray-300">Cancelar</button>
           </div>
         </div>
       </div>
@@ -278,64 +225,30 @@
 
     <section id="valor-agregado" class="mt-24 scroll-mt-32">
       <div class="mb-16 px-6 md:px-12">
-          <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8 text-left">
-            <span style="color: #121E6C;">Valor Agregado</span>
-          </h2>
-          <p class="text-lg md:text-xl leading-relaxed mb-6" style="color: #606060; text-align: justify;">
-            Se consideran actividades que agregan valor exclusivamente aquellas que se encuentran completamente automatizadas o ejecutadas por una IA, así como aquellas tareas manuales que requieren estrictamente intelecto, creatividad o criterio humano y no son sustituibles por tecnología actual.
-          </p>
-          <p class="text-lg md:text-xl leading-relaxed mb-6" style="color: #606060; text-align: justify;">
-            Toda actividad que un ser humano realice, pero que tenga el potencial de ser ejecutada por una IA, se clasifica como 'No valor agregado' hasta el momento en que su ejecución sea efectivamente trasladada a una automatización o ejecutada por una IA.
-          </p>
-          <p class="text-lg md:text-xl leading-relaxed" style="color: #606060; text-align: justify;">
-            El porcentaje indica cuánto valor agregado tiene cada proceso comparando el total de actividades contra las que sí agregan valor. Un porcentaje menor significa mayor oportunidad de automatización. Aunque no todos los procesos pueden llegar al 100%, se recomienda implementar estrategias para alcanzar al menos el 80% de valor agregado.
-          </p>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8 text-left"><span style="color: #121E6C;">Valor Agregado</span></h2>
+          <p class="text-lg md:text-xl leading-relaxed mb-6" style="color: #606060; text-align: justify;">Se consideran actividades que agregan valor exclusivamente aquellas que se encuentran completamente automatizadas o ejecutadas por una IA...</p>
       </div>
       
       <div id="valueAddedCards" class="px-3 sm:px-6 md:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
           <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[500px] sm:h-[600px] lg:h-[650px]">
             <div class="p-6" style="background: linear-gradient(to right, #121E6C, #EE424E);">
-              <div class="flex items-center gap-4">
-                <img src="./assets/img/datafono-bold.png" alt="Datáfono Bold" class="w-12 h-12 object-contain">
-              <div>
-                <h3 class="text-lg font-bold text-white">Bold.co SAS</h3>
-                <p class="text-white/90 text-sm">Valor agregado por unidad de negocio</p>
-              </div>
-              </div>
+              <div class="flex items-center gap-4"><img src="./assets/img/datafono-bold.png" alt="Datáfono Bold" class="w-12 h-12 object-contain"><div><h3 class="text-lg font-bold text-white">Bold.co SAS</h3><p class="text-white/90 text-sm">Valor agregado por unidad de negocio</p></div></div>
             </div>
-            <div class="p-6 flex-1 overflow-y-auto">
-              <div class="bg-gradient-to-br from-gray-50 to-white p-4 rounded-2xl border border-gray-100 h-full shadow-inner">
-                <img id="img1" alt="Valor agregado SAS" class="w-full h-full object-contain rounded-xl cursor-zoom-in hover:scale-[1.02] transition-transform duration-300">
-              </div>
-            </div>
+            <div class="p-6 flex-1 overflow-y-auto"><div class="bg-gradient-to-br from-gray-50 to-white p-4 rounded-2xl border border-gray-100 h-full shadow-inner"><img id="img1" alt="Valor agregado SAS" class="w-full h-full object-contain rounded-xl cursor-zoom-in hover:scale-[1.02] transition-transform duration-300"></div></div>
           </div>
-          
           <div class="bg-white rounded-3xl card-shadow overflow-hidden hover:shadow-xl transition-all duration-300 h-[500px] sm:h-[600px] lg:h-[650px]">
             <div class="p-6" style="background: linear-gradient(to right, #121E6C, #1E23A2);">
-              <div class="flex items-center gap-4">
-                <img src="./assets/img/banco-bold.png" alt="Banco Bold" class="w-12 h-12 object-contain">
-              <div>
-                <h3 class="text-lg font-bold text-white">Bold CF</h3>
-                <p class="text-white/90 text-sm">Valor agregado por unidad de negocio</p>
-              </div>
-              </div>
+              <div class="flex items-center gap-4"><img src="./assets/img/banco-bold.png" alt="Banco Bold" class="w-12 h-12 object-contain"><div><h3 class="text-lg font-bold text-white">Bold CF</h3><p class="text-white/90 text-sm">Valor agregado por unidad de negocio</p></div></div>
             </div>
-            <div class="p-6 flex-1">
-              <div class="bg-gradient-to-br from-gray-50 to-white p-4 rounded-2xl border border-gray-100 h-full shadow-inner">
-                <img id="img2" alt="Valor agregado CF" class="w-full h-full object-contain rounded-xl cursor-zoom-in hover:scale-[1.02] transition-transform duration-300">
-              </div>
-            </div>
+            <div class="p-6 flex-1"><div class="bg-gradient-to-br from-gray-50 to-white p-4 rounded-2xl border border-gray-100 h-full shadow-inner"><img id="img2" alt="Valor agregado CF" class="w-full h-full object-contain rounded-xl cursor-zoom-in hover:scale-[1.02] transition-transform duration-300"></div></div>
           </div>
         </div>
       </div>
       
       <div id="noResultsValueAdded" class="hidden bg-gray-50 rounded-2xl p-8 text-center mx-6 md:mx-12">
-        <div class="flex items-center justify-center mb-4">
-          <img src="./assets/icons/unfound-icon.png" alt="No encontrado" class="w-12 h-12 opacity-60">
-        </div>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">No hay datos disponibles</h3>
-        <p id="noResultsTextValueAdded" class="text-gray-600">No hay imágenes de valor agregado disponibles para este período.</p>
+        <div class="flex items-center justify-center mb-4"><img src="./assets/icons/unfound-icon.png" alt="No encontrado" class="w-12 h-12 opacity-60"></div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No hay datos disponibles</h3><p id="noResultsTextValueAdded" class="text-gray-600">No hay imágenes de valor agregado disponibles para este período.</p>
       </div>
 
       <div id="lightbox" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
@@ -345,14 +258,8 @@
 
     <section id="automatizaciones" class="mt-24 scroll-mt-32">
       <div class="mb-16 px-6 md:px-12">
-        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8 text-left">
-          <span style="color: #121E6C;">Automatización</span>
-        </h2>
-        
-        <p class="text-lg md:text-xl leading-relaxed mb-8" style="color: #606060; text-align: justify; max-width: 100%;">
-          En esta sección, podrás consultar las aplicaciones de automatización en producción por el equipo de automatización de procesos.
-          Cada tarjeta incluye una descripción detallada de la automatización, el valor agregado que aporta al proceso y cómo su implementación contribuye a la eficiencia.
-        </p>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-none mb-8 text-left"><span style="color: #121E6C;">Automatización</span></h2>
+        <p class="text-lg md:text-xl leading-relaxed mb-8" style="color: #606060; text-align: justify; max-width: 100%;">En esta sección, podrás consultar las aplicaciones de automatización en producción...</p>
       </div>
       
       <div class="mb-8 px-6 md:px-12">
@@ -362,9 +269,7 @@
               <input id="q" type="text" placeholder="Buscar" class="pl-12 w-full rounded-full h-12 px-6 text-base outline-none text-gray-600 bg-white" style="font-family: 'Montserrat', sans-serif;" />
               <img src="./assets/icons/lupa-bold.png" alt="Buscar" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 opacity-60">
             </div>
-            <button id="resetBtn" class="bg-white rounded-full px-6 py-3 h-12 whitespace-nowrap font-semibold transition-all hover:shadow-md" style="font-family: 'Montserrat', sans-serif; color: #121E6C;">
-              ↻ Limpiar filtros
-            </button>
+            <button id="resetBtn" class="bg-white rounded-full px-6 py-3 h-12 whitespace-nowrap font-semibold transition-all hover:shadow-md" style="font-family: 'Montserrat', sans-serif; color: #121E6C;">↻ Limpiar filtros</button>
           </div>
         </div>
       </div>
@@ -372,20 +277,15 @@
       <div id="cards" class="grid gap-4 sm:gap-6 px-3 sm:px-6 md:px-12" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));"></div>
       
       <div id="noResultsAuto" class="hidden bg-gray-50 rounded-2xl p-8 text-center mx-6 md:mx-12">
-        <div class="flex items-center justify-center mb-4">
-          <img src="./assets/icons/unfound-icon.png" alt="No encontrado" class="w-12 h-12 opacity-60">
-        </div>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">No hay resultados</h3>
-        <p id="noResultsTextAuto" class="text-gray-600">No se encontraron automatizaciones que coincidan con tu búsqueda.</p>
+        <div class="flex items-center justify-center mb-4"><img src="./assets/icons/unfound-icon.png" alt="No encontrado" class="w-12 h-12 opacity-60"></div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No hay resultados</h3><p id="noResultsTextAuto" class="text-gray-600">No se encontraron automatizaciones que coincidan con tu búsqueda.</p>
       </div>
     </section>
 
     <footer class="mt-32 py-16">
       <div class="text-center">
         <div class="w-16 h-1 bg-gradient-to-r from-[#121E6C] to-[#1E23A2] rounded-full mx-auto mb-6"></div>
-        <p class="text-sm text-gray-500 font-medium">
-          Arquitectura de Negocio y Automatización | Bold.co
-        </p>
+        <p class="text-sm text-gray-500 font-medium">Arquitectura de Negocio y Automatización | Bold.co</p>
       </div>
     </footer>
     </div>
@@ -395,100 +295,49 @@
     <button id="floatMonthSelectorBtn" class="bg-white hover:bg-gray-50 rounded-full px-6 py-3 font-bold text-base shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-3 border border-gray-200 min-w-[180px] justify-center group">
       <img src="./assets/icons/calendar-icon.png" alt="Calendario" class="w-5 h-5 opacity-80">
       <span id="floatSelectedMonth" class="text-[#121E6C]">Septiembre 2025</span>
-      <svg id="floatMonthDropdownIcon" class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="#121E6C" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-      </svg>
+      <svg id="floatMonthDropdownIcon" class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="#121E6C" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
     </button>
     
     <div id="floatMonthDropdown" class="hidden absolute top-full right-0 mt-3 bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 p-6 min-w-[400px]">
-      <div class="text-center mb-4">
-        <h3 class="text-lg font-bold" style="color: #121E6C;">Seleccionar período</h3>
-      </div>
-      
+      <div class="text-center mb-4"><h3 class="text-lg font-bold" style="color: #121E6C;">Seleccionar período</h3></div>
       <div class="grid grid-cols-2 gap-6">
         <div>
           <label class="block text-sm font-semibold mb-3" style="color: #121E6C;">Año</label>
           <div class="relative">
-            <button id="floatYearSelectBtn" class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-gray-700 font-bold text-left transition-all duration-200 hover:border-blue-400 hover:shadow-md focus:border-blue-500 focus:outline-none cursor-pointer flex items-center justify-between">
-              <span id="floatYearSelectedText">2025</span>
-              <svg class="w-4 h-4 text-gray-500 transition-transform duration-200" id="floatYearDropIcon" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-              </svg>
-            </button>
-            <div id="floatYearDropdown" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden">
-              <div id="floatYearOptions" class="py-2"></div>
-            </div>
+            <button id="floatYearSelectBtn" class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-gray-700 font-bold text-left transition-all duration-200 flex items-center justify-between"><span id="floatYearSelectedText">2025</span><svg class="w-4 h-4 text-gray-500 transition-transform duration-200" id="floatYearDropIcon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></button>
+            <div id="floatYearDropdown" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden"><div id="floatYearOptions" class="py-2"></div></div>
           </div>
         </div>
-        
         <div>
           <label class="block text-sm font-semibold mb-3" style="color: #121E6C;">Mes</label>
           <div class="relative">
-            <button id="floatMonthSelectBtn" class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-gray-700 font-bold text-left transition-all duration-200 hover:border-blue-400 hover:shadow-md focus:border-blue-500 focus:outline-none cursor-pointer flex items-center justify-between">
-              <span id="floatMonthSelectedText">Septiembre</span>
-              <svg class="w-4 h-4 text-gray-500 transition-transform duration-200" id="floatMonthDropIcon" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-              </svg>
-            </button>
-            <div id="floatMonthDropdownCustom" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden">
-              <div id="floatMonthOptions" class="py-2"></div>
-            </div>
+            <button id="floatMonthSelectBtn" class="w-full px-4 py-3 rounded-2xl border border-gray-300 text-gray-700 font-bold text-left transition-all duration-200 flex items-center justify-between"><span id="floatMonthSelectedText">Septiembre</span><svg class="w-4 h-4 text-gray-500 transition-transform duration-200" id="floatMonthDropIcon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></button>
+            <div id="floatMonthDropdownCustom" class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden"><div id="floatMonthOptions" class="py-2"></div></div>
           </div>
         </div>
       </div>
-      
-      <div class="mt-6 text-center">
-        <button id="confirmSelectionBtn" class="bg-gradient-to-r from-[#121E6C] to-[#1E23A2] text-white font-bold px-8 py-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105">
-          ✓ Aplicar Selección
-        </button>
-      </div>
+      <div class="mt-6 text-center"><button id="confirmSelectionBtn" class="bg-gradient-to-r from-[#121E6C] to-[#1E23A2] text-white font-bold px-8 py-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105">✓ Aplicar Selección</button></div>
     </div>
   </div>
   
-  <button id="scrollToTopFloat" onclick="scrollToTop()" class="scroll-to-top-btn fixed bottom-8 right-8 text-white w-14 h-14 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 z-50 opacity-0 pointer-events-none overflow-hidden" style="background-color: #121E6C;">
-    <div class="scroll-to-top-icon flex items-center justify-center w-full h-full transition-all duration-300">
-      <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-      </svg>
-    </div>
+  <button id="scrollToTopFloat" onclick="window.scrollToTop()" class="scroll-to-top-btn fixed bottom-8 right-8 text-white w-14 h-14 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 z-50 opacity-0 pointer-events-none overflow-hidden" style="background-color: #121E6C;">
+    <div class="scroll-to-top-icon flex items-center justify-center w-full h-full transition-all duration-300"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg></div>
     <span class="scroll-to-top-text absolute inset-0 flex items-center justify-center text-xs font-semibold whitespace-nowrap opacity-0 transform translate-x-full transition-all duration-300">Volver arriba</span>
   </button>
 
   <nav id="sideNav" class="fixed left-4 top-1/2 -translate-y-1/2 z-40 opacity-0 pointer-events-none transition-all duration-500 ease-in-out">
     <div class="side-nav-container rounded-2xl shadow-2xl overflow-hidden" style="background: linear-gradient(to bottom, #121E6C, #1E23A2);">
-      <a href="#" onclick="scrollToTop()" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300">
-        <div class="side-nav-icon">
-          <img src="./assets/icons/icon-home.png" alt="Inicio" class="w-6 h-6 object-contain">
-        </div>
-        <span class="side-nav-text">Inicio</span>
-      </a>
-      
-      <a href="#cambios" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300">
-        <div class="side-nav-icon">
-          <img src="./assets/icons/icon-process.png" alt="Procesos" class="w-6 h-6 object-contain">
-        </div>
-        <span class="side-nav-text">Gestión de Procesos</span>
-      </a>
-      
-      <a href="#valor-agregado" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300">
-        <div class="side-nav-icon">
-          <img src="./assets/icons/icon-va.png" alt="Valor Agregado" class="w-6 h-6 object-contain">
-        </div>
-        <span class="side-nav-text">Valor Agregado</span>
-      </a>
-      
-      <a href="#automatizaciones" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300">
-        <div class="side-nav-icon">
-          <img src="./assets/icons/icon-auto.png" alt="Automatización" class="w-6 h-6 object-contain">
-        </div>
-        <span class="side-nav-text">Automatización</span>
-      </a>
+      <a href="#" onclick="window.scrollToTop()" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300"><div class="side-nav-icon"><img src="./assets/icons/icon-home.png" alt="Inicio" class="w-6 h-6 object-contain"></div><span class="side-nav-text">Inicio</span></a>
+      <a href="#cambios" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300"><div class="side-nav-icon"><img src="./assets/icons/icon-process.png" alt="Procesos" class="w-6 h-6 object-contain"></div><span class="side-nav-text">Gestión de Procesos</span></a>
+      <a href="#valor-agregado" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300"><div class="side-nav-icon"><img src="./assets/icons/icon-va.png" alt="Valor Agregado" class="w-6 h-6 object-contain"></div><span class="side-nav-text">Valor Agregado</span></a>
+      <a href="#automatizaciones" class="side-nav-item py-6 text-white hover:bg-white/20 transition-all duration-300"><div class="side-nav-icon"><img src="./assets/icons/icon-auto.png" alt="Automatización" class="w-6 h-6 object-contain"></div><span class="side-nav-text">Automatización</span></a>
     </div>
   </nav>
 
-  <script src="./js/main.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/ui.js"></script>
+  <script src="./js/app.js"></script>
   
   </div><div id="userInfo" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
-  
 </body>
 </html>
