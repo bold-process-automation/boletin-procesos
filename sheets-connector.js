@@ -7,7 +7,7 @@
 // ========== CONFIGURACIÓN ==========
 const SHEET_CONFIG = {
   // 🔑 URL del Google Apps Script (backend seguro con autenticación de dominio)
-  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzNgxEbSMw1b__nnUGT-smxmNWTrZ6KcjQmF__wC3QblNjfrJHK5yogYJ767jWcIhsT/exec',
+  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbycwNyylhSYA9k9IPaUQNIHRSELfI9FrfSfP-FJSwf0IlWFse8ZBmenSLLSPup_ZDDt/exec',
   
   // Nombres de las hojas (pestañas) en tu Google Sheet
   SHEET_NAMES: {
