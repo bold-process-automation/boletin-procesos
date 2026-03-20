@@ -5,8 +5,9 @@
 // Para reactivar: cambia AUTH_DISABLED a false
 const AUTH_DISABLED = false;
 
-// Duración de la sesión persistente (horas)
-const SESSION_DURATION_HOURS = 24;
+// ⚠️ CAMBIO DE SEGURIDAD: Los tokens de Google expiran en 1 hora.
+// Cambiado a 1 para asegurar que el token enviado al Apps Script siempre sea válido.
+const SESSION_DURATION_HOURS = 1;
 const LOCAL_SESSION_KEY = 'boldUserSession';
 
 const ALLOWED_DOMAINS = ['bold.co', 'boldcf.co'];
@@ -62,7 +63,8 @@ function handleCredentialResponse(response) {
       currentUser = {
         email: email,
         name: userInfo.name,
-        picture: userInfo.picture
+        picture: userInfo.picture,
+        token: response.credential // 🔑 AQUÍ GUARDAMOS EL TOKEN VIP DE GOOGLE
       };
       
       // Store session (persistente)
@@ -125,6 +127,14 @@ function checkExistingSession() {
 // Grant access to dashboard
 function grantAccess() {
   console.log('Acceso concedido a:', currentUser.email);
+  
+  // 🚀 LA MAGIA SUCEDE AQUÍ: Le pasamos el token seguro al conector
+  if (window.SheetsConnector && currentUser.token) {
+    window.SheetsConnector.initializeData(currentUser.token);
+  } else if (window.SheetsConnector && AUTH_DISABLED) {
+    // Por si necesitas hacer pruebas sin autenticación
+    window.SheetsConnector.initializeData("bypass-token"); 
+  }
   
   // Hide login screen and loading skeleton
   const loginScreen = document.getElementById('loginScreen');
@@ -241,6 +251,7 @@ window.addEventListener('load', () => {
     console.log('⚠️ AUTENTICACIÓN DESACTIVADA - Acceso abierto para todos');
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('mainContent').style.display = 'block';
+    if (window.SheetsConnector) window.SheetsConnector.initializeData("bypass-token");
     return;
   }
 
