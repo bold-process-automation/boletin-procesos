@@ -6,7 +6,6 @@
 const AUTH_DISABLED = false;
 
 // ⚠️ CAMBIO DE SEGURIDAD: Los tokens de Google expiran en 1 hora.
-// Cambiado a 1 para asegurar que el token enviado al Apps Script siempre sea válido.
 const SESSION_DURATION_HOURS = 1;
 const LOCAL_SESSION_KEY = 'boldUserSession';
 
@@ -128,12 +127,9 @@ function checkExistingSession() {
 function grantAccess() {
   console.log('Acceso concedido a:', currentUser.email);
   
-  // 🚀 LA MAGIA SUCEDE AQUÍ: Le pasamos el token seguro al conector
+  // 1. Le pasamos el token de seguridad al conector
   if (window.SheetsConnector && currentUser.token) {
-    window.SheetsConnector.initializeData(currentUser.token);
-  } else if (window.SheetsConnector && AUTH_DISABLED) {
-    // Por si necesitas hacer pruebas sin autenticación
-    window.SheetsConnector.initializeData("bypass-token"); 
+    window.SheetsConnector.setToken(currentUser.token);
   }
   
   // Hide login screen and loading skeleton
@@ -147,6 +143,12 @@ function grantAccess() {
   
   // Show user info in header
   displayUserInfo();
+
+  // 2. 🚀 ORDENAMOS ACTUALIZAR LA PANTALLA
+  if (typeof window.loadDataFromSheets === 'function') {
+    console.log("Pidiendo a index.html que renderice los datos reales...");
+    window.loadDataFromSheets();
+  }
 }
 
 // Deny access
@@ -251,7 +253,7 @@ window.addEventListener('load', () => {
     console.log('⚠️ AUTENTICACIÓN DESACTIVADA - Acceso abierto para todos');
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('mainContent').style.display = 'block';
-    if (window.SheetsConnector) window.SheetsConnector.initializeData("bypass-token");
+    if (typeof window.loadDataFromSheets === 'function') window.loadDataFromSheets();
     return;
   }
 
